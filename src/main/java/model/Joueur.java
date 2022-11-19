@@ -1,4 +1,7 @@
 package src.main.java.model;
+
+import java.util.Scanner;
+
 public class Joueur {
 
     // Attributs nécessaires pour définir un joueur
@@ -7,15 +10,28 @@ public class Joueur {
     private int score;
 
     // Constructeur
-    public Joueur(String nom){
+    public Joueur(String nom, int id){
         this.nom = nom;
+        this.id = id;
         score = 0;
+    }
+
+    // Constructeur avec un scanner
+    public Joueur(int id){
+        Scanner sc = new Scanner(System.in);
+        this.nom = sc.nextLine();
+        this.score = 0;
+        this.id = id;
     }
 
     // Méthodes getteurs
     public String getNom(){return nom;}
     public int getID(){return id;}
     public int getScore(){return score;}
+
+    public String toString(){
+        return "Nom : "+nom+" / ID : "+id+" / Score : "+score;
+    }
 
     // Méthode demi-setteur : on augmente le score d'un certain nombre (non-négatif)
     public void ajouterScore(int score){this.score += (score >= 0) ? (score) : (0);}

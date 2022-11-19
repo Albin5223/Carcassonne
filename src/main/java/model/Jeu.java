@@ -12,7 +12,7 @@ public abstract class Jeu {
 
     // Méthodes nécessaires pour un jeu de plateau
     public abstract void lancerPartie();
-    public abstract void ajouterJoueur();
+    public abstract void setJoueur();
     public abstract void jouerTour();
     public abstract void abandonner(Joueur j);
 

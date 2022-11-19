@@ -13,4 +13,6 @@ public abstract class Tuile {
     // Méthodes setteurs
     public void setTitulaire(Joueur titulaire){this.titulaire = titulaire;}
 
+    public abstract void afficheTuile();
+
 }
