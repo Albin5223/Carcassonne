@@ -30,6 +30,7 @@ public class DominosCarres extends Jeu {
         
     }
 
+    // Méthode pour demander le nombre de joueurs et les initialiser
     @Override
     public void setJoueur() {
         boolean boucle = true;
