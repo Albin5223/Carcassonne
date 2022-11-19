@@ -1,9 +1,16 @@
 package src.main.java.model;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DominosCarres extends Jeu {
+
+    // Attributs :
+    // Cet attribut représente toutes les tuiles qui exisent dans notre jeu
+    private ArrayList <TuileDominosCarres> tuiles = new ArrayList<TuileDominosCarres>();
+    // Cet attribut représente les tuiles stockées dans le sac du jeu
+    private ArrayList <TuileDominosCarres> sac = new ArrayList<TuileDominosCarres>();
 
     @Override
     public void lancerPartie() {
@@ -14,10 +21,10 @@ public class DominosCarres extends Jeu {
         // On initialise le plateau
         // TODO :
 
-        // On initialise les pièces ici
+        // On initialise les tuiles ici
         // TODO :
 
-        // On distribue les pièces ici
+        // On distribue les tuiles ici
         // TODO :
 
         
@@ -63,8 +70,8 @@ public class DominosCarres extends Jeu {
     }
 
     // Affichage du dominos
-    public void afficheDominosCarrees(){
-
+    public void afficher(){
+        plateau.afficher();
     }
 
 }
