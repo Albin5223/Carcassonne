@@ -14,5 +14,6 @@ public abstract class Jeu {
     public abstract void lancerPartie();
     public abstract void ajouterJoueur();
     public abstract void jouerTour();
+    public abstract void abandonner(Joueur j);
 
 }

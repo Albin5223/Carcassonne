@@ -19,6 +19,10 @@ public class DominosCarees extends Jeu {
         
     }
 
-    
+    @Override
+    public void abandonner(Joueur j) {
+        // TODO Auto-generated method stub
+        
+    }
 
 }
