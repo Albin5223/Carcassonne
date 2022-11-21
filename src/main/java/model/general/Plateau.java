@@ -4,22 +4,22 @@ public abstract class Plateau {
 
     protected Case[][] cases;
     protected int longueur;
-    protected int largeur;
+    protected int hauteur;
 
     // Limite de taille pour un plateau, on peut la changer pour augmenter ou réduire
     protected final int limite = 30;
 
     // Constructeur : avec taille limite
-    public Plateau(int longueur, int largeur){
+    public Plateau(int longueur, int hauteur){
         if(longueur > limite){longueur = limite;}
-        if(largeur > limite){largeur = limite;}
+        if(hauteur > limite){hauteur = limite;}
 
         this.longueur = longueur;
-        this.largeur = largeur;
-        this.cases = new Case[longueur][largeur];
+        this.hauteur = hauteur;
+        this.cases = new Case[longueur][hauteur];
 
         for (int i = 0; i < longueur; i++) {
-            for (int j = 0; j < largeur; j++) {
+            for (int j = 0; j < hauteur; j++) {
                 cases[i][j] = new Case();
             }
         }
@@ -38,7 +38,7 @@ public abstract class Plateau {
     // Méthodes getteurs
     public Case getCase(int x, int y){return cases[x][y];}
     public int getLongueur(){return longueur;}
-    public int getLargeur(){return largeur;}
+    public int getHauteur(){return hauteur;}
     
     // Méthodes setteurs
     public void setCase(Case c,int x, int y){cases[x][y] = c;}
@@ -46,6 +46,5 @@ public abstract class Plateau {
 
 
     public abstract void afficher();
-    public abstract boolean poserTuile(Tuile tuile,int x,int y);
 
 }

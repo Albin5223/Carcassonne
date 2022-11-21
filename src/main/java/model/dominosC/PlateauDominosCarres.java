@@ -4,8 +4,8 @@ import src.main.java.model.general.*;
 
 public class PlateauDominosCarres extends Plateau {
 
-    public PlateauDominosCarres(int longueur, int largeur){
-        super(longueur, largeur);
+    public PlateauDominosCarres(int longueur, int hauteur){
+        super(longueur, hauteur);
     }
 
     public PlateauDominosCarres(int i){
@@ -14,9 +14,7 @@ public class PlateauDominosCarres extends Plateau {
 
     public PlateauDominosCarres(){
         super();
-    }
-
-    
+    }    
 
     private void printLines(){
         for (int i = 0; i < longueur; i++) {
@@ -34,10 +32,10 @@ public class PlateauDominosCarres extends Plateau {
         printLines();
 
         // On parcours chaque ligne du plateau
-        for (int i = 0; i < cases.length; i++) {
+        for (int i = 0; i < hauteur; i++) {
 
             // On print le haut de chaque ligne
-            for (int j = 0; j < cases.length; j++) {
+            for (int j = 0; j < longueur; j++) {
                 if(cases[j][i] != null){
                     TuileDominosCarres.printHaut(((TuileDominosCarres) cases[j][i].getTuile()));
                 }
@@ -50,7 +48,7 @@ public class PlateauDominosCarres extends Plateau {
 
             // On print les parties intermediaires
             for(int l = 0; l<PieceDomino.length();l++){
-                for (int j = 0; j < cases.length; j++) {
+                for (int j = 0; j < longueur; j++) {
                     if(cases[j][i] != null){
                         TuileDominosCarres.printInterm(((TuileDominosCarres) cases[j][i].getTuile()),l);
                     }
@@ -63,7 +61,7 @@ public class PlateauDominosCarres extends Plateau {
             }
 
             // On print le bas de chaque ligne
-            for (int j = 0; j < cases.length; j++) {
+            for (int j = 0; j < longueur; j++) {
                 if(cases[j][i] != null){
                     TuileDominosCarres.printBas(((TuileDominosCarres) cases[j][i].getTuile()));
                 }
@@ -77,26 +75,55 @@ public class PlateauDominosCarres extends Plateau {
     }
 
     public boolean surPlateau(int x, int y){
-        return x >= 0 && x < longueur && y >= 0 && y < largeur;
+        return x >= 0 && x < longueur && y >= 0 && y < hauteur;
     }
 
-    private boolean hautConforme(Tuile t, int x, int y){
+    private boolean hautConforme(TuileDominosCarres t, int x, int y){
+        if(surPlateau(x, y+1) && getCase(x, y+1).isOccupee() && 
+        ((TuileDominosCarres) getCase(x, y+1).getTuile()).getBas().equals(((TuileDominosCarres) t).getHaut())){
+            return true;
+        }
         return false;
     }
 
-    public boolean peutPoser(Tuile t,int x, int y){
+    private boolean droiteConforme(TuileDominosCarres t, int x, int y){
+        if(surPlateau(x+1, y) && getCase(x+1, y).isOccupee() && 
+        ((TuileDominosCarres) getCase(x+1, y).getTuile()).getGauche().equals(((TuileDominosCarres) t).getDroite())){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean gaucheConforme(TuileDominosCarres t, int x, int y){
+        if(surPlateau(x-1, y) && getCase(x-1, y).isOccupee() && 
+        ((TuileDominosCarres) getCase(x-1, y).getTuile()).getDroite().equals(((TuileDominosCarres) t).getGauche())){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean basConforme(TuileDominosCarres t, int x, int y){
+        if(surPlateau(x, y-1) && getCase(x, y-1).isOccupee() && 
+        ((TuileDominosCarres) getCase(x, y-1).getTuile()).getHaut().equals(((TuileDominosCarres) t).getBas())){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean peutPoser(TuileDominosCarres t,int x, int y){
         if(surPlateau(x, y)){
             if(!cases[x][y].isOccupee()){
-
+                if(hautConforme(t, x, y) || droiteConforme(t, x, y) || basConforme(t, x, y) || gaucheConforme(t, x, y)){
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    @Override
-    public boolean poserTuile(Tuile tuile, int x, int y) {
+    public boolean poserTuile(TuileDominosCarres tuile, int x, int y) {
         if(peutPoser(tuile, x, y)){
-
+            cases[x][y].poserTuile(tuile);
             return true;
         }
         return false;

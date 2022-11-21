@@ -17,6 +17,10 @@ public class PieceDomino {
         domino[2] = k;
     }
 
+    public boolean equals(PieceDomino p){
+        return domino[0] == p.domino[0] && domino[1] == p.domino[1] && domino[2] == p.domino[2];
+    }
+
     // Méthodes getteurs
     public int get(int i){return domino[i];}
     public static int length(){return taille;}
