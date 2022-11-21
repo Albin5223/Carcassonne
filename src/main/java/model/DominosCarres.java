@@ -72,7 +72,7 @@ public class DominosCarres extends Jeu {
 
     // Affichage du dominos
     public void afficher(){
-        plateau.afficher();
+        System.out.println(plateau);
     }
 
 }

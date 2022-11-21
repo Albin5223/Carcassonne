@@ -22,6 +22,11 @@ public class TuileDominosCarres extends Tuile {
         this.gauche = gauche;
     }
 
+    public PieceDomino getHaut(){return haut;}
+    public PieceDomino getDroite(){return droite;}
+    public PieceDomino getBas(){return bas;}
+    public PieceDomino getGauche(){return gauche;}
+
     @Override
     public void afficher() {
         // On affiche le haut
@@ -48,6 +53,64 @@ public class TuileDominosCarres extends Tuile {
         System.out.println("#");
     }
 
-    
+    @Override
+    public void rotation(){
+        PieceDomino tmp = haut;
+        haut = gauche;
+        gauche = bas;
+        bas = droite;
+        droite = tmp;
+    }
+
+    public static void printHaut(TuileDominosCarres t){
+        if(t != null){
+            System.out.print("# ");
+            for(int i = 0;i < PieceDomino.length();i++){
+                System.out.print(t.haut.get(i)+" ");
+            }
+            System.out.print("#  ");
+        }
+        else{
+            System.out.print("  ");
+            for(int i = 0;i < PieceDomino.length();i++){
+                System.out.print("  ");
+            }
+            System.out.print("   ");
+        }
+    }
+
+    public static void printInterm(TuileDominosCarres t, int l){
+        if(t != null){
+            System.out.print(t.gauche.get(l)+" ");
+            for(int i = 0;i < PieceDomino.length();i++){
+                System.out.print("# ");
+            }
+            System.out.print(t.droite.get(l) + "  ");
+        }
+        else{
+            System.out.print("  ");
+            for(int i = 0;i < PieceDomino.length();i++){
+                System.out.print("  ");
+            }
+            System.out.print("   ");
+        }
+    }
+
+    public static void printBas(TuileDominosCarres t){
+        if(t != null){
+            System.out.print("# ");
+            for(int i = 0;i<PieceDomino.length();i++){
+                System.out.print(t.bas.get(i) + " ");
+            }
+            System.out.print("#  ");
+        }
+        else{
+            System.out.print("  ");
+            for(int i = 0;i<PieceDomino.length();i++){
+                System.out.print("  ");
+            }
+            System.out.print("   ");
+        }
+    }
 
 }

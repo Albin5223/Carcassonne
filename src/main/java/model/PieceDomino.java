@@ -11,7 +11,7 @@ public class PieceDomino {
     private static final int taille = 3;
     
     public PieceDomino(int i, int j, int k){
-        domino = new int[3];
+        domino = new int[taille];
         domino[0] = i;
         domino[1] = j;
         domino[2] = k;

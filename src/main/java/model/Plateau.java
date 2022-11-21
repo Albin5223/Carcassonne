@@ -15,6 +15,13 @@ public abstract class Plateau {
 
         this.longueur = longueur;
         this.largeur = largeur;
+        this.cases = new Case[longueur][largeur];
+
+        for (int i = 0; i < longueur; i++) {
+            for (int j = 0; j < largeur; j++) {
+                cases[i][j] = new Case();
+            }
+        }
     }
 
     // Constructeur : plateau carré
@@ -29,6 +36,8 @@ public abstract class Plateau {
 
     // Méthodes getteurs
     public Case getCase(int x, int y){return cases[x][y];}
+    public int getLongueur(){return longueur;}
+    public int getLargeur(){return largeur;}
     
     // Méthodes setteurs
     public void setCase(Case c,int x, int y){cases[x][y] = c;}

@@ -1,5 +1,5 @@
 package src.main.java.model;
-public abstract class Case {
+public class Case {
     
     // Attributs
     private boolean occupee;
@@ -19,6 +19,7 @@ public abstract class Case {
     public boolean poserTuile(Tuile tuile){
         if(occupee){return false;}
         this.tuile = tuile;
+        occupee = true;
         return true;
     }
 
