@@ -10,7 +10,7 @@ public class Test {
 
         TuileDominosCarres t = new TuileDominosCarres(a, b, c, d);
         
-        PlateauDominosCarres p = new PlateauDominosCarres(2,3);
+        PlateauDominosCarres p = new PlateauDominosCarres(3,4);
         for (int i = 0; i < p.getHauteur(); i++) {
             for (int j = 0; j < p.getLongueur(); j++) {
                 p.getCase(i, j).poserTuile(t);

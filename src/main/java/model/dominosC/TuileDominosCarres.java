@@ -66,52 +66,52 @@ public class TuileDominosCarres extends Tuile {
 
     public static void printHaut(TuileDominosCarres t){
         if(t != null){
-            System.out.print("# ");
+            System.out.print("  # ");
             for(int i = 0;i < PieceDomino.length();i++){
                 System.out.print(t.haut.get(i)+" ");
             }
-            System.out.print("#  ");
+            System.out.print("# ");
         }
         else{
-            System.out.print("  ");
+            System.out.print("    ");
             for(int i = 0;i < PieceDomino.length();i++){
                 System.out.print("  ");
             }
-            System.out.print("   ");
+            System.out.print("  ");
         }
     }
 
     public static void printInterm(TuileDominosCarres t, int l){
         if(t != null){
-            System.out.print(t.gauche.get(l)+" ");
+            System.out.print("  "+t.gauche.get(l)+" ");
             for(int i = 0;i < PieceDomino.length();i++){
                 System.out.print("# ");
             }
-            System.out.print(t.droite.get(l) + "  ");
+            System.out.print(t.droite.get(l) + " ");
         }
         else{
-            System.out.print("  ");
+            System.out.print("    ");
             for(int i = 0;i < PieceDomino.length();i++){
                 System.out.print("  ");
             }
-            System.out.print("   ");
+            System.out.print("  ");
         }
     }
 
     public static void printBas(TuileDominosCarres t){
         if(t != null){
-            System.out.print("# ");
+            System.out.print("  # ");
             for(int i = 0;i<PieceDomino.length();i++){
                 System.out.print(t.bas.get(i) + " ");
             }
-            System.out.print("#  ");
+            System.out.print("# ");
         }
         else{
-            System.out.print("  ");
+            System.out.print("    ");
             for(int i = 0;i<PieceDomino.length();i++){
                 System.out.print("  ");
             }
-            System.out.print("   ");
+            System.out.print("  ");
         }
     }
 

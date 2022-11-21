@@ -16,8 +16,21 @@ public class PlateauDominosCarres extends Plateau {
         super();
     }
 
+    private void printLines(){
+        for (int i = 0; i < longueur; i++) {
+            System.out.print("+");
+            for (int j = 0; j < ((PieceDomino.length()+2)*2-1)+2; j++) {
+                System.out.print("-");
+            }
+        }
+        System.out.println("+");
+    }
+
     @Override
     public void afficher() {
+
+        printLines();
+
         // On parcours chaque ligne du plateau
         for (int i = 0; i < cases.length; i++) {
 
@@ -56,7 +69,8 @@ public class PlateauDominosCarres extends Plateau {
                     TuileDominosCarres.printBas(null);
                 }
             }
-            System.out.println("\n");            
+            System.out.println();
+            printLines();            
         }
     }
 }

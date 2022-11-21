@@ -7,7 +7,7 @@ public abstract class Plateau {
     protected int longueur;
 
     // Limite de taille pour un plateau, on peut la changer pour augmenter ou réduire
-    protected final int limite = 10;
+    protected final int limite = 30;
 
     // Constructeur : avec taille limite
     public Plateau(int hauteur, int longueur){
