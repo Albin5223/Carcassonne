@@ -1,5 +1,6 @@
-package src.main.java.model;
+package src.main.java.model.dominosC;
 
+import src.main.java.model.general.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;

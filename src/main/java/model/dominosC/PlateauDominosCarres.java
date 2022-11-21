@@ -1,9 +1,11 @@
-package src.main.java.model;
+package src.main.java.model.dominosC;
+
+import src.main.java.model.general.*;
 
 public class PlateauDominosCarres extends Plateau {
 
-    public PlateauDominosCarres(int longueur, int largeur){
-        super(longueur, largeur);
+    public PlateauDominosCarres(int hauteur, int longueur){
+        super(hauteur, longueur);
     }
 
     public PlateauDominosCarres(int i){

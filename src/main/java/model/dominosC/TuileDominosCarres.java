@@ -1,4 +1,6 @@
-package src.main.java.model;
+package src.main.java.model.dominosC;
+
+import src.main.java.model.general.*;
 
 /*
  * Classe qui représente les tuiles du jeu des dominos carrés

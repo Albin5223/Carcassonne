@@ -1,4 +1,4 @@
-package src.main.java.model;
+package src.main.java.model.dominosC;
 
 public class Test {
     public static void main(String[] args) {
@@ -10,11 +10,9 @@ public class Test {
 
         TuileDominosCarres t = new TuileDominosCarres(a, b, c, d);
         
-
-
-        PlateauDominosCarres p = new PlateauDominosCarres(2);
-        for (int i = 0; i < p.longueur; i++) {
-            for (int j = 0; j < p.largeur; j++) {
+        PlateauDominosCarres p = new PlateauDominosCarres(2,3);
+        for (int i = 0; i < p.getHauteur(); i++) {
+            for (int j = 0; j < p.getLongueur(); j++) {
                 p.getCase(i, j).poserTuile(t);
             }
         }

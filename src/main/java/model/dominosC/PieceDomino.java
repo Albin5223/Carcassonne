@@ -1,4 +1,4 @@
-package src.main.java.model;
+package src.main.java.model.dominosC;
 
 /*
  * Cette classe va représenter un des domino qu'il y a sur les côtés d'une tuileDominosCarrées

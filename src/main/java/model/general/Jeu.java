@@ -1,4 +1,4 @@
-package src.main.java.model;
+package src.main.java.model.general;
 /*
  * Cette classe abstraite permettra de représenter un jeu de plateau de manière générale.
  * Pour définir nos deux autres jeux, on les fera hériter de cette classe
