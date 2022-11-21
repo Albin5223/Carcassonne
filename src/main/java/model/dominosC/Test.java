@@ -11,13 +11,14 @@ public class Test {
         TuileDominosCarres t = new TuileDominosCarres(a, b, c, d);
         
         PlateauDominosCarres p = new PlateauDominosCarres(3,4);
-        for (int i = 0; i < p.getHauteur(); i++) {
-            for (int j = 0; j < p.getLongueur(); j++) {
+        for (int i = 0; i < p.getLongueur(); i++) {
+            for (int j = 0; j < p.getLargeur(); j++) {
                 p.getCase(i, j).poserTuile(t);
             }
         }
 
         p.afficher();
+
 
         DominosCarres domino = new DominosCarres();
         //domino.lancerPartie();

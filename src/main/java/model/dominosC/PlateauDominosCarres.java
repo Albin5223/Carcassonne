@@ -4,8 +4,8 @@ import src.main.java.model.general.*;
 
 public class PlateauDominosCarres extends Plateau {
 
-    public PlateauDominosCarres(int hauteur, int longueur){
-        super(hauteur, longueur);
+    public PlateauDominosCarres(int longueur, int largeur){
+        super(longueur, largeur);
     }
 
     public PlateauDominosCarres(int i){
@@ -15,6 +15,8 @@ public class PlateauDominosCarres extends Plateau {
     public PlateauDominosCarres(){
         super();
     }
+
+    
 
     private void printLines(){
         for (int i = 0; i < longueur; i++) {
@@ -35,9 +37,9 @@ public class PlateauDominosCarres extends Plateau {
         for (int i = 0; i < cases.length; i++) {
 
             // On print le haut de chaque ligne
-            for (int j = 0; j < cases[i].length; j++) {
-                if(cases[i][j] != null){
-                    TuileDominosCarres.printHaut(((TuileDominosCarres) cases[i][j].getTuile()));
+            for (int j = 0; j < cases.length; j++) {
+                if(cases[j][i] != null){
+                    TuileDominosCarres.printHaut(((TuileDominosCarres) cases[j][i].getTuile()));
                 }
                 else{
                     TuileDominosCarres.printHaut(null);
@@ -48,9 +50,9 @@ public class PlateauDominosCarres extends Plateau {
 
             // On print les parties intermediaires
             for(int l = 0; l<PieceDomino.length();l++){
-                for (int j = 0; j < cases[i].length; j++) {
-                    if(cases[i][j] != null){
-                        TuileDominosCarres.printInterm(((TuileDominosCarres) cases[i][j].getTuile()),l);
+                for (int j = 0; j < cases.length; j++) {
+                    if(cases[j][i] != null){
+                        TuileDominosCarres.printInterm(((TuileDominosCarres) cases[j][i].getTuile()),l);
                     }
                     else{
                         TuileDominosCarres.printInterm(null,l);
@@ -61,9 +63,9 @@ public class PlateauDominosCarres extends Plateau {
             }
 
             // On print le bas de chaque ligne
-            for (int j = 0; j < cases[i].length; j++) {
-                if(cases[i][j] != null){
-                    TuileDominosCarres.printBas(((TuileDominosCarres) cases[i][j].getTuile()));
+            for (int j = 0; j < cases.length; j++) {
+                if(cases[j][i] != null){
+                    TuileDominosCarres.printBas(((TuileDominosCarres) cases[j][i].getTuile()));
                 }
                 else{
                     TuileDominosCarres.printBas(null);
@@ -72,5 +74,31 @@ public class PlateauDominosCarres extends Plateau {
             System.out.println();
             printLines();            
         }
+    }
+
+    public boolean surPlateau(int x, int y){
+        return x >= 0 && x < longueur && y >= 0 && y < largeur;
+    }
+
+    private boolean hautConforme(Tuile t, int x, int y){
+        return false;
+    }
+
+    public boolean peutPoser(Tuile t,int x, int y){
+        if(surPlateau(x, y)){
+            if(!cases[x][y].isOccupee()){
+
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean poserTuile(Tuile tuile, int x, int y) {
+        if(peutPoser(tuile, x, y)){
+
+            return true;
+        }
+        return false;
     }
 }

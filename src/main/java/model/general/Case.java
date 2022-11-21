@@ -22,7 +22,4 @@ public class Case {
         occupee = true;
         return true;
     }
-
-    
-
 }
