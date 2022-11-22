@@ -3,6 +3,7 @@ package src.main.java.model.dominosC;
 import src.main.java.model.general.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class DominosCarres extends Jeu {
@@ -52,12 +53,23 @@ public class DominosCarres extends Jeu {
                 System.err.println("- Rentrez un nombre valide. -");
                 boucle = true;
             }
+            sc.close();
         }
         for (int i = 0; i < joueurs.length; i++) {
             System.out.println("- Quel est le nom du joueur n°" + (i+1) + " ? -");
             joueurs[i] = new Joueur(i);
         }
+        
     }
+
+    //Cette fonction permet de piocher un domino aléatoire dans le sac
+    public TuileDominosCarres piocher(){
+        Random r=new Random();
+        int n = r.nextInt(sac.size());
+
+        return sac.get(n);
+    }
+
 
     @Override
     public void jouerTour() {

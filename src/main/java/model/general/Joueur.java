@@ -22,6 +22,7 @@ public class Joueur {
         this.nom = sc.nextLine();
         this.score = 0;
         this.id = id;
+        sc.close();
     }
 
     // Méthodes getteurs
