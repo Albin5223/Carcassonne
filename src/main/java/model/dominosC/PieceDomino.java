@@ -1,5 +1,7 @@
 package src.main.java.model.dominosC;
 
+import java.util.Random;
+
 /*
  * Cette classe va représenter un des domino qu'il y a sur les côtés d'une tuileDominosCarrées
  */
@@ -24,4 +26,10 @@ public class PieceDomino {
     // Méthodes getteurs
     public int get(int i){return domino[i];}
     public static int length(){return taille;}
+    
+    
+    public PieceDomino tirerHasard() {
+    	Random r = new Random();
+    	return new PieceDomino(r.nextInt(1, 4),r.nextInt(1, 4),r.nextInt(1, 4));
+    }
 }
