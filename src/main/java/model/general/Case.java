@@ -10,11 +10,6 @@ public class Case {
         occupee = false;
         tuile = null;
     }
-    
-    public Case (Tuile t) {
-    	tuile = t;
-    	occupee = true;
-    }
 
     // Méthodes getteurs
     public boolean isOccupee(){return occupee;}
