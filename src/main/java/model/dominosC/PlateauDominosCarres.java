@@ -29,13 +29,19 @@ public class PlateauDominosCarres extends Plateau {
     @Override
     public void afficher() {
 
-        int cNonVide = nColonneNonVide();
+        int cNonVide = nColonneNonVide()+2;
+
+        // On print une première ligne vide
+        printLines(cNonVide);
+        System.out.print("\n\n\n\n\n");
+
 
         printLines(cNonVide);
         // On parcours chaque ligne du plateau
         for (int i = 0; i < hauteur; i++) {
             if(!ligneVide(i)){
                 // On print le haut de chaque ligne
+                TuileDominosCarres.printHaut(null);
                 for (int j = 0; j < longueur; j++) {
                     if(!colonneVide(j)){
                         if(cases[j][i] != null){
@@ -51,6 +57,7 @@ public class PlateauDominosCarres extends Plateau {
 
                 // On print les parties intermediaires
                 for(int l = 0; l<PieceDomino.length();l++){
+                    TuileDominosCarres.printInterm(null,l);
                     for (int j = 0; j < longueur; j++) {
                         if(!colonneVide(j)){
                             if(cases[j][i] != null){
@@ -66,6 +73,7 @@ public class PlateauDominosCarres extends Plateau {
                 }
 
                 // On print le bas de chaque ligne
+                TuileDominosCarres.printBas(null);
                 for (int j = 0; j < longueur; j++) {
                     if(!colonneVide(j)){
                         if(cases[j][i] != null){
@@ -80,6 +88,10 @@ public class PlateauDominosCarres extends Plateau {
                 printLines(cNonVide);     
             }       
         }
+
+        // On print une dernière ligne vide
+        System.out.print("\n\n\n\n\n");
+        printLines(cNonVide);
     }
 
     public boolean ligneVide(int l){
