@@ -33,45 +33,55 @@ public class PlateauDominosCarres extends Plateau {
 
         // On parcours chaque ligne du plateau
         for (int i = 0; i < hauteur; i++) {
-
-            // On print le haut de chaque ligne
-            for (int j = 0; j < longueur; j++) {
-                if(cases[j][i] != null){
-                    TuileDominosCarres.printHaut(((TuileDominosCarres) cases[j][i].getTuile()));
-                }
-                else{
-                    TuileDominosCarres.printHaut(null);
-                }
-            }
-            // On passe à la ligne
-            System.out.println();
-
-            // On print les parties intermediaires
-            for(int l = 0; l<PieceDomino.length();l++){
+            if(!ligneVide(i)){
+                // On print le haut de chaque ligne
                 for (int j = 0; j < longueur; j++) {
                     if(cases[j][i] != null){
-                        TuileDominosCarres.printInterm(((TuileDominosCarres) cases[j][i].getTuile()),l);
+                        TuileDominosCarres.printHaut(((TuileDominosCarres) cases[j][i].getTuile()));
                     }
                     else{
-                        TuileDominosCarres.printInterm(null,l);
+                        TuileDominosCarres.printHaut(null);
                     }
                 }
                 // On passe à la ligne
                 System.out.println();
-            }
 
-            // On print le bas de chaque ligne
-            for (int j = 0; j < longueur; j++) {
-                if(cases[j][i] != null){
-                    TuileDominosCarres.printBas(((TuileDominosCarres) cases[j][i].getTuile()));
+                // On print les parties intermediaires
+                for(int l = 0; l<PieceDomino.length();l++){
+                    for (int j = 0; j < longueur; j++) {
+                        if(cases[j][i] != null){
+                            TuileDominosCarres.printInterm(((TuileDominosCarres) cases[j][i].getTuile()),l);
+                        }
+                        else{
+                            TuileDominosCarres.printInterm(null,l);
+                        }
+                    }
+                    // On passe à la ligne
+                    System.out.println();
                 }
-                else{
-                    TuileDominosCarres.printBas(null);
+
+                // On print le bas de chaque ligne
+                for (int j = 0; j < longueur; j++) {
+                    if(cases[j][i] != null){
+                        TuileDominosCarres.printBas(((TuileDominosCarres) cases[j][i].getTuile()));
+                    }
+                    else{
+                        TuileDominosCarres.printBas(null);
+                    }
                 }
-            }
-            System.out.println();
-            printLines();            
+                System.out.println();
+                printLines();     
+            }       
         }
+    }
+
+    public boolean ligneVide(int l){
+        for (int i = 0; i < longueur; i++) {
+            if(cases[i][l].isOccupee()){
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean surPlateau(int x, int y){
