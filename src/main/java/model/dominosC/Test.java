@@ -10,8 +10,7 @@ public class Test {
 
         TuileDominosCarres t = new TuileDominosCarres(a, b, c, d);
         
-        /*
-        PlateauDominosCarres p = new PlateauDominosCarres();
+        PlateauDominosCarres p = new PlateauDominosCarres(5,3);
 
         // On pose au moins une tuile sur le plateau pour pouvoir placer le reste
         p.getCase(0, 0).poserTuile(t);
@@ -28,9 +27,5 @@ public class Test {
 
         DominosCarres domino = new DominosCarres();
         //domino.lancerPartie();
-         
-         */
-        
-        
     }
 }

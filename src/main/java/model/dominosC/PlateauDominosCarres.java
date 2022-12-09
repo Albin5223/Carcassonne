@@ -1,30 +1,23 @@
 package src.main.java.model.dominosC;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Random;
-
 import src.main.java.model.general.*;
 
 public class PlateauDominosCarres extends Plateau {
 
-    public PlateauDominosCarres(ArrayList<TuileDominosCarres> sac){
-    	super();
-    	Random r = new Random();
-    	int n = r.nextInt(0,sac.size());
-    	Tuile t = sac.get(n);
-    	Case c = new Case(t);
-    	LinkedList<Case> l = new LinkedList<Case>();
-    	l.add(c);
-    	l.addFirst(null);
-    	l.addLast(null);
-    	plateau.add(l);
-    	sac.remove(n);
-    	
+    public PlateauDominosCarres(int longueur, int hauteur){
+        super(longueur, hauteur);
     }
 
+    public PlateauDominosCarres(int i){
+        super(i);
+    }
+
+    public PlateauDominosCarres(){
+        super();
+    }    
+
     private void printLines(){
-        for (int i = 0; i < getLongueur(); i++) {
+        for (int i = 0; i < longueur; i++) {
             System.out.print("+");
             for (int j = 0; j < ((PieceDomino.length()+2)*2-1)+2; j++) {
                 System.out.print("-");
@@ -39,12 +32,12 @@ public class PlateauDominosCarres extends Plateau {
         printLines();
 
         // On parcours chaque ligne du plateau
-        for (int i = 0; i < getHauteur(); i++) {
+        for (int i = 0; i < hauteur; i++) {
 
             // On print le haut de chaque ligne
-            for (int j = 0; j < getLongueur(); j++) {
-                if(plateau.get(j).get(i) != null){
-                    TuileDominosCarres.printHaut(((TuileDominosCarres) plateau.get(j).get(i).getTuile()));
+            for (int j = 0; j < longueur; j++) {
+                if(cases[j][i] != null){
+                    TuileDominosCarres.printHaut(((TuileDominosCarres) cases[j][i].getTuile()));
                 }
                 else{
                     TuileDominosCarres.printHaut(null);
@@ -55,9 +48,9 @@ public class PlateauDominosCarres extends Plateau {
 
             // On print les parties intermediaires
             for(int l = 0; l<PieceDomino.length();l++){
-                for (int j = 0; j < getLongueur(); j++) {
-                    if(plateau.get(j).get(i) != null){
-                        TuileDominosCarres.printInterm(((TuileDominosCarres) plateau.get(j).get(i) .getTuile()),l);
+                for (int j = 0; j < longueur; j++) {
+                    if(cases[j][i] != null){
+                        TuileDominosCarres.printInterm(((TuileDominosCarres) cases[j][i].getTuile()),l);
                     }
                     else{
                         TuileDominosCarres.printInterm(null,l);
@@ -68,9 +61,9 @@ public class PlateauDominosCarres extends Plateau {
             }
 
             // On print le bas de chaque ligne
-            for (int j = 0; j < getLongueur(); j++) {
-                if(plateau.get(j).get(i) != null){
-                    TuileDominosCarres.printBas(((TuileDominosCarres) plateau.get(j).get(i).getTuile()));
+            for (int j = 0; j < longueur; j++) {
+                if(cases[j][i] != null){
+                    TuileDominosCarres.printBas(((TuileDominosCarres) cases[j][i].getTuile()));
                 }
                 else{
                     TuileDominosCarres.printBas(null);
@@ -82,7 +75,7 @@ public class PlateauDominosCarres extends Plateau {
     }
 
     public boolean surPlateau(int x, int y){
-        return x >= 0 && x < getLongueur() && y >= 0 && y < getHauteur();
+        return x >= 0 && x < longueur && y >= 0 && y < hauteur;
     }
 
     private boolean hautConforme(TuileDominosCarres t, int x, int y){
@@ -119,7 +112,7 @@ public class PlateauDominosCarres extends Plateau {
 
     public boolean peutPoser(TuileDominosCarres t,int x, int y){
         if(surPlateau(x, y)){
-            if(!plateau.get(x).get(y).isOccupee()){
+            if(!cases[x][y].isOccupee()){
                 if(hautConforme(t, x, y) || droiteConforme(t, x, y) || basConforme(t, x, y) || gaucheConforme(t, x, y)){
                     return true;
                 }
@@ -130,7 +123,7 @@ public class PlateauDominosCarres extends Plateau {
 
     public boolean poserTuile(TuileDominosCarres tuile, int x, int y) {
         if(peutPoser(tuile, x, y)){
-        	plateau.get(x).get(y).poserTuile(tuile);
+            cases[x][y].poserTuile(tuile);
             return true;
         }
         return false;

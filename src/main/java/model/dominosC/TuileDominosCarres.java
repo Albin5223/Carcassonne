@@ -1,7 +1,6 @@
 package src.main.java.model.dominosC;
 
 import src.main.java.model.general.*;
-import java.util.LinkedList;
 
 /*
  * Classe qui représente les tuiles du jeu des dominos carrés
@@ -16,7 +15,7 @@ public class TuileDominosCarres extends Tuile {
     private PieceDomino droite;   // Domino qui se situe à droite de la tuile
     private PieceDomino bas;      // Domino qui se situe en bas de la tuile
     private PieceDomino gauche;   // Domino qui se situe à gauche de la tuile
-    
+
     // Constructeur : pour le moment, on force les tuiles à avoir des cotés avec 3 valeurs, on pourra potentiellement augmenter la taille après
     public TuileDominosCarres(PieceDomino haut, PieceDomino droite, PieceDomino bas, PieceDomino gauche){
         this.haut = haut;
@@ -115,13 +114,5 @@ public class TuileDominosCarres extends Tuile {
             System.out.print("  ");
         }
     }
-
-	@Override
-	public Tuile creerHasard() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-    
-    
 
 }

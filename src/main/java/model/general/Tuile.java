@@ -15,7 +15,5 @@ public abstract class Tuile {
 
     public abstract void rotation();    // Il faudra peut-être l'enlever de cette classe si ça gène la création du 2ème jeu
     public abstract void afficher();
-    
-    public abstract Tuile creerHasard(); //Cette fonction crée une piece au hasard
 
 }
