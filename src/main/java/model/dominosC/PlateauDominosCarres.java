@@ -16,8 +16,8 @@ public class PlateauDominosCarres extends Plateau {
         super();
     }    
 
-    private void printLines(){
-        for (int i = 0; i < longueur; i++) {
+    private void printLines(int n){
+        for (int i = 0; i < n; i++) {
             System.out.print("+");
             for (int j = 0; j < ((PieceDomino.length()+2)*2-1)+2; j++) {
                 System.out.print("-");
@@ -29,18 +29,21 @@ public class PlateauDominosCarres extends Plateau {
     @Override
     public void afficher() {
 
-        printLines();
+        int cNonVide = nColonneNonVide();
 
+        printLines(cNonVide);
         // On parcours chaque ligne du plateau
         for (int i = 0; i < hauteur; i++) {
             if(!ligneVide(i)){
                 // On print le haut de chaque ligne
                 for (int j = 0; j < longueur; j++) {
-                    if(cases[j][i] != null){
-                        TuileDominosCarres.printHaut(((TuileDominosCarres) cases[j][i].getTuile()));
-                    }
-                    else{
-                        TuileDominosCarres.printHaut(null);
+                    if(!colonneVide(j)){
+                        if(cases[j][i] != null){
+                            TuileDominosCarres.printHaut(((TuileDominosCarres) cases[j][i].getTuile()));
+                        }
+                        else{
+                            TuileDominosCarres.printHaut(null);
+                        }
                     }
                 }
                 // On passe à la ligne
@@ -49,11 +52,13 @@ public class PlateauDominosCarres extends Plateau {
                 // On print les parties intermediaires
                 for(int l = 0; l<PieceDomino.length();l++){
                     for (int j = 0; j < longueur; j++) {
-                        if(cases[j][i] != null){
-                            TuileDominosCarres.printInterm(((TuileDominosCarres) cases[j][i].getTuile()),l);
-                        }
-                        else{
-                            TuileDominosCarres.printInterm(null,l);
+                        if(!colonneVide(j)){
+                            if(cases[j][i] != null){
+                                TuileDominosCarres.printInterm(((TuileDominosCarres) cases[j][i].getTuile()),l);
+                            }
+                            else{
+                                TuileDominosCarres.printInterm(null,l);
+                            }
                         }
                     }
                     // On passe à la ligne
@@ -62,15 +67,17 @@ public class PlateauDominosCarres extends Plateau {
 
                 // On print le bas de chaque ligne
                 for (int j = 0; j < longueur; j++) {
-                    if(cases[j][i] != null){
-                        TuileDominosCarres.printBas(((TuileDominosCarres) cases[j][i].getTuile()));
-                    }
-                    else{
-                        TuileDominosCarres.printBas(null);
+                    if(!colonneVide(j)){
+                        if(cases[j][i] != null){
+                            TuileDominosCarres.printBas(((TuileDominosCarres) cases[j][i].getTuile()));
+                        }
+                        else{
+                            TuileDominosCarres.printBas(null);
+                        }
                     }
                 }
                 System.out.println();
-                printLines();     
+                printLines(cNonVide);     
             }       
         }
     }
@@ -82,6 +89,25 @@ public class PlateauDominosCarres extends Plateau {
             }
         }
         return true;
+    }
+
+    public boolean colonneVide(int c){
+        for (int i = 0; i < hauteur; i++) {
+            if(cases[c][i].isOccupee()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int nColonneNonVide(){
+        int n = 0;
+        for (int i = 0; i < longueur; i++) {
+            if(!colonneVide(i)){
+                n++;
+            }
+        }
+        return n;
     }
 
     public boolean surPlateau(int x, int y){
