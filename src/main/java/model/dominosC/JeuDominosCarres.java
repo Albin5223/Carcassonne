@@ -69,20 +69,12 @@ public class JeuDominosCarres extends Jeu {
         }
     }
 
-    // Cette fonction permet de piocher un domino aléatoire dans le sac
-    public TuileDominosCarres piocher(Joueur j){
-        // On choisis un nombre aléatoire pour piocher dans le sac
+    //Cette fonction permet de piocher un domino aléatoire dans le sac
+    public TuileDominosCarres piocher(){
         Random r=new Random();
         int n = r.nextInt(sac.size());
 
-        // On trouve la tuile piochée
-        TuileDominosCarres piocher = sac.get(n);
-        // On attribue à la tuile son titulaire
-        piocher.setTitulaire(j);
-        // On l'enlève du sac
-        sac.remove(n);
-        // On le retourne
-        return piocher;
+        return sac.get(n);
     }
 
 
