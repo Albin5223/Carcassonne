@@ -16,7 +16,7 @@ public class Test {
         p.getCase(0, 0).poserTuile(t);
 
         // Et le reste se placera vu que c'est la même tuile à chaque fois, et que le haut = bas et droite = gauche
-        for (int i = 0; i < p.getLongueur(); i++) {
+        for (int i = 0; i < p.getLongueur()-1; i++) {
             for (int j = 0; j < p.getHauteur(); j++) {
                 p.poserTuile(t, i, j);
             }

@@ -58,8 +58,10 @@ public class TuileDominosCarres extends Tuile {
     @Override
     public void rotation(){
         PieceDomino tmp = haut;
+        gauche.inversePiece();
         haut = gauche;
         gauche = bas;
+        droite.inversePiece();
         bas = droite;
         droite = tmp;
     }

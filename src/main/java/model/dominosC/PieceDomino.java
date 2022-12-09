@@ -24,4 +24,10 @@ public class PieceDomino {
     // Méthodes getteurs
     public int get(int i){return domino[i];}
     public static int length(){return taille;}
+
+    public void inversePiece(){
+        int tmp = domino[0];
+        domino[0] = domino[taille-1];
+        domino[taille-1] = tmp;
+    }
 }
