@@ -29,6 +29,9 @@ public class DominosCarres extends Jeu {
         // On distribue les tuiles ici
         // TODO :
 
+        // On lance les tours ici
+        // TODO :
+
         
     }
 
@@ -59,7 +62,6 @@ public class DominosCarres extends Jeu {
             System.out.println("- Quel est le nom du joueur n°" + (i+1) + " ? -");
             joueurs[i] = new Joueur(i);
         }
-        
     }
 
     // Cette fonction permet de piocher un domino aléatoire dans le sac

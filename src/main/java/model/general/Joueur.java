@@ -8,12 +8,14 @@ public class Joueur {
     private String nom;
     private int id;
     private int score;
+    private boolean abandon;
 
     // Constructeur
     public Joueur(String nom, int id){
         this.nom = nom;
         this.id = id;
         score = 0;
+        abandon = false;
     }
 
     // Constructeur avec un scanner
