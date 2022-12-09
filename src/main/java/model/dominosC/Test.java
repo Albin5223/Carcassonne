@@ -10,12 +10,12 @@ public class Test {
 
         TuileDominosCarres t = new TuileDominosCarres(a, b, c, d);
         
-        PlateauDominosCarres p = new PlateauDominosCarres(5,3);
+        PlateauDominosCarres p = new PlateauDominosCarres(10,7);
 
         // On pose au moins une tuile sur le plateau pour pouvoir placer le reste
-        p.getCase(0, 0).poserTuile(t);
+        p.getCase(0, 0).poserTuile(t);p.getCase(1, 0).poserTuile(t);
         p.getCase(0, 1).poserTuile(t);
-        p.getCase(1, 1).poserTuile(t);
+        p.getCase(0, 2).poserTuile(t);p.getCase(1, 2).poserTuile(t);
 
         /* 
         // Et le reste se placera vu que c'est la même tuile à chaque fois, et que le haut = bas et droite = gauche

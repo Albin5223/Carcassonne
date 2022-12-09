@@ -146,6 +146,7 @@ public class PlateauDominosCarres extends Plateau {
         return false;
     }
 
+    // TODO : Ne marche pas vraiment
     public boolean peutPoser(TuileDominosCarres t,int x, int y){
         if(surPlateau(x, y)){
             if(!cases[x][y].isOccupee()){
