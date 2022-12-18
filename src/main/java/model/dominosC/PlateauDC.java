@@ -67,36 +67,4 @@ public class PlateauDC extends Plateau {
         System.out.print("\n\n\n\n\n");
         printLines(getLongueur()+2);
     }
-
-    public boolean ligneVide(int l){
-        for (int i = 0; i < getLongueur(); i++) {
-            if(isOccupee(i, l)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean colonneVide(int c){
-        for (int i = 0; i < getHauteur(); i++) {
-            if(isOccupee(c, i)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public int nColonneNonVide(){
-        int n = 0;
-        for (int i = 0; i < getLongueur(); i++) {
-            if(!colonneVide(i)){
-                n++;
-            }
-        }
-        return n;
-    }
-
-    public boolean surPlateau(int x, int y){
-        return x >= 0 && x < getLongueur() && y >= 0 && y < getHauteur();
-    }
 }
