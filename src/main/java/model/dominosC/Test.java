@@ -1,9 +1,10 @@
 package src.main.java.model.dominosC;
 
 import src.main.java.model.general.CasePleineException;
+import src.main.java.model.general.CaseVideException;
 
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CaseVideException, CasePleineException {
 
         PieceDomino a = new PieceDomino(0, 1, 2);
         PieceDomino b = new PieceDomino(3, 4, 5);
@@ -11,7 +12,7 @@ public class Test {
         PieceDomino d = new PieceDomino(3, 4, 5);
 
         TuileDominosCarres t = new TuileDominosCarres(a, b, c, d);
-        
+
         //J'ai mis en paramètre ce que tu as fait vu qu'on a mis dictionnaire mtn
         /*
         // On pose au moins une tuile sur le plateau pour pouvoir placer le reste
@@ -37,10 +38,8 @@ public class Test {
         */
         
         PlateauDominosCarres plateau = new PlateauDominosCarres();
-        try {
-			plateau.setCase(t, 0, 0);
-		} catch (CasePleineException e) {
-			e.printStackTrace();
-		}
+		plateau.setTuile(t, 0, 0);
+        plateau.setTuile(t, 0, 1);
+        plateau.afficher();
     }
 }

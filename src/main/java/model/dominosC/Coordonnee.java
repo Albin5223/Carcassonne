@@ -22,8 +22,6 @@ public class Coordonnee {
 		if (c1.x == this.x && c1.y == this.y) {
 			return true;
 		}
-		
 		return false;
-		
 	}
 }
