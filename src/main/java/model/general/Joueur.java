@@ -45,4 +45,8 @@ public class Joueur {
         // Si le score du joueur est tombé dans les négatifs, on le remonte à zéro
         this.score = (this.score < 0) ? 0 : this.score;
     }
+    // Méthode pour abandonner
+    public void abandonne(){
+        abandon = true;
+    }
 }

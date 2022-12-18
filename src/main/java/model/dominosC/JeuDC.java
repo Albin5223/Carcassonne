@@ -6,13 +6,13 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class DominosCarresJeu extends Jeu {
+public class JeuDC extends Jeu {
 
     // Attributs :
     // Cet attribut représente toutes les tuiles qui exisent dans notre jeu
-    private ArrayList <TuileDominosCarres> tuiles = new ArrayList<TuileDominosCarres>();
+    private ArrayList <TuileDC> tuiles = new ArrayList<TuileDC>();
     // Cet attribut représente les tuiles stockées dans le sac du jeu
-    private ArrayList <TuileDominosCarres> sac = new ArrayList<TuileDominosCarres>();
+    private ArrayList <TuileDC> sac = new ArrayList<TuileDC>();
 
     @Override
     public void lancerPartie() {
@@ -65,13 +65,13 @@ public class DominosCarresJeu extends Jeu {
     }
 
     //Cette fonction permet de piocher un domino aléatoire dans le sac
-    public TuileDominosCarres piocher(Joueur j){
+    public TuileDC piocher(Joueur j){
         // On choisis un nombre aléatoire pour piocher dans le sac
         Random r=new Random();
         int n = r.nextInt(sac.size());
 
         // On trouve la tuile piochée
-        TuileDominosCarres piocher = sac.get(n);
+        TuileDC piocher = sac.get(n);
         // On attribue à la tuile son titulaire
         piocher.setTitulaire(j);
         // On l'enlève du sac
@@ -101,12 +101,12 @@ public class DominosCarresJeu extends Jeu {
     
     //Fonction qui initialise le sac avec tous les dominos possibles
     public void creerSac() {
-    	ArrayList<PieceDomino> pieces = new ArrayList<PieceDomino>();
+    	ArrayList<PieceDC> pieces = new ArrayList<PieceDC>();
     	
     	for (int i = 1;i<4;i++) {
     		for (int j = 1;j<4;j++) {
     			for (int k = 1;k<4;k++) {
-    				pieces.add(new PieceDomino(i,j,k));
+    				pieces.add(new PieceDC(i,j,k));
     	    	}
         	}
     	}
@@ -115,7 +115,7 @@ public class DominosCarresJeu extends Jeu {
     		for (int j = 0;j<pieces.size();j++) {
     			for (int k = 0;k<pieces.size();k++) {
     				for (int l = 0;l<pieces.size();l++) {
-        				sac.add(new TuileDominosCarres(pieces.get(i),pieces.get(j),pieces.get(k),pieces.get(k)));
+        				sac.add(new TuileDC(pieces.get(i),pieces.get(j),pieces.get(k),pieces.get(k)));
         	    	}
     	    	}
         	}

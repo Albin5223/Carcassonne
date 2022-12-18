@@ -1,5 +1,3 @@
 package src.main.java.model.general;
 
-public class CaseVideException extends Exception {
-
-}
+public class CaseVideException extends Exception {}

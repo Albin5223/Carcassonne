@@ -8,40 +8,40 @@ import src.main.java.model.general.*;
  *  - Les dominos horizontaux de la tuile se définissent de gauche à droite
  *  - Les dominos verticaux de la tuile se définissent de haut en bas
  */
-public class TuileDominosCarres extends Tuile {
+public class TuileDC extends Tuile {
 
     // Attributs
-    private PieceDomino haut;     // Domino qui se situe en haut de la tuile
-    private PieceDomino droite;   // Domino qui se situe à droite de la tuile
-    private PieceDomino bas;      // Domino qui se situe en bas de la tuile
-    private PieceDomino gauche;   // Domino qui se situe à gauche de la tuile
+    private PieceDC haut;     // Domino qui se situe en haut de la tuile
+    private PieceDC droite;   // Domino qui se situe à droite de la tuile
+    private PieceDC bas;      // Domino qui se situe en bas de la tuile
+    private PieceDC gauche;   // Domino qui se situe à gauche de la tuile
 
     // Constructeur : pour le moment, on force les tuiles à avoir des cotés avec 3 valeurs, on pourra potentiellement augmenter la taille après
-    public TuileDominosCarres(PieceDomino haut, PieceDomino droite, PieceDomino bas, PieceDomino gauche){
+    public TuileDC(PieceDC haut, PieceDC droite, PieceDC bas, PieceDC gauche){
         this.haut = haut;
         this.droite = droite;
         this.bas = bas;
         this.gauche = gauche;
     }
 
-    public PieceDomino getHaut(){return haut;}
-    public PieceDomino getDroite(){return droite;}
-    public PieceDomino getBas(){return bas;}
-    public PieceDomino getGauche(){return gauche;}
+    public PieceDC getHaut(){return haut;}
+    public PieceDC getDroite(){return droite;}
+    public PieceDC getBas(){return bas;}
+    public PieceDC getGauche(){return gauche;}
 
     @Override
     public void afficher() {
         // On affiche le haut
         System.out.print("# ");
-        for(int i = 0;i < PieceDomino.length();i++){
+        for(int i = 0;i < PieceDC.length();i++){
             System.out.print(haut.get(i) + " ");
         }
         System.out.println("#");
 
         // On affiche les côtés
-        for (int i = 0; i < PieceDomino.length(); i++) {
+        for (int i = 0; i < PieceDC.length(); i++) {
             System.out.print(gauche.get(i)+" ");
-            for (int j = 0; j < PieceDomino.length(); j++) {
+            for (int j = 0; j < PieceDC.length(); j++) {
                 System.out.print("# ");
             }
             System.out.println(droite.get(i));
@@ -49,7 +49,7 @@ public class TuileDominosCarres extends Tuile {
 
         // On affiche le bas
         System.out.print("# ");
-        for(int i = 0;i<PieceDomino.length();i++){
+        for(int i = 0;i<PieceDC.length();i++){
             System.out.print(bas.get(i) + " ");
         }
         System.out.println("#");
@@ -57,7 +57,7 @@ public class TuileDominosCarres extends Tuile {
 
     @Override
     public void rotation(){
-        PieceDomino tmp = haut;
+        PieceDC tmp = haut;
         gauche.inversePiece();
         haut = gauche;
         gauche = bas;
@@ -66,51 +66,51 @@ public class TuileDominosCarres extends Tuile {
         droite = tmp;
     }
 
-    public static void printHaut(TuileDominosCarres t){
+    public static void printHaut(TuileDC t){
         if(t != null){
             System.out.print("  # ");
-            for(int i = 0;i < PieceDomino.length();i++){
+            for(int i = 0;i < PieceDC.length();i++){
                 System.out.print(t.haut.get(i)+" ");
             }
             System.out.print("# ");
         }
         else{
             System.out.print("    ");
-            for(int i = 0;i < PieceDomino.length();i++){
+            for(int i = 0;i < PieceDC.length();i++){
                 System.out.print("  ");
             }
             System.out.print("  ");
         }
     }
 
-    public static void printInterm(TuileDominosCarres t, int l){
+    public static void printInterm(TuileDC t, int l){
         if(t != null){
             System.out.print("  "+t.gauche.get(l)+" ");
-            for(int i = 0;i < PieceDomino.length();i++){
+            for(int i = 0;i < PieceDC.length();i++){
                 System.out.print("# ");
             }
             System.out.print(t.droite.get(l) + " ");
         }
         else{
             System.out.print("    ");
-            for(int i = 0;i < PieceDomino.length();i++){
+            for(int i = 0;i < PieceDC.length();i++){
                 System.out.print("  ");
             }
             System.out.print("  ");
         }
     }
 
-    public static void printBas(TuileDominosCarres t){
+    public static void printBas(TuileDC t){
         if(t != null){
             System.out.print("  # ");
-            for(int i = 0;i<PieceDomino.length();i++){
+            for(int i = 0;i<PieceDC.length();i++){
                 System.out.print(t.bas.get(i) + " ");
             }
             System.out.print("# ");
         }
         else{
             System.out.print("    ");
-            for(int i = 0;i<PieceDomino.length();i++){
+            for(int i = 0;i<PieceDC.length();i++){
                 System.out.print("  ");
             }
             System.out.print("  ");
