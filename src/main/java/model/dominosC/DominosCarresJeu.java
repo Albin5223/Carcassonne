@@ -6,7 +6,7 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class DominosCarres extends Jeu {
+public class DominosCarresJeu extends Jeu {
 
     // Attributs :
     // Cet attribut représente toutes les tuiles qui exisent dans notre jeu
@@ -24,7 +24,7 @@ public class DominosCarres extends Jeu {
         // TODO :
 
         // On initialise les tuiles ici
-        // TODO :
+        creerSac();
 
         // On distribue les tuiles ici
         // TODO :
@@ -98,5 +98,29 @@ public class DominosCarres extends Jeu {
     public void afficher(){
         System.out.println(plateau);
     }
+    
+    //Fonction qui initialise le sac avec tous les dominos possibles
+    public void creerSac() {
+    	ArrayList<PieceDomino> pieces = new ArrayList<PieceDomino>();
+    	
+    	for (int i = 1;i<4;i++) {
+    		for (int j = 1;j<4;j++) {
+    			for (int k = 1;k<4;k++) {
+    				pieces.add(new PieceDomino(i,j,k));
+    	    	}
+        	}
+    	}
+    	
+    	for (int i = 0;i<pieces.size();i++) {
+    		for (int j = 0;j<pieces.size();j++) {
+    			for (int k = 0;k<pieces.size();k++) {
+    				for (int l = 0;l<pieces.size();l++) {
+        				sac.add(new TuileDominosCarres(pieces.get(i),pieces.get(j),pieces.get(k),pieces.get(k)));
+        	    	}
+    	    	}
+        	}
+    	}
+    }
+
 
 }

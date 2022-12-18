@@ -1,5 +1,7 @@
 package src.main.java.model.dominosC;
 
+import src.main.java.model.general.CasePleineException;
+
 public class Test {
     public static void main(String[] args) {
 
@@ -10,8 +12,8 @@ public class Test {
 
         TuileDominosCarres t = new TuileDominosCarres(a, b, c, d);
         
-        PlateauDominosCarres p = new PlateauDominosCarres(50,89);
-
+        //J'ai mis en paramètre ce que tu as fait vu qu'on a mis dictionnaire mtn
+        /*
         // On pose au moins une tuile sur le plateau pour pouvoir placer le reste
         p.getCase(27, 27).poserTuile(t);p.getCase(28, 27).poserTuile(t);
         p.getCase(24, 28).poserTuile(t);p.getCase(25, 28).poserTuile(t);p.getCase(26, 28).poserTuile(t);
@@ -25,12 +27,20 @@ public class Test {
             }
         }
         //p.poserTuile(t, 1, 4);
-        */
-
+        
+        
         p.afficher();
 
 
         DominosCarres domino = new DominosCarres();
         //domino.lancerPartie();
+        */
+        
+        PlateauDominosCarres plateau = new PlateauDominosCarres();
+        try {
+			plateau.setCase(t, 0, 0);
+		} catch (CasePleineException e) {
+			e.printStackTrace();
+		}
     }
 }

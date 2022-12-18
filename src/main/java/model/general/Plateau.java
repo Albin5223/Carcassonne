@@ -1,49 +1,43 @@
 package src.main.java.model.general;
 
+import java.util.HashMap;
+
+import src.main.java.model.dominosC.Coordonnee;
+
 public abstract class Plateau {
 
-    protected Case[][] cases;
-    protected int longueur;
-    protected int hauteur;
-
-    // Limite de taille pour un plateau, on peut la changer pour augmenter ou réduire
-    protected final int limite = 30;
-
-    // Constructeur : avec taille limite
-    public Plateau(int longueur, int hauteur){
-        if(longueur > limite){longueur = limite;}
-        if(hauteur > limite){hauteur = limite;}
-
-        this.longueur = longueur;
-        this.hauteur = hauteur;
-        this.cases = new Case[longueur][hauteur];
-
-        for (int i = 0; i < longueur; i++) {
-            for (int j = 0; j < hauteur; j++) {
-                cases[i][j] = new Case();
-            }
-        }
+    HashMap<Coordonnee,Tuile> plateau;
+    
+    public Plateau() {
+    	plateau = new HashMap<Coordonnee,Tuile>();
     }
-
-    // Constructeur : plateau carré
-    public Plateau(int i){
-        this(i, i);
-    }
-
-    // Constructeur : sans argument, on donne une taille de 10
-    public Plateau(){
-        this(10);
-    }
-
+    
     // Méthodes getteurs
-    public Case getCase(int x, int y){return cases[x][y];}
-    public int getLongueur(){return longueur;}
-    public int getHauteur(){return hauteur;}
+    public Tuile getCase(int x, int y)throws CaseVideException{
+    	Coordonnee c = new Coordonnee (x,y);
+    	Tuile t = plateau.get(c);
+    	if (t == null) {
+    		throw new CaseVideException();
+    	}
+    	else {
+    		return t;
+    	}
+    	
+    }
+    
     
     // Méthodes setteurs
-    public void setCase(Case c,int x, int y){cases[x][y] = c;}
-    public void setPlateau(Case[][] p){cases = p;}
-
+    public void setCase(Tuile t,int x, int y)throws CasePleineException{
+    	Coordonnee c = new Coordonnee (x,y);
+    	Tuile sub = plateau.get(c);
+    	if (sub != null) {
+    		throw new CasePleineException();
+    	}
+    	else {
+    		plateau.put(c,t);
+    	}
+    }
+   
 
     public abstract void afficher();
 

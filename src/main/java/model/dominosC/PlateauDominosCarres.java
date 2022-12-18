@@ -4,17 +4,13 @@ import src.main.java.model.general.*;
 
 public class PlateauDominosCarres extends Plateau {
 
-    public PlateauDominosCarres(int longueur, int hauteur){
-        super(longueur, hauteur);
-    }
+	@Override
+	public void afficher() {
+		
+		
+	}
 
-    public PlateauDominosCarres(int i){
-        super(i);
-    }
-
-    public PlateauDominosCarres(){
-        super();
-    }    
+	/*
 
     private void printLines(int n){
         for (int i = 0; i < n; i++) {
@@ -125,7 +121,7 @@ public class PlateauDominosCarres extends Plateau {
     public boolean surPlateau(int x, int y){
         return x >= 0 && x < longueur && y >= 0 && y < hauteur;
     }
-
+	
     private boolean hautConforme(TuileDominosCarres t, int x, int y){
         if(surPlateau(x, y+1) && getCase(x, y+1).isOccupee() && 
         ((TuileDominosCarres) getCase(x, y+1).getTuile()).getBas().equals(((TuileDominosCarres) t).getHaut())){
@@ -177,4 +173,6 @@ public class PlateauDominosCarres extends Plateau {
         }
         return false;
     }
+    
+    */
 }
