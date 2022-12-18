@@ -13,9 +13,37 @@ public class Test {
 
         TuileDC t = new TuileDC(a, b, c, d);
         
+        PieceDC a1 = new PieceDC(0, 1, 2);
+        PieceDC b1 = new PieceDC(3, 3, 3);
+        PieceDC c1 = new PieceDC(0, 1, 2);
+        PieceDC d1 = new PieceDC(6, 4, 5);
+
+        TuileDC t1 = new TuileDC(a1, b1, c1, d1);
+        
+        PieceDC a2 = new PieceDC(0, 1, 2);
+        PieceDC b2 = new PieceDC(3, 3, 3);
+        PieceDC c2 = new PieceDC(0, 1, 2);
+        PieceDC d2 = new PieceDC(3, 4, 5);
+
+        TuileDC t2 = new TuileDC(a2, b2, c2, d2);
+        
+        PieceDC a3 = new PieceDC(0, 1, 2);
+        PieceDC b3 = new PieceDC(3, 4, 3);
+        PieceDC c3 = new PieceDC(0, 1, 2);
+        PieceDC d3 = new PieceDC(3, 3, 3);
+
+        TuileDC t3 = new TuileDC(a3, b3, c3, d3);
+        
         PlateauDC plateau = new PlateauDC();
 		plateau.setTuile(t, 0, 0);
-        plateau.setTuile(t, 0, 1);
+        try {
+			System.out.println(plateau.poserTuile(t1, 0, 1));
+			System.out.println(plateau.poserTuile(t2, 1, 0));
+			System.out.println(plateau.poserTuile(t3, 1, 1));
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+			
         plateau.afficher();
     }
 }

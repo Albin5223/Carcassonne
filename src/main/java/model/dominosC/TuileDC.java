@@ -117,5 +117,28 @@ public class TuileDC extends Tuile {
         }
     }
     
-
+    public static int comparer(Tuile t1,Tuile t2, char c1,char c2) {
+    	PieceDC partie1 = null;
+    	PieceDC partie2 = null;
+    	
+    	switch (c1) {
+    		case 'h': partie1 = ((TuileDC) t1).haut;break;
+    		case 'b': partie1 = ((TuileDC) t1).bas;break;
+    		case 'g': partie1 = ((TuileDC) t1).gauche;break;
+    		case 'd': partie1 = ((TuileDC) t1).droite;break;
+    	}
+    	
+    	switch (c2) {
+			case 'h' :partie2 = ((TuileDC) t2).haut;break;
+			case 'b': partie2 = ((TuileDC) t2).bas;break;
+			case 'g': partie2 = ((TuileDC) t2).gauche;break;
+			case 'd': partie2 = ((TuileDC) t2).droite;break;
+    	}
+    	
+    	int point = 0;
+    	point = PieceDC.comparer(partie1,partie2);
+    	
+    	return point;
+    		
+    }
 }

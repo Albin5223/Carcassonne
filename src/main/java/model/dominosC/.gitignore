@@ -2,3 +2,8 @@
 /Cordonnee.class
 /Coordonnee.class
 /DominosCarresJeu.class
+/JeuDC.class
+/PieceDC.class
+/PlateauDC.class
+/TuileDC.class
+/ActionImpossibleException.class

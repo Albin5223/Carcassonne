@@ -30,4 +30,17 @@ public class PieceDC {
         domino[0] = domino[taille-1];
         domino[taille-1] = tmp;
     }
+    
+    public static int comparer(PieceDC p1,PieceDC p2) {
+    	int point = 0;
+    	for (int i = 0;i<3;i++) {
+    		if (p1.domino[i]!=p2.domino[i]) {
+    			return 0;
+    		}
+    		else {
+    			point +=p1.domino[i];
+    		}
+    	}
+    	return point;
+    }
 }
