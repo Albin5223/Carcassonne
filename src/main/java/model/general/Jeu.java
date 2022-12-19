@@ -11,10 +11,13 @@ public abstract class Jeu {
     // Attributs d'un jeu de plateau
     protected ArrayList<Joueur> joueurs;
     protected Plateau plateau;
+    protected int niveauOrdinateur = 1;
 
     // Méthodes nécessaires pour un jeu de plateau
     public abstract void lancerPartie();
     public abstract void setJoueur();
     public abstract void jouerTour();
+    public ArrayList<Joueur> getJoueurs(){return joueurs;}
+    public abstract Plateau getPlateau();
 
 }

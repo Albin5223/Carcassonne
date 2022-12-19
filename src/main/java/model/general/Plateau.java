@@ -4,19 +4,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import src.main.java.model.dominosC.ActionImpossibleException;
 import src.main.java.model.dominosC.Coordonnee;
 
 public abstract class Plateau {
 
-    public HashMap<Coordonnee,Tuile> plateau;
-	public ArrayList<Integer> hauteur;
-	public ArrayList<Integer> longueur;
+    protected HashMap<Coordonnee,Tuile> plateau;
+	protected ArrayList<Coordonnee> possibilites;
+	protected ArrayList<Integer> hauteur;
+	protected ArrayList<Integer> longueur;
     
     public Plateau() {
     	plateau = new HashMap<Coordonnee,Tuile>();
+		possibilites = new ArrayList<Coordonnee>(); 
 		hauteur = new ArrayList<Integer>();
 		longueur = new ArrayList<Integer>();
     }
+
+	public ArrayList<Coordonnee> getPossibilites(){
+		return possibilites;
+	}
     
     // Méthodes getteurs
     public Tuile getTuile(int x, int y) throws CaseVideException{
@@ -47,10 +54,39 @@ public abstract class Plateau {
 			Collections.sort(longueur);
 		}
 		plateau.put(c, t);
+		possibilitesMAJ(c);
     }
+
+	protected void possibilitesMAJ(Coordonnee c){
+		possibilites.remove(c);
+		Coordonnee bas = new Coordonnee(c.getX(), c.getY()+1);
+		Coordonnee haut = new Coordonnee(c.getX(), c.getY()-1);
+		Coordonnee droite = new Coordonnee(c.getX()+1, c.getY());
+		Coordonnee gauche = new Coordonnee(c.getX()-1, c.getY());
+		if(!isOccupee(bas)){
+			possibilites.add(bas);
+		}
+		if(!isOccupee(haut)){
+			possibilites.add(haut);
+		}
+		if(!isOccupee(droite)){
+			possibilites.add(droite);
+		}
+		if(!isOccupee(gauche)){
+			possibilites.add(gauche);
+		}
+	}
 
 	public boolean isOccupee(int x, int y){
 		Coordonnee c = new Coordonnee(x, y);
+		Tuile sub = plateau.get(c);
+		if(sub != null){
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isOccupee(Coordonnee c){
 		Tuile sub = plateau.get(c);
 		if(sub != null){
 			return true;
@@ -67,5 +103,6 @@ public abstract class Plateau {
 	}
 
     public abstract void afficher();
+	public abstract void poserTuile(Tuile t, int x,int y) throws ActionImpossibleException, CasePleineException;
 
 }

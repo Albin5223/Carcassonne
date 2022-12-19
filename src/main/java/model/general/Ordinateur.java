@@ -2,9 +2,25 @@ package src.main.java.model.general;
 
 public class Ordinateur extends Joueur {
 
-    public Ordinateur(int id) {
+    protected Strategie strategie;
+
+    public Ordinateur(int id, int strat, Jeu jeu) {
         super("Ordinateur "+id, id);
         ordinateur = true;
+        choixStategie(strat);
+        strategie.setJeu(jeu);
+    }
+
+    private void choixStategie(int choix){
+        switch (choix) {
+            default:
+                strategie = new Strategie1();
+                break;
+        }
+    }
+
+    public boolean jouerTour(Tuile tuile){
+        return strategie.jouerTour(tuile);
     }
 
     /*

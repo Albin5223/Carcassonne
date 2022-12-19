@@ -39,6 +39,10 @@ public class Joueur {
         return "Nom : "+nom+" / ID : "+id+" / Score : "+score;
     }
 
+    public boolean isBot(){
+        return ordinateur;
+    }
+
     // Méthode demi-setteur : on augmente le score d'un certain nombre (non-négatif)
     public void ajouterScore(int score){this.score += (score >= 0) ? (score) : (0);}
     // Méthode demi-setteur : on baisse le score d'un certain nombre (non-négatif)

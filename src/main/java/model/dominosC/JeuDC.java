@@ -19,7 +19,11 @@ public class JeuDC extends Jeu {
         sac = new ArrayList<TuileDC>();
         plateau = new PlateauDC();
         tour = 0;
-        lancerPartie();
+    }
+
+    @Override
+    public PlateauDC getPlateau(){
+        return (PlateauDC) plateau;
     }
 
     @Override
@@ -90,7 +94,7 @@ public class JeuDC extends Jeu {
                 }
             }
             for (int i = 0; i < nombreOrdinateur; i++) {
-                joueurs.add(new Ordinateur(i));
+                joueurs.add(new Ordinateur(i,niveauOrdinateur,this));
             }
         }
     }
@@ -128,24 +132,35 @@ public class JeuDC extends Jeu {
             afficher();
 
             Joueur joueur = joueurs.get(tour);
-            // TODO :
-            /*
-             * Faire jouer le bot si le joueur est un bot (grâce à l'attribut "ordinateur")
-             * Pour l'instant, quand c'est le tour d'un bot, c'est comme si c'était un joueur humain
-             */
             System.out.println(" /// C'est au tour de "+joueur.getNom()+" : \\\\\\\n");     // On dit à qui est le tour
+            TuileDC pioche = piocher(joueur); 
+            System.out.println("Voici la tuile piochée :");             // On affiche sa pioche
+            pioche.afficher();                                          // On le fait piocher
 
-            TuileDC pioche = piocher(joueur);
-            System.out.println("Voici la tuile piochée :");         // On affiche sa pioche
-            pioche.afficher();
+            if(joueur.isBot()){
+                if(((Ordinateur) joueur).jouerTour(pioche)){
+                    System.out.println(joueur.getNom() + " a placé sa tuile");
+                }
+                else{
+                    System.out.println(joueur.getNom() + " n'a pas reussi à placer sa tuile");
+                }
+                joueurSuivant();
+            }
+            else{
+                demanderChoix(joueur, pioche);              // On lui demande ce qu'il veut faire
+            }
 
-            demanderChoix(joueur, pioche);              // On lui demande ce qu'il veut faire
+            if(joueur.getScore() >= maxScore){
+                joueurGagnant(joueur);
+            }
         }
 
         joueurGagnant(joueurs.get(0));      // On applaudi le joueur gagnant
     }
 
     private void joueurGagnant(Joueur joueur){
+        System.out.println("Etat du plateau final :");
+        plateau.afficher();
         System.out.println("\n/// "+joueur.getNom()+" remporte la partie avec un score total de : "+joueur.getScore()+" \\\\\\\n");
         System.exit(0);
     }
@@ -328,5 +343,6 @@ public class JeuDC extends Jeu {
 
     public static void main(String[] args) {
         JeuDC jeu = new JeuDC();
+        jeu.lancerPartie();
     }
 }
