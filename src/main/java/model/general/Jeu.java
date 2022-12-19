@@ -11,7 +11,7 @@ public abstract class Jeu {
     // Attributs d'un jeu de plateau
     protected ArrayList<Joueur> joueurs;
     protected Plateau plateau;
-    protected int niveauOrdinateur = 1;
+    protected int niveauOrdinateur = 2;
 
     // Méthodes nécessaires pour un jeu de plateau
     public abstract void lancerPartie();
