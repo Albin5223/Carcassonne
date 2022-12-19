@@ -37,9 +37,9 @@ public class Test {
         PlateauDC plateau = new PlateauDC();
 		plateau.setTuile(t, 0, 0);
         try {
-			System.out.println(plateau.poserTuile(t1, 0, 1));
-			System.out.println(plateau.poserTuile(t2, 1, 0));
-			System.out.println(plateau.poserTuile(t3, 1, 1));
+			plateau.poserTuile(t1, 0, 1);
+			plateau.poserTuile(t2, 1, 0);
+			plateau.poserTuile(t3, 1, 1);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

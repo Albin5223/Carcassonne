@@ -5,10 +5,11 @@ import java.util.Scanner;
 public class Joueur {
 
     // Attributs nécessaires pour définir un joueur
-    private String nom;
-    private int id;
-    private int score;
-    private boolean abandon;
+    protected String nom;
+    protected int id;
+    protected int score;
+    protected boolean abandon;
+    protected boolean ordinateur;
 
     // Constructeur
     public Joueur(String nom, int id){
@@ -16,15 +17,17 @@ public class Joueur {
         this.id = id;
         score = 0;
         abandon = false;
+        ordinateur = false;
     }
 
     // Constructeur avec un scanner
     public Joueur(int id){
         Scanner sc = new Scanner(System.in);
-        this.nom = sc.nextLine();
-        this.score = 0;
+        nom = sc.nextLine();
+        score = 0;
         this.id = id;
-        sc.close();
+        abandon = false;
+        ordinateur = false;
     }
 
     // Méthodes getteurs

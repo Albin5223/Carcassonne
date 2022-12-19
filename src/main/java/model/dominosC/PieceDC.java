@@ -25,10 +25,12 @@ public class PieceDC {
     public int get(int i){return domino[i];}
     public static int length(){return taille;}
 
-    public void inversePiece(){
-        int tmp = domino[0];
-        domino[0] = domino[taille-1];
-        domino[taille-1] = tmp;
+    public PieceDC inversePiece(){
+        PieceDC inverse = new PieceDC(0, 0,0);
+        inverse.domino[0] = this.get(2);
+        inverse.domino[1] = this.get(1);
+        inverse.domino[2] = this.get(0);
+        return inverse;
     }
     
     public static int comparer(PieceDC p1,PieceDC p2) {

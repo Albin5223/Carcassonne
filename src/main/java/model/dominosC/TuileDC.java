@@ -31,6 +31,7 @@ public class TuileDC extends Tuile {
 
     @Override
     public void afficher() {
+        System.out.println();
         // On affiche le haut
         System.out.print("# ");
         for(int i = 0;i < PieceDC.length();i++){
@@ -53,17 +54,20 @@ public class TuileDC extends Tuile {
             System.out.print(bas.get(i) + " ");
         }
         System.out.println("#");
+        System.out.println();
     }
 
     @Override
     public void rotation(){
-        PieceDC tmp = haut;
-        gauche.inversePiece();
-        haut = gauche;
-        gauche = bas;
-        droite.inversePiece();
-        bas = droite;
-        droite = tmp;
+        PieceDC h = gauche.inversePiece();
+        PieceDC d = haut;
+        PieceDC b = droite.inversePiece();
+        PieceDC g = bas;
+
+        this.haut = h;
+        this.droite = d;
+        this.bas = b;
+        this.gauche = g;
     }
 
     public static void printHaut(TuileDC t){
