@@ -3,6 +3,8 @@ package src.main.java.model.Graphique;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +13,7 @@ import javax.swing.JPanel;
 
 import src.main.java.model.dominosC.PieceDC;
 import src.main.java.model.dominosC.TuileDC;
+import src.main.java.model.general.Joueur;
 
 public class PlateauDominoCarre extends JFrame{
 	
@@ -19,7 +22,7 @@ public class PlateauDominoCarre extends JFrame{
 	
 	public PlateauDominoCarre() {
 		this.setSize(new Dimension(1000,800));
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
 		conteneur = new JPanel();
@@ -54,17 +57,33 @@ public class PlateauDominoCarre extends JFrame{
 		
 		JButton piocher;
 		JButton placer;
+		JButton suivant;
+		
+		JPanel panneauButton;
 		
 		public Information(int x,int y) {
 			this.setBounds(x, y, 200, 800);
 			this.setBackground(Color.BLUE);
+			this.setLayout(new GridLayout(5,1,100,100));
+			
+			panneauButton = new JPanel();
+			panneauButton.setBackground(Color.BLUE);
 			
 			
 			piocher = new JButton("Piocher");
-			this.add(piocher);
+			panneauButton.add(piocher,BorderLayout.NORTH);
 			
 			placer = new JButton("Placer");
-			this.add(placer);
+			panneauButton.add(placer,BorderLayout.NORTH);
+			
+			suivant = new JButton("Suivant");
+			panneauButton.add(suivant);
+			
+			this.add(panneauButton);
+			
+			Joueur j1 = new Joueur("Albin",3);
+			JoueurView jv1 = new JoueurView(j1);
+			this.add(jv1,BorderLayout.CENTER);
 			
 			
 		}

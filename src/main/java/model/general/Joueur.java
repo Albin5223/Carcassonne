@@ -1,4 +1,4 @@
-package src.main.java.model.general;
+	package src.main.java.model.general;
 
 import java.util.Scanner;
 
