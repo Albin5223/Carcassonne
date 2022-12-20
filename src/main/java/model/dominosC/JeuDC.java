@@ -9,14 +9,11 @@ import java.util.Scanner;
 public class JeuDC extends Jeu {
 
     // Attributs :
-    private ArrayList <TuileDC> sac;    // Cet attribut représente les tuiles stockées dans le sac du jeu
-    private final int maxScore = 20;   // Représente le nombre de points à avoir pour finir la partie
-    private final int maxPlayers = 4;   // Représente le nombre de joueurs maximal que peut accueillir notre jeu (on peut l'augmenter si besoin)
-    private int tour;                   // Représente l'index de la personne à qui est le tour
+    private int tour;     // Représente l'index de la personne à qui est le tour
 
     public JeuDC(){
         joueurs = new ArrayList<Joueur>();
-        sac = new ArrayList<TuileDC>();
+        sac = new ArrayList<Tuile>();
         plateau = new PlateauDC();
         tour = 0;
     }
@@ -105,7 +102,7 @@ public class JeuDC extends Jeu {
         Random r=new Random();
         int n = r.nextInt(sac.size());
         // On trouve la tuile piochée
-        TuileDC piocher = sac.get(n);
+        TuileDC piocher = (TuileDC)sac.get(n);
         // On attribue à la tuile son titulaire
         piocher.setTitulaire(j);
         // On l'enlève du sac
