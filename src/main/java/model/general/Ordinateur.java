@@ -16,6 +16,9 @@ public class Ordinateur extends Joueur {
             default:
                 strategie = new Strategie1();
                 break;
+            case 2:
+                strategie = new Strategie2();
+                break;
         }
     }
 
