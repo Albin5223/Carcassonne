@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 import src.main.java.model.dominosC.PieceDC;
 import src.main.java.model.dominosC.TuileDC;
 import src.main.java.model.general.Joueur;
+import src.main.java.model.general.Tuile;
 
 public class PlateauDominoCarre extends JFrame{
 	
@@ -25,6 +27,15 @@ public class PlateauDominoCarre extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
+		
+		
+		AcceuilView acc = new AcceuilView();
+		this.add(acc);
+		
+		initJeu();
+	}
+	
+	public void initJeu() {
 		conteneur = new JPanel();
 		conteneur.setLayout(null);
 		
@@ -47,14 +58,18 @@ public class PlateauDominoCarre extends JFrame{
         TuileDominoCarree t3 = new TuileDominoCarree(t,1,1);
         conteneur.add(t3);
         
+        
         Information i = new Information(800,0);
         conteneur.add(i);
         
         this.add(conteneur);
 	}
 	
+	
 	class Information extends JPanel{
 		
+		TuileDominoCarree t1;
+		Tuile tuile;
 		JButton piocher;
 		JButton placer;
 		JButton suivant;
@@ -64,7 +79,7 @@ public class PlateauDominoCarre extends JFrame{
 		public Information(int x,int y) {
 			this.setBounds(x, y, 200, 800);
 			this.setBackground(Color.BLUE);
-			this.setLayout(new GridLayout(5,1,100,100));
+			this.setLayout(new GridLayout(4,1,100,100));
 			
 			panneauButton = new JPanel();
 			panneauButton.setBackground(Color.BLUE);
@@ -73,18 +88,64 @@ public class PlateauDominoCarre extends JFrame{
 			piocher = new JButton("Piocher");
 			panneauButton.add(piocher,BorderLayout.NORTH);
 			
+			piocher.addActionListener((ActionEvent e) ->{
+				if(tuile==null) {
+					piocher();
+					piocher.setEnabled(false);
+					this.repaint();
+				}
+			});
+			
 			placer = new JButton("Placer");
+			
+			placer.addActionListener((ActionEvent e) ->{
+				placer(1,0);
+			});
 			panneauButton.add(placer,BorderLayout.NORTH);
 			
 			suivant = new JButton("Suivant");
+			suivant.addActionListener((ActionEvent e) ->{
+				if(t1!=null) {
+					this.remove(t1);
+					this.repaint();
+					t1=null;
+					tuile = null;
+				}
+				piocher.setEnabled(true);
+			});
 			panneauButton.add(suivant);
 			
-			this.add(panneauButton);
+			
 			
 			Joueur j1 = new Joueur("Albin",3);
 			JoueurView jv1 = new JoueurView(j1);
 			this.add(jv1,BorderLayout.CENTER);
+			this.add(panneauButton);
+		}
 			
+		public void placer(int x, int y) {
+			if (tuile != null) {
+				TuileDominoCarree t1 = new TuileDominoCarree((TuileDC)tuile,x,y);
+				conteneur.add(t1,BorderLayout.CENTER);
+				conteneur.repaint();
+			}			
+		}
+		
+		public void piocher() {
+			PieceDC a = new PieceDC(0, 1, 2);
+	        PieceDC b = new PieceDC(3, 4, 5);
+	        PieceDC c = new PieceDC(0, 1, 2);
+	        PieceDC d = new PieceDC(3, 4, 5);
+
+	        TuileDC t = new TuileDC(a, b, c, d);
+	        
+	        tuile = t;  
+	          
+	        t1 = new TuileDominoCarree(t,1,0);
+			this.add(t1);
+			t1.setVisible(true);
+			this.repaint();
+			information.repaint();
 			
 		}
 	}

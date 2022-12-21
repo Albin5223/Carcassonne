@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class JeuDC extends Jeu {
 
     // Attributs :
-    private int tour;     // Représente l'index de la personne à qui est le tour
+       // Représente l'index de la personne à qui est le tour
 
     public JeuDC(){
         joueurs = new ArrayList<Joueur>();

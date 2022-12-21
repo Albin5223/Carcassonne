@@ -17,9 +17,10 @@ public abstract class Jeu {
     protected ArrayList <Tuile> sac;    // Cet attribut représente les tuiles stockées dans le sac du jeu
     protected final int maxScore = 20;   // Représente le nombre de points à avoir pour finir la partie
     protected final int maxPlayers = 4;   // Représente le nombre de joueurs maximal que peut accueillir notre jeu (on peut l'augmenter si besoin)
-
+    protected int tour; 
 
     // Méthodes nécessaires pour un jeu de plateau
+    
     public abstract void lancerPartie();
     public abstract void setJoueur();
     public abstract void jouerTour();
