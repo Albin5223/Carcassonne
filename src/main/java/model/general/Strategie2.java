@@ -1,7 +1,6 @@
 package src.main.java.model.general;
 
-import src.main.java.model.dominosC.ActionImpossibleException;
-import src.main.java.model.dominosC.Coordonnee;
+import src.main.java.model.DC.ActionImpossibleException;
 
 public class Strategie2 extends Strategie {
 

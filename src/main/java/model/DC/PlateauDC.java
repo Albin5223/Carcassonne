@@ -1,4 +1,4 @@
-package src.main.java.model.dominosC;
+package src.main.java.model.DC;
 
 import src.main.java.model.general.*;
 
@@ -38,7 +38,6 @@ public class PlateauDC extends Plateau {
         System.out.println();
 	}
 
-    @Override
     public void afficher() {
 		System.out.println();
 		printX();

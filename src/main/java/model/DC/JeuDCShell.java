@@ -1,4 +1,4 @@
-package src.main.java.model.dominosC;
+package src.main.java.model.DC;
 
 import src.main.java.model.general.*;
 import java.util.ArrayList;
@@ -6,12 +6,12 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class JeuDC extends Jeu {
+public class JeuDCShell extends Jeu {
 
     // Attributs :
        // Représente l'index de la personne à qui est le tour
 
-    public JeuDC(){
+    public JeuDCShell(){
         joueurs = new ArrayList<Joueur>();
         sac = new ArrayList<Tuile>();
         plateau = new PlateauDC();
@@ -157,7 +157,7 @@ public class JeuDC extends Jeu {
 
     private void joueurGagnant(Joueur joueur){
         System.out.println("Etat du plateau final :");
-        plateau.afficher();
+        ((PlateauDC) plateau).afficher();
         System.out.println("\n/// "+joueur.getNom()+" remporte la partie avec un score total de : "+joueur.getScore()+" \\\\\\\n");
         System.exit(0);
     }
@@ -312,7 +312,7 @@ public class JeuDC extends Jeu {
 
     // Affichage du dominos
     public void afficher(){
-        plateau.afficher();
+        ((PlateauDC) plateau).afficher();
     }
     
     //Fonction qui initialise le sac avec tous les dominos possibles
@@ -339,7 +339,7 @@ public class JeuDC extends Jeu {
     }
 
     public static void main(String[] args) {
-        JeuDC jeu = new JeuDC();
+        JeuDCShell jeu = new JeuDCShell();
         jeu.lancerPartie();
     }
 }

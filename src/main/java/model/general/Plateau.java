@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import src.main.java.model.dominosC.ActionImpossibleException;
-import src.main.java.model.dominosC.Coordonnee;
+import src.main.java.model.DC.ActionImpossibleException;
 
 public abstract class Plateau {
 
@@ -102,7 +101,6 @@ public abstract class Plateau {
 		return longueur.size();
 	}
 
-    public abstract void afficher();
 	public abstract void poserTuile(Tuile t, int x,int y) throws ActionImpossibleException, CasePleineException;
 
 }

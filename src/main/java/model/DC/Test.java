@@ -1,4 +1,4 @@
-package src.main.java.model.dominosC;
+package src.main.java.model.DC;
 
 import src.main.java.model.general.CasePleineException;
 import src.main.java.model.general.CaseVideException;

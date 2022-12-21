@@ -1,4 +1,4 @@
-package src.main.java.model.dominosC;
+package src.main.java.model.DC;
 
 import src.main.java.model.general.*;
 
@@ -8,28 +8,18 @@ import src.main.java.model.general.*;
  *  - Les dominos horizontaux de la tuile se définissent de gauche à droite
  *  - Les dominos verticaux de la tuile se définissent de haut en bas
  */
-public class TuileDC extends Tuile {
-
-    // Attributs
-    private PieceDC haut;     // Domino qui se situe en haut de la tuile
-    private PieceDC droite;   // Domino qui se situe à droite de la tuile
-    private PieceDC bas;      // Domino qui se situe en bas de la tuile
-    private PieceDC gauche;   // Domino qui se situe à gauche de la tuile
+public class TuileDC extends Tuile<Integer> {
 
     // Constructeur : pour le moment, on force les tuiles à avoir des cotés avec 3 valeurs, on pourra potentiellement augmenter la taille après
     public TuileDC(PieceDC haut, PieceDC droite, PieceDC bas, PieceDC gauche){
-        this.haut = haut;
-        this.droite = droite;
-        this.bas = bas;
-        this.gauche = gauche;
+        super(haut, droite, bas, gauche);
     }
 
-    public PieceDC getHaut(){return haut;}
-    public PieceDC getDroite(){return droite;}
-    public PieceDC getBas(){return bas;}
-    public PieceDC getGauche(){return gauche;}
+    public PieceDC getHaut(){return (PieceDC) haut;}
+    public PieceDC getDroite(){return (PieceDC) droite;}
+    public PieceDC getBas(){return (PieceDC) bas;}
+    public PieceDC getGauche(){return (PieceDC) gauche;}
 
-    @Override
     public void afficher() {
         System.out.println();
         // On affiche le haut
@@ -59,10 +49,10 @@ public class TuileDC extends Tuile {
 
     @Override
     public void rotation(){
-        PieceDC h = gauche.inversePiece();
-        PieceDC d = haut;
-        PieceDC b = droite.inversePiece();
-        PieceDC g = bas;
+        PieceDC h = (PieceDC) gauche.inversePiece();
+        PieceDC d = (PieceDC) haut;
+        PieceDC b = (PieceDC) droite.inversePiece();
+        PieceDC g = (PieceDC) bas;
 
         this.haut = h;
         this.droite = d;
@@ -126,17 +116,17 @@ public class TuileDC extends Tuile {
     	PieceDC partie2 = null;
     	
     	switch (c1) {
-    		case 'h': partie1 = ((TuileDC) t1).haut;break;
-    		case 'b': partie1 = ((TuileDC) t1).bas;break;
-    		case 'g': partie1 = ((TuileDC) t1).gauche;break;
-    		case 'd': partie1 = ((TuileDC) t1).droite;break;
+    		case 'h': partie1 = (PieceDC) t1.haut;break;
+    		case 'b': partie1 = (PieceDC) t1.bas;break;
+    		case 'g': partie1 = (PieceDC) t1.gauche;break;
+    		case 'd': partie1 = (PieceDC) t1.droite;break;
     	}
     	
     	switch (c2) {
-			case 'h' :partie2 = ((TuileDC) t2).haut;break;
-			case 'b': partie2 = ((TuileDC) t2).bas;break;
-			case 'g': partie2 = ((TuileDC) t2).gauche;break;
-			case 'd': partie2 = ((TuileDC) t2).droite;break;
+			case 'h' :partie2 = (PieceDC) t2.haut;break;
+			case 'b': partie2 = (PieceDC) t2.bas;break;
+			case 'g': partie2 = (PieceDC) t2.gauche;break;
+			case 'd': partie2 = (PieceDC) t2.droite;break;
     	}
     	
     	int point = 0;
