@@ -21,6 +21,7 @@ import src.main.java.model.general.Ordinateur;
 public class AcceuilView extends JFrame{
 	
 	int x_pos = 50;
+	int nb_Joueur;
 	JeuDCGraphique jeu;
 	JButton add;
 	JButton jouer_dominoCarree;
@@ -48,11 +49,14 @@ public class AcceuilView extends JFrame{
 		add = new JButton("Ajouter un joueur");
 		
 		add.addActionListener((ActionEvent e) ->{
-			jouer_dominoCarree.setEnabled(true);
 			CreationJoueurView cjv = new CreationJoueurView(x_pos);
 			cjv.ajouter();
 			buttonView.setVisible(false);
 			buttonView.setVisible(true);
+			nb_Joueur+=1;
+			if (nb_Joueur == 4) {
+				add.setEnabled(false);
+			}
 		});
 		
 		buttonView.add(add);
@@ -114,6 +118,7 @@ public class AcceuilView extends JFrame{
 				}
 				jeu.addJoueur(joueur);
 				valider.setEnabled(false);
+				jouer_dominoCarree.setEnabled(true);
 			});
 			
 			this.add(container);
