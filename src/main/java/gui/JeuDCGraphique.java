@@ -3,6 +3,7 @@ package src.main.java.gui;
 import java.util.ArrayList;
 import java.util.Random;
 
+import src.main.java.model.DC.ActionImpossibleException;
 import src.main.java.model.DC.CoteDC;
 import src.main.java.model.DC.PlateauDC;
 import src.main.java.model.DC.TuileDC;
@@ -11,17 +12,21 @@ import src.main.java.model.general.CasePleineException;
 import src.main.java.model.general.Jeu;
 import src.main.java.model.general.Joueur;
 import src.main.java.model.general.Plateau;
+import src.main.java.model.general.TitulaireAbsentException;
 import src.main.java.model.general.Tuile;
 
 public class JeuDCGraphique extends Jeu {
 
 	int tour;
+	int pointMax;
+	boolean partieFinie;
 	
 	public JeuDCGraphique(){
 		joueurs = new ArrayList<Joueur>();
 		sac = new ArrayList<Tuile>();
 		plateau = new PlateauDC();
 		tour = 0;
+		pointMax=20;
 	}
 	
 	public void addJoueur(Joueur j) {
@@ -37,11 +42,45 @@ public class JeuDCGraphique extends Jeu {
 		return joueurs.get(tour);
 	}
 	
-	public void joueurSuivant() {
-		tour+=1;
-		if (tour == joueurs.size()) {
-			tour=0;
+	public boolean placer(Tuile t,int x, int y) {
+		try {
+			plateau.poserTuile(t, x, y);
+			return true;
+		} catch (ActionImpossibleException | CasePleineException | TitulaireAbsentException e) {
+			return false;
 		}
+	}
+	
+	public void joueurSuivant() {
+		if(tour == -1) {
+			tour = 0;
+		}
+		else {
+			if (joueurs.get(tour).getScore()>=pointMax) {
+				partieFinie = true;
+			}
+			else {
+				tour+=1;
+				if (tour == joueurs.size()) {
+					tour=0;
+				}
+			}
+		}
+		
+	}
+	
+	public void abandonner() {
+		if (joueurs.size()<=1) {
+			partieFinie = true;
+		}
+		else {
+			joueurs.remove(tour);
+			tour-=1;
+		}
+	}
+	
+	public boolean partieFinie() {
+		return partieFinie;
 	}
 	
 	public Tuile setPlateau(){

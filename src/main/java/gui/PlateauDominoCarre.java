@@ -3,19 +3,19 @@ package src.main.java.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import src.main.java.model.DC.CoteDC;
 import src.main.java.model.DC.TuileDC;
-import src.main.java.model.general.Jeu;
-import src.main.java.model.general.Joueur;
 import src.main.java.model.general.Tuile;
 
 public class PlateauDominoCarre extends JFrame{
@@ -70,79 +70,229 @@ public class PlateauDominoCarre extends JFrame{
 		JButton abandonner;
 		JoueurView jv1;
 		
+		JTextField xCord;
+		JTextField yCord;
+		
 		JPanel panneauButton;
+		JPanel infoCoord;
+		JLabel message;
 		
 		public Information(int x,int y) {
 			this.setBounds(x, y, 200, 800);
 			this.setBackground(Color.BLUE);
-			this.setLayout(new GridLayout(4,1,100,100));
+			this.setLayout(new GridLayout(4,1,100,25));
 			
 			jv1 = new JoueurView(jeu.getCurrentJoueur());
 			panneauButton = new JPanel();
 			panneauButton.setBackground(Color.BLUE);
 			
 			
+			
 			piocher = new JButton("Piocher");
 			panneauButton.add(piocher,BorderLayout.NORTH);
 			
 			piocher.addActionListener((ActionEvent e) ->{
-				TuileDC t = jeu.piocher(jeu.getCurrentJoueur());
-				tuile = t;
-				t1 = new TuileDominoCarree(t,0,0);
-				this.add(t1);
-				this.setVisible(false);
-				this.setVisible(true);
-				tourner.setEnabled(true);
-				defausser.setEnabled(true);
-				placer.setEnabled(true);
+				piocher();
 			});
 			
 			placer = new JButton("Placer");
 			placer.setEnabled(false);
 			placer.addActionListener((ActionEvent e) ->{
-				placer(1,0);
+				placer();
 			});
 			panneauButton.add(placer,BorderLayout.NORTH);
 			
 			suivant = new JButton("Suivant");
 			suivant.setEnabled(false);
 			suivant.addActionListener((ActionEvent e) ->{
-				jeu.joueurSuivant();
-				jv1.replace(jeu.getCurrentJoueur());
-				piocher.setEnabled(true);
-				placer.setEnabled(false);
-				
+				if (jeu.partieFinie()) {
+					jv1.annonceVainqueur();
+					piocher.setEnabled(false);
+					placer.setEnabled(false);
+					defausser.setEnabled(false);
+					tourner.setEnabled(false);
+					suivant.setEnabled(false);
+					abandonner.setEnabled(false);
+					quitter();
+				}
+				else {
+					suivant();
+				}
 			});
 			panneauButton.add(suivant);
 			
 			defausser = new JButton("Defausser");
 			defausser.setEnabled(false);
+			defausser.addActionListener((ActionEvent e) ->{
+				defausser();
+				
+			});
 			panneauButton.add(defausser);
 			
 			tourner = new JButton("Rotation");
 			tourner.setEnabled(false);
+			tourner.addActionListener((ActionEvent e) ->{
+				this.remove(t1);
+				tuile.rotation();
+				t1 = new TuileDominoCarree((TuileDC) tuile,0,0);
+				this.add(t1);
+				this.setVisible(false);
+				this.setVisible(true);
+			});
 			panneauButton.add(tourner);
+			
+			
+			
 			
 			abandonner = new JButton("Abandonner");
 			panneauButton.add(abandonner);
+			abandonner.addActionListener((ActionEvent e) ->{
+				jeu.abandonner();
+				if(t1 != null) {
+					defausser();
+				}
+				
+				if (jeu.partieFinie()) {
+					jv1.annonceVainqueur();
+					piocher.setEnabled(false);
+					placer.setEnabled(false);
+					defausser.setEnabled(false);
+					tourner.setEnabled(false);
+					suivant.setEnabled(false);
+					abandonner.setEnabled(false);
+					quitter();
+				}
+				else {
+					suivant();
+				}
+				
+			});
 			
 			this.add(jv1);
 			this.add(panneauButton);
+			
+			infoCoord = new JPanel();
+			infoCoord.setBackground(Color.BLUE);
+			infoCoord.setLayout(new GridLayout(2,2));
+			
+			JLabel enX = new JLabel("En X : ");
+			enX.setForeground(Color.WHITE);
+			infoCoord.add(enX);
+			
+			xCord = new JTextField();
+			infoCoord.add(xCord);
+			
+			JLabel enY = new JLabel("En Y : ");
+			enY.setForeground(Color.WHITE);
+			infoCoord.add(enY);
+			
+			yCord = new JTextField();
+			infoCoord.add(yCord);
+			this.add(infoCoord);
+			
+			message = new JLabel();
+			panneauButton.add(message);
+			
+		}
+		
+		public void defausser() {
+			this.remove(t1);
+			this.setVisible(false);
+			this.setVisible(true);
+			tourner.setEnabled(false);
+			suivant.setEnabled(true);
+			placer.setEnabled(false);
+			defausser.setEnabled(false);
+		}
+		
+		public void quitter() {
+			this.addMouseListener(new MouseListener() {
+
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					PlateauDominoCarre.this.dispose();
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
+		}
+		
+		public void suivant() {
+			jeu.joueurSuivant();
+			jv1.replace(jeu.getCurrentJoueur());
+			piocher.setEnabled(true);
+			placer.setEnabled(false);
+			abandonner.setEnabled(true);
+			suivant.setEnabled(false);
+			if (message!=null) {
+				panneauButton.remove(message);
+			}
 		}
 			
-		public void placer(int x, int y) {
+		public void placer() {
 			if (tuile != null) {
-				TuileDominoCarree t1 = new TuileDominoCarree((TuileDC)tuile,x,y);
-				conteneur.add(t1,BorderLayout.CENTER);
-				conteneur.repaint();
-			}			
+				int x = Integer.valueOf(xCord.getText());
+				int y = Integer.valueOf(yCord.getText());
+				if (jeu.placer(tuile,x, y)){
+					TuileDominoCarree tuileAPalacer = new TuileDominoCarree((TuileDC)tuile,x,y);
+					conteneur.add(tuileAPalacer,BorderLayout.CENTER);
+					conteneur.repaint();
+					message.setText("Bien joue");
+					message.setForeground(Color.WHITE );
+					this.repaint();
+					this.remove(t1);
+					defausser.setEnabled(false);
+					tourner.setEnabled(false);
+					placer.setEnabled(false);
+					abandonner.setEnabled(false);
+					suivant.setEnabled(true);
+					jv1.refresh();
+					
+					this.setVisible(false);
+					this.setVisible(true);
+					}
+				else {
+					message.setText("Erreur dans le placement");
+					message.setForeground(Color.RED);
+					this.repaint();
+				}
+			}		
 		}
 		
 		public void piocher() {
+			TuileDC t = jeu.piocher(jeu.getCurrentJoueur());
+			tuile = t;
+			t1 = new TuileDominoCarree(t,0,0);
 			this.add(t1);
-			t1.setVisible(true);
-			this.repaint();
-			information.repaint();
+			this.setVisible(false);
+			this.setVisible(true);
+			tourner.setEnabled(true);
+			defausser.setEnabled(true);
+			placer.setEnabled(true);
+			piocher.setEnabled(false);
 			
 		}
 	}

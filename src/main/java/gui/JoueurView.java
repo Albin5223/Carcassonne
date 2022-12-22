@@ -34,6 +34,19 @@ public class JoueurView extends JPanel{
 		nom .setText("Nom : " +joueur.getNom());
 		this.repaint();
 	}
-
+	
+	public void refresh() {
+		score.setText("Score : "+ String.valueOf(joueur.getScore()));
+		this.repaint();
+	}
+	
+	public void annonceVainqueur() {
+		nom.setText(joueur.getNom()+" A GAGNE");
+		score.setText("Cliquez pour quitter");
+		
+		
+		this.repaint();
+	}
+	
 	
 }
