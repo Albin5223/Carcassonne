@@ -365,19 +365,19 @@ public class PlateauDominoCarre extends JFrame{
 			CoteDC bas = tuile.getBas();
 			CoteDC haut = tuile.getHaut();
 			
-			JLabel coin = new JLabel("A");
+			JLabel coin = new JLabel(" ");
 			coin.setBounds(0, 0, 20, 20);
 			this.add(coin);
 			
-			JLabel coin1 = new JLabel("B");
+			JLabel coin1 = new JLabel(" ");
 			coin1.setBounds(80, 0, 20, 20);
 			this.add(coin1);
 			
-			JLabel coin2 = new JLabel("C");
+			JLabel coin2 = new JLabel(" ");
 			coin2.setBounds(0,80, 20, 20);
 			this.add(coin2);
 			
-			JLabel coin3 = new JLabel("D");
+			JLabel coin3 = new JLabel(" ");
 			coin3.setBounds(80,80, 20, 20);
 			this.add(coin3);
 			
