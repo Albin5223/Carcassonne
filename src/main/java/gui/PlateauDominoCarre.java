@@ -57,6 +57,15 @@ public class PlateauDominoCarre extends JFrame{
 		TuileDominoCarree t1 = new TuileDominoCarree((TuileDC)t,x,y);
 		conteneur.add(t1,BorderLayout.CENTER);
 		conteneur.repaint();
+		t1.fixer();
+	}
+	
+	public TuileDominoCarree positionner(Tuile t,int x,int y) {
+		TuileDominoCarree t1 = new TuileDominoCarree((TuileDC)t,x,y);
+		conteneur.add(t1,BorderLayout.CENTER);
+		conteneur.repaint();
+		
+		return t1;
 	}
 	
 	
@@ -78,6 +87,11 @@ public class PlateauDominoCarre extends JFrame{
 		JPanel panneauButton;
 		JPanel infoCoord;
 		JLabel message;
+		
+		JButton gauche;
+		JButton droit;
+		JButton haut;
+		JButton bas;
 		
 		public Information(int x,int y) {
 			this.setBounds(x, y, 200, 800);
@@ -134,12 +148,7 @@ public class PlateauDominoCarre extends JFrame{
 			tourner = new JButton("Rotation");
 			tourner.setEnabled(false);
 			tourner.addActionListener((ActionEvent e) ->{
-				this.remove(t1);
-				tuile.rotation();
-				t1 = new TuileDominoCarree((TuileDC) tuile,0,0);
-				this.add(t1);
-				this.setVisible(false);
-				this.setVisible(true);
+				t1.tourner();
 			});
 			panneauButton.add(tourner);
 			
@@ -177,19 +186,39 @@ public class PlateauDominoCarre extends JFrame{
 			infoCoord.setBackground(Color.BLUE);
 			infoCoord.setLayout(new GridLayout(2,2));
 			
-			JLabel enX = new JLabel("En X : ");
-			enX.setForeground(Color.WHITE);
-			infoCoord.add(enX);
 			
-			xCord = new JTextField();
-			infoCoord.add(xCord);
+			haut = new JButton("Haut");
+			infoCoord.add(haut);
+			haut.addActionListener((ActionEvent e) ->{
+				if (t1 != null) {
+					t1.setLocation(t1.getX(),t1.getY()-100);
+				}
+			});
 			
-			JLabel enY = new JLabel("En Y : ");
-			enY.setForeground(Color.WHITE);
-			infoCoord.add(enY);
+			bas = new JButton("Bas");
+			infoCoord.add(bas);
+			bas.addActionListener((ActionEvent e) ->{
+				if (t1 != null) {
+					t1.setLocation(t1.getX(),t1.getY()+100);
+				}
+			});
 			
-			yCord = new JTextField();
-			infoCoord.add(yCord);
+			gauche = new JButton("Gauche");
+			infoCoord.add(gauche);
+			gauche.addActionListener((ActionEvent e) ->{
+				if (t1 != null) {
+					t1.setLocation(t1.getX()-100,t1.getY());
+				}
+			});
+			
+			droit = new JButton("Droit");
+			infoCoord.add(droit);
+			droit.addActionListener((ActionEvent e) ->{
+				if (t1 != null) {
+					t1.setLocation(t1.getX()+100,t1.getY());
+				}
+			});
+			
 			this.add(infoCoord);
 			
 			message = new JLabel();
@@ -198,9 +227,8 @@ public class PlateauDominoCarre extends JFrame{
 		}
 		
 		public void defausser() {
-			this.remove(t1);
-			this.setVisible(false);
-			this.setVisible(true);
+			conteneur.remove(t1);
+			conteneur.repaint();
 			tourner.setEnabled(false);
 			suivant.setEnabled(true);
 			placer.setEnabled(false);
@@ -274,50 +302,38 @@ public class PlateauDominoCarre extends JFrame{
 		}
 			
 		public void placer() {
-			int x = 0;
-			int y = 0;
+			int x = (t1.getX()-400)/100;
+			int y = (t1.getY()-400)/100;
 			if (tuile != null) {
-				try {
-					x = Integer.valueOf(xCord.getText());
-					y = Integer.valueOf(yCord.getText());
-				}
-				catch(Exception e){
-					
-				}
-				
 				if (jeu.placer(tuile,x, y)){
-					TuileDominoCarree tuileAPalacer = new TuileDominoCarree((TuileDC)tuile,x,y);
-					conteneur.add(tuileAPalacer,BorderLayout.CENTER);
+					conteneur.remove(t1);
+					conteneur.repaint();
+					t1 = null;
+					placerTuile(tuile,x,y);
 					conteneur.repaint();
 					message.setText("Bien joue");
 					message.setForeground(Color.WHITE );
-					this.repaint();
-					this.remove(t1);
 					defausser.setEnabled(false);
 					tourner.setEnabled(false);
 					placer.setEnabled(false);
 					abandonner.setEnabled(false);
 					suivant.setEnabled(true);
 					jv1.refresh();
-					
-					this.setVisible(false);
-					this.setVisible(true);
+		
 					}
 				else {
 					message.setText("Erreur dans le placement");
 					message.setForeground(Color.RED);
-					this.repaint();
+		
 				}
 			}		
 		}
 		
 		public void piocher() {
-			TuileDC t = jeu.piocher(jeu.getCurrentJoueur());
+			Tuile t = jeu.piocher(jeu.getCurrentJoueur());
 			tuile = t;
-			t1 = new TuileDominoCarree(t,0,0);
-			this.add(t1);
-			this.setVisible(false);
-			this.setVisible(true);
+			t1 = positionner(t,-3,-3);
+			
 			tourner.setEnabled(true);
 			defausser.setEnabled(true);
 			placer.setEnabled(true);
@@ -334,7 +350,7 @@ public class PlateauDominoCarre extends JFrame{
 		
 		public TuileDominoCarree (TuileDC tuile,int x,int y) {
 			this.setBounds(x*100+400, y*100+400, 100, 100);
-			this.setBackground(Color.RED);
+			this.setBackground(Color.YELLOW);
 			this.setLayout(new BorderLayout(5,5));
 			this.tuile = tuile;
 			this.x = x;
@@ -393,6 +409,18 @@ public class PlateauDominoCarre extends JFrame{
 			JLabel coin4 = new JLabel("");
 			coin4.setBounds(20,80, 20, 20);
 			this.add(coin4);
+			
+		}
+		
+		public void fixer() {
+			this.setBackground(Color.RED);
+		}
+		
+		public void tourner() {
+			this.removeAll();
+			tuile.rotation();
+			init();
+			conteneur.repaint();
 			
 		}
 	}
