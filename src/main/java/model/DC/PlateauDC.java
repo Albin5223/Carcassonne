@@ -8,7 +8,7 @@ public class PlateauDC extends Plateau {
 		System.out.print("      ");
         for (int i = 0; i < n; i++) {
             System.out.print("+");
-            for (int j = 0; j < ((PieceDC.length()+2)*2-1)+2; j++) {
+            for (int j = 0; j < ((CoteDC.length()+2)*2-1)+2; j++) {
                 System.out.print("-");
             }
         }
@@ -24,7 +24,7 @@ public class PlateauDC extends Plateau {
 
         for (int i = 0; i <= maxX-minX; i++) {
             System.out.print(" ");
-			int l = ((PieceDC.length()+2)*2-1)+2;
+			int l = ((CoteDC.length()+2)*2-1)+2;
             for (int j = 0; j < l; j++) {
 				if(j == l/2-1){
 					System.out.print(index);
@@ -75,7 +75,7 @@ public class PlateauDC extends Plateau {
             System.out.println();       // On passe aux intermediaires
 
             // On print les parties intermediaires
-            for(int l = 0; l<PieceDC.length();l++){
+            for(int l = 0; l<CoteDC.length();l++){
 				if(l != 1){
 					System.out.print("      ");
 				}
@@ -135,7 +135,7 @@ public class PlateauDC extends Plateau {
 		System.out.println();
     }
     
-    public void poserTuile(Tuile t, int x,int y) throws ActionImpossibleException, CasePleineException{
+    public void poserTuile(Tuile t, int x,int y) throws ActionImpossibleException, CasePleineException, TitulaireAbsentException{
     	int point = 0;
     	Tuile gauche = null;
     	Tuile droit = null;
@@ -196,8 +196,13 @@ public class PlateauDC extends Plateau {
     	else {
     		setTuile(t,x,y);
     	}
-    	
-    	t.getTitulaire().ajouterScore(point);
+
+		if(t.getTitulaire() != null){
+			t.getTitulaire().ajouterScore(point);
+		}
+		else{
+			throw new TitulaireAbsentException();
+		}
     }
     
     public int hautConforme(Tuile t,Tuile haut) {

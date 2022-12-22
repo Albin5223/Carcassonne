@@ -246,7 +246,7 @@ public class JeuDCShell extends Jeu {
                                     joueurGagnant(joueur);
                                 }
                                 joueurSuivant();
-                            } catch (ActionImpossibleException | CasePleineException e) {
+                            } catch (ActionImpossibleException | CasePleineException | TitulaireAbsentException e) {
                                 System.err.println("- Impossible de placer votre tuile ici -");
                                 placerTuile(joueur, tuile);
                             }
@@ -317,12 +317,12 @@ public class JeuDCShell extends Jeu {
     
     //Fonction qui initialise le sac avec tous les dominos possibles
     public void creerSac() {
-    	ArrayList<PieceDC> pieces = new ArrayList<PieceDC>();
+    	ArrayList<CoteDC> pieces = new ArrayList<CoteDC>();
     	
     	for (int i = 1;i<4;i++) {
     		for (int j = 1;j<4;j++) {
     			for (int k = 1;k<4;k++) {
-    				pieces.add(new PieceDC(i,j,k));
+    				pieces.add(new CoteDC(new ValeurDC(i),new ValeurDC(j),new ValeurDC(k)));
     	    	}
         	}
     	}

@@ -10,7 +10,7 @@ public class Strategie1 extends Strategie {
             try {
                 jeu.getPlateau().poserTuile(tuile, c.getX(), c.getY());
                 return true;
-            } catch (ActionImpossibleException | CasePleineException e) {
+            } catch (ActionImpossibleException | CasePleineException | TitulaireAbsentException e) {
                 // La tuile n'a pas été placé, on passe à la suite
             }
         }

@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import src.main.java.model.DC.PieceDC;
+import src.main.java.model.DC.CoteDC;
 import src.main.java.model.DC.TuileDC;
 import src.main.java.model.general.Joueur;
 import src.main.java.model.general.Tuile;
@@ -42,10 +42,10 @@ public class PlateauDominoCarre extends JFrame{
 		information = new JPanel();
 		information.setLayout(null);
 		
-		PieceDC a = new PieceDC(0, 1, 2);
-        PieceDC b = new PieceDC(3, 4, 5);
-        PieceDC c = new PieceDC(0, 1, 2);
-        PieceDC d = new PieceDC(3, 4, 5);
+		CoteDC a = new CoteDC(0, 1, 2);
+        CoteDC b = new CoteDC(3, 4, 5);
+        CoteDC c = new CoteDC(0, 1, 2);
+        CoteDC d = new CoteDC(3, 4, 5);
 
         TuileDC t = new TuileDC(a, b, c, d);
         
@@ -132,10 +132,10 @@ public class PlateauDominoCarre extends JFrame{
 		}
 		
 		public void piocher() {
-			PieceDC a = new PieceDC(0, 1, 2);
-	        PieceDC b = new PieceDC(3, 4, 5);
-	        PieceDC c = new PieceDC(0, 1, 2);
-	        PieceDC d = new PieceDC(3, 4, 5);
+			CoteDC a = new CoteDC(0, 1, 2);
+	        CoteDC b = new CoteDC(3, 4, 5);
+	        CoteDC c = new CoteDC(0, 1, 2);
+	        CoteDC d = new CoteDC(3, 4, 5);
 
 	        TuileDC t = new TuileDC(a, b, c, d);
 	        
@@ -168,10 +168,10 @@ public class PlateauDominoCarre extends JFrame{
 		}
 		
 		public void init() {
-			PieceDC gauche = tuile.getGauche();
-			PieceDC droite = tuile.getDroite();
-			PieceDC bas = tuile.getBas();
-			PieceDC haut = tuile.getHaut();
+			CoteDC gauche = tuile.getGauche();
+			CoteDC droite = tuile.getDroite();
+			CoteDC bas = tuile.getBas();
+			CoteDC haut = tuile.getHaut();
 			
 			JLabel coin = new JLabel("A");
 			coin.setBounds(0, 0, 20, 20);

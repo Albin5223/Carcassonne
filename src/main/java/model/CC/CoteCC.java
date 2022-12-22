@@ -1,24 +1,30 @@
 package src.main.java.model.CC;
 
 import src.main.java.model.general.Cote;
+import src.main.java.model.general.Valeur;
 
-public class CoteCC extends Cote<Paysage>{
+public class CoteCC extends Cote {
 
-    public CoteCC(Paysage i, Paysage j, Paysage k) {
+    public CoteCC(ValeurCC i, ValeurCC j, ValeurCC k) {
         super(i, j, k);
         //TODO Auto-generated constructor stub
     }
 
     @Override
-    public Paysage get(int i) {
+    public ValeurCC get(int i) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Cote<Paysage> inversePiece() {
+    public Valeur getObject(int i) {
         // TODO Auto-generated method stub
         return null;
     }
-    
+
+    @Override
+    public CoteCC inversePiece() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
