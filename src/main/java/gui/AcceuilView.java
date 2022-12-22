@@ -66,6 +66,16 @@ public class AcceuilView extends JFrame{
 		jouer_dominoCarree.addActionListener((ActionEvent e) ->{
 			add.setVisible(false);
 			jouer_dominoCarree.setVisible(false);
+			
+			javax.swing.SwingUtilities.invokeLater(
+					new Runnable() {
+						public void run() {
+							PlateauDominoCarre p = new PlateauDominoCarre(jeu);
+							
+						}
+					}
+				);
+			jeu.lancerPartie();
 		});
 		buttonView.add(jouer_dominoCarree);
 		
@@ -110,12 +120,13 @@ public class AcceuilView extends JFrame{
 			
 			valider.addActionListener((ActionEvent e) ->{
 				Joueur joueur;
-				if (estRobot == null || estRobot.isSelected()) {
-					joueur = new Ordinateur(idJoueur,1,jeu);
+				if (estRobot == null || !estRobot.isSelected()) {
+					joueur = new Joueur(demanderNom.getText(),idJoueur);
 				}
 				else {
-					joueur = new Joueur(demanderNom.getSelectedText(),idJoueur);
+					joueur = new Ordinateur(idJoueur,1,jeu);
 				}
+				
 				jeu.addJoueur(joueur);
 				valider.setEnabled(false);
 				jouer_dominoCarree.setEnabled(true);

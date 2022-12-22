@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import src.main.java.model.DC.CoteDC;
 import src.main.java.model.DC.TuileDC;
+import src.main.java.model.general.Jeu;
 import src.main.java.model.general.Joueur;
 import src.main.java.model.general.Tuile;
 
@@ -21,17 +22,13 @@ public class PlateauDominoCarre extends JFrame{
 	
 	JPanel conteneur;
 	JPanel information;
+	JeuDCGraphique jeu;
 	
-	public PlateauDominoCarre() {
+	public PlateauDominoCarre(JeuDCGraphique j) {
 		this.setSize(new Dimension(1000,800));
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-		
-		
-		
-		AcceuilView acc = new AcceuilView();
-		this.add(acc);
-		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jeu = j;
 		initJeu();
 	}
 	
@@ -42,27 +39,22 @@ public class PlateauDominoCarre extends JFrame{
 		information = new JPanel();
 		information.setLayout(null);
 		
-		CoteDC a = new CoteDC(0, 1, 2);
-        CoteDC b = new CoteDC(3, 4, 5);
-        CoteDC c = new CoteDC(0, 1, 2);
-        CoteDC d = new CoteDC(3, 4, 5);
 
-        TuileDC t = new TuileDC(a, b, c, d);
-        
-        TuileDominoCarree t1 = new TuileDominoCarree(t,0,0);
-        conteneur.add(t1);
-        
-        TuileDominoCarree t2 = new TuileDominoCarree(t,0,1);
-        conteneur.add(t2);
-        
-        TuileDominoCarree t3 = new TuileDominoCarree(t,1,1);
-        conteneur.add(t3);
-        
         
         Information i = new Information(800,0);
         conteneur.add(i);
         
+        Tuile t = ((JeuDCGraphique) jeu).setPlateau();
+        placerTuile(t,0,0);
+        
+        
         this.add(conteneur);
+	}
+	
+	public void placerTuile(Tuile t,int x,int y) {
+		TuileDominoCarree t1 = new TuileDominoCarree((TuileDC)t,x,y);
+		conteneur.add(t1,BorderLayout.CENTER);
+		conteneur.repaint();
 	}
 	
 	
@@ -72,7 +64,11 @@ public class PlateauDominoCarre extends JFrame{
 		Tuile tuile;
 		JButton piocher;
 		JButton placer;
+		JButton defausser;
+		JButton tourner;
 		JButton suivant;
+		JButton abandonner;
+		JoueurView jv1;
 		
 		JPanel panneauButton;
 		
@@ -81,6 +77,7 @@ public class PlateauDominoCarre extends JFrame{
 			this.setBackground(Color.BLUE);
 			this.setLayout(new GridLayout(4,1,100,100));
 			
+			jv1 = new JoueurView(jeu.getCurrentJoueur());
 			panneauButton = new JPanel();
 			panneauButton.setBackground(Color.BLUE);
 			
@@ -89,37 +86,47 @@ public class PlateauDominoCarre extends JFrame{
 			panneauButton.add(piocher,BorderLayout.NORTH);
 			
 			piocher.addActionListener((ActionEvent e) ->{
-				if(tuile==null) {
-					piocher();
-					piocher.setEnabled(false);
-					this.repaint();
-				}
+				TuileDC t = jeu.piocher(jeu.getCurrentJoueur());
+				tuile = t;
+				t1 = new TuileDominoCarree(t,0,0);
+				this.add(t1);
+				this.setVisible(false);
+				this.setVisible(true);
+				tourner.setEnabled(true);
+				defausser.setEnabled(true);
+				placer.setEnabled(true);
 			});
 			
 			placer = new JButton("Placer");
-			
+			placer.setEnabled(false);
 			placer.addActionListener((ActionEvent e) ->{
 				placer(1,0);
 			});
 			panneauButton.add(placer,BorderLayout.NORTH);
 			
 			suivant = new JButton("Suivant");
+			suivant.setEnabled(false);
 			suivant.addActionListener((ActionEvent e) ->{
-				if(t1!=null) {
-					this.remove(t1);
-					this.repaint();
-					t1=null;
-					tuile = null;
-				}
+				jeu.joueurSuivant();
+				jv1.replace(jeu.getCurrentJoueur());
 				piocher.setEnabled(true);
+				placer.setEnabled(false);
+				
 			});
 			panneauButton.add(suivant);
 			
+			defausser = new JButton("Defausser");
+			defausser.setEnabled(false);
+			panneauButton.add(defausser);
 			
+			tourner = new JButton("Rotation");
+			tourner.setEnabled(false);
+			panneauButton.add(tourner);
 			
-			Joueur j1 = new Joueur("Albin",3);
-			JoueurView jv1 = new JoueurView(j1);
-			this.add(jv1,BorderLayout.CENTER);
+			abandonner = new JButton("Abandonner");
+			panneauButton.add(abandonner);
+			
+			this.add(jv1);
 			this.add(panneauButton);
 		}
 			
@@ -132,16 +139,6 @@ public class PlateauDominoCarre extends JFrame{
 		}
 		
 		public void piocher() {
-			CoteDC a = new CoteDC(0, 1, 2);
-	        CoteDC b = new CoteDC(3, 4, 5);
-	        CoteDC c = new CoteDC(0, 1, 2);
-	        CoteDC d = new CoteDC(3, 4, 5);
-
-	        TuileDC t = new TuileDC(a, b, c, d);
-	        
-	        tuile = t;  
-	          
-	        t1 = new TuileDominoCarree(t,1,0);
 			this.add(t1);
 			t1.setVisible(true);
 			this.repaint();
