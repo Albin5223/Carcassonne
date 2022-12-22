@@ -253,9 +253,17 @@ public class PlateauDominoCarre extends JFrame{
 		}
 			
 		public void placer() {
+			int x = 0;
+			int y = 0;
 			if (tuile != null) {
-				int x = Integer.valueOf(xCord.getText());
-				int y = Integer.valueOf(yCord.getText());
+				try {
+					x = Integer.valueOf(xCord.getText());
+					y = Integer.valueOf(yCord.getText());
+				}
+				catch(Exception e){
+					
+				}
+				
 				if (jeu.placer(tuile,x, y)){
 					TuileDominoCarree tuileAPalacer = new TuileDominoCarree((TuileDC)tuile,x,y);
 					conteneur.add(tuileAPalacer,BorderLayout.CENTER);

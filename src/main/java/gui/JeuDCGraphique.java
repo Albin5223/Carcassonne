@@ -146,8 +146,7 @@ public class JeuDCGraphique extends Jeu {
 
 	@Override
 	public Plateau getPlateau() {
-		// TODO Auto-generated method stub
-		return null;
+		return plateau;
 	}
 
 	
