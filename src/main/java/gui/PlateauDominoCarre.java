@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 
 import src.main.java.model.DC.CoteDC;
 import src.main.java.model.DC.TuileDC;
+import src.main.java.model.general.Joueur;
+import src.main.java.model.general.Ordinateur;
 import src.main.java.model.general.Tuile;
 
 public class PlateauDominoCarre extends JFrame{
@@ -242,6 +244,17 @@ public class PlateauDominoCarre extends JFrame{
 		
 		public void suivant() {
 			jeu.joueurSuivant();
+			if (jeu.partieFinie()) {
+				jv1.annonceVainqueur();
+				piocher.setEnabled(false);
+				placer.setEnabled(false);
+				defausser.setEnabled(false);
+				tourner.setEnabled(false);
+				suivant.setEnabled(false);
+				abandonner.setEnabled(false);
+				quitter();
+				return;
+			}
 			jv1.replace(jeu.getCurrentJoueur());
 			piocher.setEnabled(true);
 			placer.setEnabled(false);
@@ -249,6 +262,14 @@ public class PlateauDominoCarre extends JFrame{
 			suivant.setEnabled(false);
 			if (message!=null) {
 				panneauButton.remove(message);
+			}
+			if (jeu.getCurrentJoueur().isBot()) {
+				Tuile tuileOrdi = jeu.piocher(jeu.getCurrentJoueur());
+				Joueur j = jeu.getCurrentJoueur();
+				if (((Ordinateur) j).jouerTour(tuileOrdi)) {
+					PlateauDominoCarre.this.placerTuile(tuileOrdi,tuileOrdi.getCoordonnee().getX(),tuileOrdi.getCoordonnee().getY());
+				}
+				suivant();
 			}
 		}
 			

@@ -26,7 +26,7 @@ public class JeuDCGraphique extends Jeu {
 		sac = new ArrayList<Tuile>();
 		plateau = new PlateauDC();
 		tour = 0;
-		pointMax=20;
+		pointMax=60;
 	}
 	
 	public void addJoueur(Joueur j) {
