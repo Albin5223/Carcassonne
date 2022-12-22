@@ -101,6 +101,5 @@ public abstract class Plateau {
 		return longueur.size();
 	}
 
-	public abstract void poserTuile(Tuile t, int x,int y) throws ActionImpossibleException, CasePleineException;
-
+	public abstract void poserTuile(Tuile t, int x,int y) throws ActionImpossibleException, CasePleineException, TitulaireAbsentException;
 }

@@ -1,31 +1,29 @@
 package src.main.java.model.general;
 
-import java.util.ArrayList;
-
 /*
  * Cette classe va représenter un des cote qu'il y a sur les côtés d'une tuileDominosCarrées
  */
-public abstract class Cote<T> {
+public abstract class Cote {
     
     // Attributs
-    protected ArrayList<T> cote;
+    protected Valeur[] cote;
     // On met la valeur de taille à 3 puisque le jeu est défini comme cela
     protected static final int taille = 3;
     
-    public Cote(T i, T j, T k){
-        cote = new ArrayList<T>();
-        cote.add(i);
-        cote.add(j);
-        cote.add(k);
+    public Cote(Valeur i, Valeur j, Valeur k){
+        cote = new Valeur[taille];
+        cote[0] = i;
+        cote[1] = j;
+        cote[2] = k;
     }
 
-    public boolean equals(Cote<T> p){
-        return cote.get(0).equals(p.cote.get(0)) && cote.get(1).equals(p.cote.get(1)) && cote.get(2).equals(p.cote.get(2));
+    public boolean equals(Cote p){
+        return cote[0].equals(p.cote[0]) && cote[1].equals(p.cote[1]) && cote[2].equals(p.cote[2]);
     }
 
     // Méthodes getteurs
-    public abstract T get(int i);
+    public abstract Object get(int i);
+    public abstract Valeur getObject(int i);
     public static int length(){return taille;}
-
-    public abstract Cote<T> inversePiece();
+    public abstract Cote inversePiece();
 }
