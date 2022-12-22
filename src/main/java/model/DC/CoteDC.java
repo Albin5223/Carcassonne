@@ -22,17 +22,4 @@ public class CoteDC extends Cote {
         ValeurDC t3 = new ValeurDC(get(0));
         return new CoteDC(t1, t2, t3);
     }    
-
-    public static int comparer(CoteDC p1,CoteDC p2) {
-    	int point = 0;
-    	for (int i = 0;i<3;i++) {
-    		if (p1.get(i) != p2.get(i)) {
-    			return 0;
-    		}
-    		else {
-    			point += p1.getObject(i).getPoints();
-    		}
-    	}
-    	return point;
-    }
 }

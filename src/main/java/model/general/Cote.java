@@ -26,4 +26,17 @@ public abstract class Cote {
     public abstract Valeur getObject(int i);
     public static int length(){return taille;}
     public abstract Cote inversePiece();
+
+    public static int comparer(Cote p1,Cote p2) {
+    	int point = 0;
+    	for (int i = 0;i<3;i++) {
+    		if(!p1.get(i).equals(p2.get(i))) {
+    			return 0;
+    		}
+    		else {
+    			point += p1.getObject(i).getPoints();
+    		}
+    	}
+    	return point;
+    }
 }

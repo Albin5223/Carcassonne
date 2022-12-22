@@ -21,6 +21,7 @@ public class Joueur {
     }
 
     // Constructeur avec un scanner
+    @SuppressWarnings("resource")
     public Joueur(int id){
         Scanner sc = new Scanner(System.in);
         nom = sc.nextLine();

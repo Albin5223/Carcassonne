@@ -9,8 +9,6 @@ import java.util.Scanner;
 public class JeuDCShell extends Jeu {
 
     // Attributs :
-       // Représente l'index de la personne à qui est le tour
-
     public JeuDCShell(){
         joueurs = new ArrayList<Joueur>();
         sac = new ArrayList<Tuile>();
@@ -41,6 +39,7 @@ public class JeuDCShell extends Jeu {
 
     // Méthode pour demander le nombre de joueurs et les initialiser
     @Override
+    @SuppressWarnings("resource")
     public void setJoueur() {
         boolean boucle = true;
         int nombreHumain = 0;
@@ -173,6 +172,7 @@ public class JeuDCShell extends Jeu {
     }
 
     // Fonction pour demander à l'utilisateur un choix
+    @SuppressWarnings("resource")
     private void demanderChoix(Joueur joueur, TuileDC pioche){
         boolean boucle = true;
         while (boucle) {
@@ -222,6 +222,7 @@ public class JeuDCShell extends Jeu {
     }
 
     // Fonction pour demander à l'utilisateur s'il veut placer sa tuile
+    @SuppressWarnings("resource")
     private void placerTuile(Joueur joueur, TuileDC tuile){
         boolean boucle = true;
         while (boucle) {
@@ -265,6 +266,7 @@ public class JeuDCShell extends Jeu {
     }
 
     // Fonction pour demander à l'utilisateur les coordonnées
+    @SuppressWarnings("resource")
     private Coordonnee demanderCoordonnee(){
         boolean boucle = true;
         int x = 0;

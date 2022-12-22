@@ -110,29 +110,4 @@ public class TuileDC extends Tuile {
             System.out.print("  ");
         }
     }
-    
-    public static int comparer(Tuile t1,Tuile t2, char c1,char c2) {
-    	CoteDC partie1 = null;
-    	CoteDC partie2 = null;
-    	
-    	switch (c1) {
-    		case 'h': partie1 = (CoteDC) t1.haut;break;
-    		case 'b': partie1 = (CoteDC) t1.bas;break;
-    		case 'g': partie1 = (CoteDC) t1.gauche;break;
-    		case 'd': partie1 = (CoteDC) t1.droite;break;
-    	}
-    	
-    	switch (c2) {
-			case 'h' :partie2 = (CoteDC) t2.haut;break;
-			case 'b': partie2 = (CoteDC) t2.bas;break;
-			case 'g': partie2 = (CoteDC) t2.gauche;break;
-			case 'd': partie2 = (CoteDC) t2.droite;break;
-    	}
-    	
-    	int point = 0;
-    	point = CoteDC.comparer(partie1,partie2);
-    	
-    	return point;
-    		
-    }
 }

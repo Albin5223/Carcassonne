@@ -53,6 +53,7 @@ public abstract class Plateau {
 			Collections.sort(longueur);
 		}
 		plateau.put(c, t);
+		t.setCordonnee(c);
 		possibilitesMAJ(c);
     }
 
