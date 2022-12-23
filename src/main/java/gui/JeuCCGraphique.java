@@ -34,6 +34,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Pre());
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile1.png");
             sac.add(tuile);
         }
 
@@ -44,6 +45,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Pre(), new Route(), new Pre());
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile2.png");
             sac.add(tuile);
         }
 
@@ -54,6 +56,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Pre(), new Route(), new Pre());
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile3.png");
             sac.add(tuile);
         }
 
@@ -64,6 +67,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Mur());
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile4.png");
             sac.add(tuile);
         }
 
@@ -74,6 +78,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Mur());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile5.png");
             sac.add(tuile);
         }
 
@@ -84,6 +89,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Pre(), new Route(), new Pre());
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile6.png");
             sac.add(tuile);
         }
 
@@ -95,6 +101,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
             tuile.setCentre(new Carrefour());
+            tuile.setName("tuile7.png");
             sac.add(tuile);
         }
 
@@ -105,6 +112,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Pre());
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile8.png");
             sac.add(tuile);
         }
 
@@ -116,6 +124,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
             tuile.setCentre(new Carrefour());
+            tuile.setName("tuile9.png");
             sac.add(tuile);
         }
 
@@ -126,6 +135,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Pre());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile10.png");
             sac.add(tuile);
         }
 
@@ -136,6 +146,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Mur(),new Ville(false),new Mur());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile11.png");
             sac.add(tuile);
         }
 
@@ -146,6 +157,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Mur());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile12.png");
             sac.add(tuile);
         }
 
@@ -157,6 +169,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
             tuile.setCentre(new Abbaye());
+            tuile.setName("tuile13.png");
             sac.add(tuile);
         }
 
@@ -168,6 +181,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC bas = new CoteCC(new Pre(), new Route(),new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
             tuile.setCentre(new Abbaye());
+            tuile.setName("tuile14.png");
             sac.add(tuile);
         }
 
@@ -178,6 +192,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Pre());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile15.png");
             sac.add(tuile);
         }
 
@@ -188,6 +203,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Mur(), new Ville(true), new Mur());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile16.png");
             sac.add(tuile);
         }
 
@@ -198,6 +214,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Pre(), new Route(), new Pre());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile17.png");
             sac.add(tuile);
         }
 
@@ -208,6 +225,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Pre());
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile18.png");
             sac.add(tuile);
         }
 
@@ -218,6 +236,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Mur(), new Ville(false), new Mur());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile19.png");
             sac.add(tuile);
         }
 
@@ -228,6 +247,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Mur());
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile20.png");
             sac.add(tuile);
         }
 
@@ -238,6 +258,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Ville(false));
             CoteCC bas = new CoteCC(new Ville(false));
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile21.png");
             sac.add(tuile);
         }
 
@@ -249,6 +270,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
             tuile.setCentre(new Carrefour());
+            tuile.setName("tuile22.png");
             sac.add(tuile);
         }
 
@@ -259,6 +281,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Pre());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile23.png");
             sac.add(tuile);
         }
 
@@ -269,6 +292,7 @@ public class JeuCCGraphique extends Jeu {
             CoteCC droite = new CoteCC(new Mur(), new Ville(false), new Mur());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
+            tuile.setName("tuile24.png");
             sac.add(tuile);
         }
     }
