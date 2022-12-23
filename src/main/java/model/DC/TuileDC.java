@@ -10,7 +10,6 @@ import src.main.java.model.general.*;
  */
 public class TuileDC extends Tuile {
 
-    // Constructeur : pour le moment, on force les tuiles à avoir des cotés avec 3 valeurs, on pourra potentiellement augmenter la taille après
     public TuileDC(CoteDC haut, CoteDC droite, CoteDC bas, CoteDC gauche){
         super(haut, droite, bas, gauche);
     }

@@ -16,7 +16,7 @@ public class CoteDC extends Cote {
     public Integer get(int i){return (Integer) cote[i].getValeur();}
 
     @Override
-    public Cote inversePiece() {
+    public CoteDC inversePiece() {
         ValeurDC t1 = new ValeurDC(get(2));
         ValeurDC t2 = new ValeurDC(get(1));
         ValeurDC t3 = new ValeurDC(get(0));
