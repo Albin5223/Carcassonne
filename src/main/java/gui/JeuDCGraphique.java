@@ -17,8 +17,6 @@ import src.main.java.model.general.Tuile;
 
 public class JeuDCGraphique extends Jeu {
 
-	int tour;
-	int pointMax;
 	boolean partieFinie;
 	
 	public JeuDCGraphique(){
@@ -26,7 +24,7 @@ public class JeuDCGraphique extends Jeu {
 		sac = new ArrayList<Tuile>();
 		plateau = new PlateauDC();
 		tour = 0;
-		pointMax=60;
+		maxScore=60;
 	}
 	
 	public void addJoueur(Joueur j) {
@@ -56,7 +54,7 @@ public class JeuDCGraphique extends Jeu {
 			tour = 0;
 		}
 		else {
-			if (joueurs.get(tour).getScore()>=pointMax) {
+			if (joueurs.get(tour).getScore()>=maxScore) {
 				partieFinie = true;
 			}
 			else {
