@@ -81,7 +81,6 @@ public class PlateauDominoCarre extends JFrame{
 		JButton placer;
 		JButton defausser;
 		JButton tourner;
-		JButton suivant;
 		JButton abandonner;
 		JoueurView jv1;
 		
@@ -122,30 +121,11 @@ public class PlateauDominoCarre extends JFrame{
 			});
 			panneauButton.add(placer,BorderLayout.NORTH);
 			
-			suivant = new JButton("Suivant");
-			suivant.setEnabled(false);
-			suivant.addActionListener((ActionEvent e) ->{
-				if (jeu.partieFinie()) {
-					jv1.annonceVainqueur();
-					piocher.setEnabled(false);
-					placer.setEnabled(false);
-					defausser.setEnabled(false);
-					tourner.setEnabled(false);
-					suivant.setEnabled(false);
-					abandonner.setEnabled(false);
-					quitter();
-				}
-				else {
-					suivant();
-				}
-			});
-			panneauButton.add(suivant);
-			
 			defausser = new JButton("Defausser");
 			defausser.setEnabled(false);
 			defausser.addActionListener((ActionEvent e) ->{
 				defausser();
-				
+				suivant();
 			});
 			panneauButton.add(defausser);
 			
@@ -166,20 +146,8 @@ public class PlateauDominoCarre extends JFrame{
 				if(t1 != null) {
 					defausser();
 				}
-				
-				if (jeu.partieFinie()) {
-					jv1.annonceVainqueur();
-					piocher.setEnabled(false);
-					placer.setEnabled(false);
-					defausser.setEnabled(false);
-					tourner.setEnabled(false);
-					suivant.setEnabled(false);
-					abandonner.setEnabled(false);
-					quitter();
-				}
-				else {
-					suivant();
-				}
+
+				suivant();
 				
 			});
 			
@@ -188,26 +156,25 @@ public class PlateauDominoCarre extends JFrame{
 			
 			infoCoord = new JPanel();
 			infoCoord.setBackground(Color.BLUE);
-			infoCoord.setLayout(new GridLayout(2,2));
+			infoCoord.setLayout(new GridLayout(2,6));
 			
+			JPanel vide1 = new JPanel();
+			vide1.setBackground(this.getBackground());
+			infoCoord.add(vide1); 
 			
-			haut = new JButton("Haut");
+			haut = new JButton("^");
 			infoCoord.add(haut);
 			haut.addActionListener((ActionEvent e) ->{
 				if (t1 != null) {
 					t1.setLocation(t1.getX(),t1.getY()-100);
 				}
 			});
-			
-			bas = new JButton("Bas");
-			infoCoord.add(bas);
-			bas.addActionListener((ActionEvent e) ->{
-				if (t1 != null) {
-					t1.setLocation(t1.getX(),t1.getY()+100);
-				}
-			});
-			
-			gauche = new JButton("Gauche");
+
+			JPanel vide2 = new JPanel();
+			vide2.setBackground(this.getBackground());
+			infoCoord.add(vide2);
+
+			gauche = new JButton("<");
 			infoCoord.add(gauche);
 			gauche.addActionListener((ActionEvent e) ->{
 				if (t1 != null) {
@@ -215,7 +182,15 @@ public class PlateauDominoCarre extends JFrame{
 				}
 			});
 			
-			droit = new JButton("Droit");
+			bas = new JButton("v");
+			infoCoord.add(bas);
+			bas.addActionListener((ActionEvent e) ->{
+				if (t1 != null) {
+					t1.setLocation(t1.getX(),t1.getY()+100);
+				}
+			});
+			
+			droit = new JButton(">");
 			infoCoord.add(droit);
 			droit.addActionListener((ActionEvent e) ->{
 				if (t1 != null) {
@@ -233,7 +208,6 @@ public class PlateauDominoCarre extends JFrame{
 			conteneur.remove(t1);
 			conteneur.repaint();
 			tourner.setEnabled(false);
-			suivant.setEnabled(true);
 			placer.setEnabled(false);
 			defausser.setEnabled(false);
 		}
@@ -281,7 +255,6 @@ public class PlateauDominoCarre extends JFrame{
 				placer.setEnabled(false);
 				defausser.setEnabled(false);
 				tourner.setEnabled(false);
-				suivant.setEnabled(false);
 				abandonner.setEnabled(false);
 				quitter();
 				return;
@@ -290,7 +263,6 @@ public class PlateauDominoCarre extends JFrame{
 			piocher.setEnabled(true);
 			placer.setEnabled(false);
 			abandonner.setEnabled(true);
-			suivant.setEnabled(false);
 			if (message!=null) {
 				panneauButton.remove(message);
 			}
@@ -324,7 +296,7 @@ public class PlateauDominoCarre extends JFrame{
 					tourner.setEnabled(false);
 					placer.setEnabled(false);
 					abandonner.setEnabled(false);
-					suivant.setEnabled(true);
+					suivant();
 					jv1.refresh();
 		
 					}
