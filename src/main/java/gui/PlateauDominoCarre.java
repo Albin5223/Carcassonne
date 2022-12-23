@@ -7,12 +7,15 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.MouseInputListener;
 
 import src.main.java.model.DC.CoteDC;
 import src.main.java.model.DC.TuileDC;
@@ -41,7 +44,7 @@ public class PlateauDominoCarre extends JFrame{
 		information = new JPanel();
 		information.setLayout(null);
 		
-
+		
         
         Information i = new Information(800,0);
         conteneur.add(i);
@@ -51,6 +54,7 @@ public class PlateauDominoCarre extends JFrame{
         
         
         this.add(conteneur);
+      
 	}
 	
 	public void placerTuile(Tuile t,int x,int y) {
@@ -222,7 +226,6 @@ public class PlateauDominoCarre extends JFrame{
 			this.add(infoCoord);
 			
 			message = new JLabel();
-			panneauButton.add(message);
 			
 		}
 		
@@ -313,6 +316,10 @@ public class PlateauDominoCarre extends JFrame{
 					conteneur.repaint();
 					message.setText("Bien joue");
 					message.setForeground(Color.WHITE );
+					panneauButton.add(message);
+					this.setVisible(false);
+					this.setVisible(true);
+					
 					defausser.setEnabled(false);
 					tourner.setEnabled(false);
 					placer.setEnabled(false);
@@ -324,6 +331,9 @@ public class PlateauDominoCarre extends JFrame{
 				else {
 					message.setText("Erreur dans le placement");
 					message.setForeground(Color.RED);
+					panneauButton.add(message);
+					this.setVisible(false);
+					this.setVisible(true);
 		
 				}
 			}		
