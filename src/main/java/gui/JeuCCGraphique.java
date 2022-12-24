@@ -1,15 +1,20 @@
 package src.main.java.gui;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import src.main.java.model.CC.CoteCC;
 import src.main.java.model.CC.TuileCC;
-import src.main.java.model.DC.PlateauDC;
+import src.main.java.model.DC.ActionImpossibleException;
+import src.main.java.model.DC.TuileDC;
+import src.main.java.model.general.CasePleineException;
 import src.main.java.model.general.Jeu;
 import src.main.java.model.general.Joueur;
 import src.main.java.model.general.Plateau;
+import src.main.java.model.general.TitulaireAbsentException;
 import src.main.java.model.general.Tuile;
 import src.main.java.model.CC.Paysage.*;
+import src.main.java.model.CC.PlateauCC;
 import src.main.java.model.CC.TuileCC.Centre.Abbaye;
 import src.main.java.model.CC.TuileCC.Centre.Carrefour;
 
@@ -18,9 +23,13 @@ public class JeuCCGraphique extends Jeu {
     public JeuCCGraphique(){
 		joueurs = new ArrayList<Joueur>();
 		sac = new ArrayList<Tuile>();
-		plateau = new PlateauDC();
+		plateau = new PlateauCC();
 		tour = 0;
 		maxScore=60;
+	}
+    
+    public Joueur getCurrentJoueur() {
+		return joueurs.get(tour);
 	}
 
     public void initSac(){
@@ -297,8 +306,7 @@ public class JeuCCGraphique extends Jeu {
 
     @Override
     public void lancerPartie() {
-        // TODO Auto-generated method stub
-        
+        initSac();
     }
 
     @Override
@@ -309,18 +317,64 @@ public class JeuCCGraphique extends Jeu {
 
     @Override
     public void jouerTour() {
-        // TODO Auto-generated method stub
+    	if(tour == -1) {
+			tour = 0;
+		}
+		else {
+			if (joueurs.get(tour).getScore()>=maxScore) {
+				partieFinie = true;
+			}
+			else {
+				tour+=1;
+				if (tour == joueurs.size()) {
+					tour=0;
+				}
+			}
+		}
         
     }
+    
+    public boolean placer(Tuile t,int x, int y) {
+		try {
+			plateau.poserTuile(t, x, y);
+			return true;
+		} catch (ActionImpossibleException | CasePleineException | TitulaireAbsentException e) {
+			return false;
+		}
+	}
 
     @Override
     public Plateau getPlateau() {
         // TODO Auto-generated method stub
         return null;
     }
+    
+    public TuileCC piocher(Joueur j){
+        Random r=new Random();
+        int n = r.nextInt(0,sac.size());
+        TuileCC piocher = (TuileCC) sac.get(n);
+        piocher.setTitulaire(j);
+       
+        sac.remove(n);
+        
+        return piocher;
+    }
 
 	public void addJoueur(Joueur joueur) {
 		joueurs.add(joueur);
 	}
+	
+	public Tuile setPlateau(){
+        TuileCC t = piocher(null);
+        try {
+            plateau.setTuile(t, 0, 0);
+            return t;
+            
+        } catch (CasePleineException e) {
+            System.out.println("...La première tuile d'initialisation n'a pas été placée...");
+            e.printStackTrace();
+            return null;
+        }
+    }
     
 }

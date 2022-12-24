@@ -31,6 +31,10 @@ public class TuileCC extends Tuile {
     public void setName(String s){
         this.name = s;
     }
+    
+    public String getName() {
+    	return name;
+    }
 
     public static class Centre {
 

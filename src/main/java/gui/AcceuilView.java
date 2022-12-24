@@ -88,7 +88,7 @@ public class AcceuilView extends JFrame{
 			javax.swing.SwingUtilities.invokeLater(
 					new Runnable() {
 						public void run() {
-							PlateauDominoCarre p = new PlateauDominoCarre(jeu);
+							PlateauCarcassonne p = new PlateauCarcassonne(jeuCar);
 							
 						}
 					}

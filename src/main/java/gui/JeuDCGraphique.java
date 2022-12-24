@@ -17,7 +17,7 @@ import src.main.java.model.general.Tuile;
 
 public class JeuDCGraphique extends Jeu {
 
-	boolean partieFinie;
+	
 	
 	public JeuDCGraphique(){
 		joueurs = new ArrayList<Joueur>();
@@ -67,19 +67,6 @@ public class JeuDCGraphique extends Jeu {
 		
 	}
 	
-	public void abandonner() {
-		if (joueurs.size()<=1) {
-			partieFinie = true;
-		}
-		else {
-			joueurs.remove(tour);
-			tour-=1;
-		}
-	}
-	
-	public boolean partieFinie() {
-		return partieFinie;
-	}
 	
 	public Tuile setPlateau(){
         TuileDC t = piocher(null);

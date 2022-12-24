@@ -13,7 +13,7 @@ public abstract class Jeu {
     protected Plateau plateau;
 
     protected int niveauOrdinateur = 2;
-    
+    protected boolean partieFinie;
     protected ArrayList<Tuile> sac;    // Cet attribut représente les tuiles stockées dans le sac du jeu
     protected int maxScore = 20;        // Représente le nombre de points à avoir pour finir la partie
     protected final int maxPlayers = 4;   // Représente le nombre de joueurs maximal que peut accueillir notre jeu (on peut l'augmenter si besoin)
@@ -26,5 +26,18 @@ public abstract class Jeu {
     public abstract void jouerTour();
     public ArrayList<Joueur> getJoueurs(){return joueurs;}
     public abstract Plateau getPlateau();
+    public void abandonner() {
+		if (joueurs.size()<=1) {
+			partieFinie = true;
+		}
+		else {
+			joueurs.remove(tour);
+			tour-=1;
+		}
+	}
+	
+	public boolean partieFinie() {
+		return partieFinie;
+	}
 
 }
