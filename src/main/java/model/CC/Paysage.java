@@ -32,16 +32,13 @@ public abstract class Paysage {
         }
     }
 
-    public static class Porte extends Paysage {
-        public Porte(){
-            ID = 4;
-            // TODO : Voir comment gérer les points
-        }
-    }
-
     public static class Ville extends Paysage {
-        public Ville(){
-            ID = 5;
+
+        protected boolean bouclier;
+
+        public Ville(boolean bouclier){
+            ID = 4;
+            this.bouclier = bouclier;
             // TODO : Voir comment gérer les points
         }
     }

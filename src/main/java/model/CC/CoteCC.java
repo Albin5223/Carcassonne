@@ -8,6 +8,14 @@ public class CoteCC extends Cote {
         super(i, j, k);
     }
 
+    public CoteCC(Paysage i, Paysage j, Paysage k) {
+        super(new ValeurCC(i), new ValeurCC(j), new ValeurCC(k));
+    }
+
+    public CoteCC(Paysage i) {
+        super(new ValeurCC(i), new ValeurCC(i), new ValeurCC(i));
+    }
+
     public ValeurCC getObject(int i){return (ValeurCC) cote[i];}
     public Paysage get(int i){return (Paysage) cote[i].getValeur();}
 

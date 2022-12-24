@@ -5,6 +5,7 @@ import src.main.java.model.general.Tuile;
 public class TuileCC extends Tuile {
 
     protected Centre centre;
+    protected String name;
 
     public TuileCC(CoteCC haut, CoteCC droite, CoteCC bas, CoteCC gauche) {
         super(haut, droite, bas, gauche);
@@ -23,13 +24,21 @@ public class TuileCC extends Tuile {
         this.gauche = g;
     }  
 
-    public class Centre {
+    public void setCentre(Centre centre){
+        this.centre = centre;
+    }
+
+    public void setName(String s){
+        this.name = s;
+    }
+
+    public static class Centre {
 
         // TODO : A voir leurs utilités après. Ils vont surement servir pour les points ou autre
 
-        public class Abbaye extends Centre {}
+        public static class Abbaye extends Centre {}
 
-        public class Carrefour extends Centre {}
+        public static class Carrefour extends Centre {}
 
     }
 }
