@@ -39,7 +39,6 @@ public class PlateauCC extends Plateau {
         if(casesVide != 4){
             setTuile(t, x, y);
         }
-        
     }
 
     private boolean hautConforme(Tuile tuileCC, int x, int y) throws CaseVideException {

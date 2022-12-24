@@ -10,6 +10,7 @@ public class Joueur {
     protected int score;
     protected boolean abandon;
     protected boolean ordinateur;
+    protected int partisans = 8;
 
     // Constructeur
     public Joueur(String nom, int id){
@@ -19,6 +20,9 @@ public class Joueur {
         abandon = false;
         ordinateur = false;
     }
+
+    public int getPartisans(){return partisans;}
+    public void decrPartisans(){partisans--;}
 
     // Constructeur avec un scanner
     @SuppressWarnings("resource")

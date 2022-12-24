@@ -56,7 +56,7 @@ public class JeuView extends JFrame {
 	}
 	
 	public void placerTuile(Tuile t,int x,int y) {
-		TuileDCView t1 = new TuileDCView((TuileDC)t);
+		TuileDCView t1 = new TuileDCView((TuileDC)t,plateau);
 		plateau.setTuile(t1,x,y);
 	}
 
@@ -72,21 +72,17 @@ public class JeuView extends JFrame {
         JButton abandonner;
         JoueurView jv1;
         
-        JTextField xCord;
-        JTextField yCord;
-        
         JPanel panneauButton;
-        JPanel infoCoord;
         JLabel message;
         
         public InformationsView() {
-            this.setLayout(new GridLayout(4,1));
+            this.setLayout(new GridLayout(3,1));
             
             jv1 = new JoueurView(jeu.getCurrentJoueur());
             panneauButton = new JPanel();
             panneauButton.setLayout(new GridLayout(7,1));
 
-            panneauButton.setBackground(Color.GREEN);
+            panneauButton.setBackground(Color.BLUE);
             
             piocher = new JButton("Piocher");
             panneauButton.add(piocher);
@@ -134,7 +130,7 @@ public class JeuView extends JFrame {
             tourner.addActionListener((ActionEvent e) ->{
                 this.remove(t1);
                 tuile.rotation();
-                t1 = new TuileDCView((TuileDC) tuile);
+                t1 = new TuileDCView((TuileDC) tuile,plateau);
                 this.add(t1);
                 this.setVisible(false);
                 this.setVisible(true);
@@ -168,27 +164,6 @@ public class JeuView extends JFrame {
             
             this.add(jv1);
             this.add(panneauButton);
-            
-            infoCoord = new JPanel();
-            infoCoord.setBackground(Color.BLUE);
-            infoCoord.setLayout(new GridLayout(2,2));
-            
-            JLabel enX = new JLabel("En X : ");
-            enX.setForeground(Color.WHITE);
-            enX.setHorizontalAlignment(JLabel.CENTER);
-            infoCoord.add(enX);
-            
-            xCord = new JTextField();
-            infoCoord.add(xCord);
-            
-            JLabel enY = new JLabel("En Y : ");
-            enY.setForeground(Color.WHITE);
-            enY.setHorizontalAlignment(JLabel.CENTER);
-            infoCoord.add(enY);
-            
-            yCord = new JTextField();
-            infoCoord.add(yCord);
-            this.add(infoCoord);
             
             message = new JLabel();
             message.setHorizontalAlignment(JLabel.CENTER);
@@ -277,8 +252,6 @@ public class JeuView extends JFrame {
             int y = 0;
             if (tuile != null) {
                 try {
-                    x = Integer.valueOf(xCord.getText());
-                    y = Integer.valueOf(yCord.getText());
                 }
                 catch(Exception e){
                     
@@ -311,7 +284,7 @@ public class JeuView extends JFrame {
         
         public void piocher() {
             tuile = jeu.piocher(jeu.getCurrentJoueur());
-            t1 = new TuileDCView(tuile);
+            t1 = new TuileDCView(tuile,plateau);
 
             this.add(t1);
             this.repaint();
