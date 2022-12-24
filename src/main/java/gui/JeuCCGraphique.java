@@ -4,14 +4,12 @@ import java.util.ArrayList;
 
 import src.main.java.model.CC.CoteCC;
 import src.main.java.model.CC.TuileCC;
-import src.main.java.model.CC.ValeurCC;
 import src.main.java.model.DC.PlateauDC;
 import src.main.java.model.general.Jeu;
 import src.main.java.model.general.Joueur;
 import src.main.java.model.general.Plateau;
 import src.main.java.model.general.Tuile;
 import src.main.java.model.CC.Paysage.*;
-import src.main.java.model.CC.TuileCC.Centre;
 import src.main.java.model.CC.TuileCC.Centre.Abbaye;
 import src.main.java.model.CC.TuileCC.Centre.Carrefour;
 
@@ -320,5 +318,9 @@ public class JeuCCGraphique extends Jeu {
         // TODO Auto-generated method stub
         return null;
     }
+
+	public void addJoueur(Joueur joueur) {
+		joueurs.add(joueur);
+	}
     
 }

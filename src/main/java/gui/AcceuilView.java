@@ -1,11 +1,8 @@
 package src.main.java.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
@@ -23,8 +20,10 @@ public class AcceuilView extends JFrame{
 	int x_pos = 50;
 	int nb_Joueur;
 	JeuDCGraphique jeu;
+	JeuCCGraphique jeuCar;
 	JButton add;
 	JButton jouer_dominoCarree;
+	JButton jouer_carcassonne;
 	
 	
 	JPanel container;
@@ -34,6 +33,7 @@ public class AcceuilView extends JFrame{
 
 	public AcceuilView() {
 		jeu = new JeuDCGraphique();
+		jeuCar = new JeuCCGraphique();
 		this.setSize(new Dimension(1000,800));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
@@ -78,6 +78,24 @@ public class AcceuilView extends JFrame{
 			jeu.lancerPartie();
 		});
 		buttonView.add(jouer_dominoCarree);
+		
+		jouer_carcassonne = new JButton("Jouer au jeu de Carcassonne");
+		jouer_carcassonne.setEnabled(false);
+		jouer_carcassonne.addActionListener((ActionEvent e) ->{
+			add.setVisible(false);
+			jouer_carcassonne.setVisible(false);
+			
+			javax.swing.SwingUtilities.invokeLater(
+					new Runnable() {
+						public void run() {
+							PlateauDominoCarre p = new PlateauDominoCarre(jeu);
+							
+						}
+					}
+				);
+			jeuCar.lancerPartie();
+		});
+		buttonView.add(jouer_carcassonne);
 		
 		
 		container.add(panneauJoueur);
@@ -128,8 +146,11 @@ public class AcceuilView extends JFrame{
 				}
 				
 				jeu.addJoueur(joueur);
+				jeuCar.addJoueur(joueur);
 				valider.setEnabled(false);
 				jouer_dominoCarree.setEnabled(true);
+				jouer_carcassonne.setEnabled(true);
+				
 			});
 			
 			this.add(container);
