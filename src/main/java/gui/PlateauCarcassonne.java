@@ -149,7 +149,6 @@ public class PlateauCarcassonne extends JFrame{
 				if(t1 != null) {
 					defausser();
 				}
-
 				suivant();
 				
 			});

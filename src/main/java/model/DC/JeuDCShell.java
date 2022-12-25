@@ -324,7 +324,7 @@ public class JeuDCShell extends Jeu {
     	for (int i = 1;i<4;i++) {
     		for (int j = 1;j<4;j++) {
     			for (int k = 1;k<4;k++) {
-    				pieces.add(new CoteDC(new ValeurDC(i),new ValeurDC(j),new ValeurDC(k)));
+    				pieces.add(new CoteDC(i,j,k));
     	    	}
         	}
     	}

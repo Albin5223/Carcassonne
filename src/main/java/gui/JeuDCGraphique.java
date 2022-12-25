@@ -7,7 +7,6 @@ import src.main.java.model.DC.ActionImpossibleException;
 import src.main.java.model.DC.CoteDC;
 import src.main.java.model.DC.PlateauDC;
 import src.main.java.model.DC.TuileDC;
-import src.main.java.model.DC.ValeurDC;
 import src.main.java.model.general.CasePleineException;
 import src.main.java.model.general.Jeu;
 import src.main.java.model.general.Joueur;
@@ -42,7 +41,7 @@ public class JeuDCGraphique extends Jeu {
 	
 	public boolean placer(Tuile t,int x, int y) {
 		try {
-			plateau.poserTuile(t, x, y);
+			plateau.poserTuile((TuileDC)t, x, y);
 			return true;
 		} catch (ActionImpossibleException | CasePleineException | TitulaireAbsentException e) {
 			return false;
@@ -88,7 +87,7 @@ public class JeuDCGraphique extends Jeu {
     	for (int i = 1;i<4;i++) {
     		for (int j = 1;j<4;j++) {
     			for (int k = 1;k<4;k++) {
-    				pieces.add(new CoteDC(new ValeurDC(i),new ValeurDC(j),new ValeurDC(k)));
+    				pieces.add(new CoteDC(i,j,k));
     	    	}
         	}
     	}

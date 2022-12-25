@@ -135,6 +135,7 @@ public class PlateauDC extends Plateau {
 		System.out.println();
     }
     
+	@Override
     public void poserTuile(Tuile t, int x,int y) throws ActionImpossibleException, CasePleineException, TitulaireAbsentException{
     	int point = 0;
     	Tuile gauche = null;
@@ -210,7 +211,7 @@ public class PlateauDC extends Plateau {
     		return 0;
     	}
     	else {
-    		return TuileDC.comparer(t, haut, 'h', 'b');
+    		return Tuile.comparer(t, haut, 'h', 'b');
     	}
     }
     
@@ -219,7 +220,7 @@ public class PlateauDC extends Plateau {
     		return 0;
     	}
     	else {
-    		return TuileDC.comparer(t, bas, 'b', 'h');
+    		return Tuile.comparer(t, bas, 'b', 'h');
     	}
     }
     
@@ -228,7 +229,7 @@ public class PlateauDC extends Plateau {
     		return 0;
     	}
     	else {
-    		return TuileDC.comparer(t, gauche, 'g', 'd');
+    		return Tuile.comparer(t, gauche, 'g', 'd');
     	}
     }
     
@@ -237,7 +238,7 @@ public class PlateauDC extends Plateau {
     		return 0;
     	}
     	else {
-    		return TuileDC.comparer(t, droit, 'd', 'g');
+    		return Tuile.comparer(t, droit, 'd', 'g');
     	}
     }
 }

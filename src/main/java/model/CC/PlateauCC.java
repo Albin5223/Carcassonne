@@ -13,25 +13,25 @@ public class PlateauCC extends Plateau {
     public void poserTuile(Tuile t, int x, int y) throws ActionImpossibleException, CasePleineException {
         int casesVide = 0;
         try {
-            if(!hautConforme(t, x, y)){
+            if(!hautConforme((TuileCC) t, x, y)){
                 throw new ActionImpossibleException();
             }
         } catch (CaseVideException e) {casesVide++;}
 
         try {
-            if(!basConforme(t, x, y)){
+            if(!basConforme((TuileCC) t, x, y)){
                 throw new ActionImpossibleException();
             }
         } catch (CaseVideException e) {casesVide++;}
 
         try {
-            if(!droiteConforme(t, x, y)){
+            if(!droiteConforme((TuileCC) t, x, y)){
                 throw new ActionImpossibleException();
             }
         } catch (CaseVideException e) {casesVide++;}
 
         try {
-            if(!gaucheConforme(t, x, y)){
+            if(!gaucheConforme((TuileCC) t, x, y)){
                 throw new ActionImpossibleException();
             }
         } catch (CaseVideException e) {casesVide++;}
@@ -41,8 +41,8 @@ public class PlateauCC extends Plateau {
         }
     }
 
-    private boolean hautConforme(Tuile tuileCC, int x, int y) throws CaseVideException {
-        Tuile haut = plateau.get(new Coordonnee(x, y+1));
+    private boolean hautConforme(TuileCC tuileCC, int x, int y) throws CaseVideException {
+        TuileCC haut = (TuileCC) plateau.get(new Coordonnee(x, y+1));
         if(haut == null){
             throw new CaseVideException();
         }
@@ -52,19 +52,19 @@ public class PlateauCC extends Plateau {
         return false;
     }
 
-    private boolean basConforme(Tuile tuileCC, int x, int y) throws CaseVideException {
-        Tuile bas = plateau.get(new Coordonnee(x, y-1));
+    private boolean basConforme(TuileCC t, int x, int y) throws CaseVideException {
+        TuileCC bas = (TuileCC) plateau.get(new Coordonnee(x, y-1));
         if(bas == null){
             throw new CaseVideException();
         }
-        if(tuileCC.bas.equals(bas.haut)){
+        if(t.bas.equals(bas.haut)){
             return true;
         }
         return false;
     }
 
-    private boolean droiteConforme(Tuile tuileCC, int x, int y) throws CaseVideException {
-        Tuile droite = plateau.get(new Coordonnee(x+1, y));
+    private boolean droiteConforme(TuileCC tuileCC, int x, int y) throws CaseVideException {
+        TuileCC droite = (TuileCC) plateau.get(new Coordonnee(x+1, y));
         if(droite == null){
             throw new CaseVideException();
         }
@@ -74,8 +74,8 @@ public class PlateauCC extends Plateau {
         return false;
     }
 
-    private boolean gaucheConforme(Tuile tuileCC, int x, int y) throws CaseVideException {
-        Tuile gauche = plateau.get(new Coordonnee(x-1, y));
+    private boolean gaucheConforme(TuileCC tuileCC, int x, int y) throws CaseVideException {
+        TuileCC gauche = (TuileCC) plateau.get(new Coordonnee(x-1, y));
         if(gauche == null){
             throw new CaseVideException();
         }
