@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -329,7 +330,7 @@ public class PlateauCarcassonne extends JFrame{
 	class TuileDominoCarcasonne extends JPanel{
 		
 		TuileCC tuile;
-		BufferedImage image;
+		BufferedImage imageR;
 		int x;
 		int y;
 		
@@ -337,21 +338,23 @@ public class PlateauCarcassonne extends JFrame{
 			this.setBounds(x*100+400, y*100+400, 100, 100);
 			this.setLayout(new BorderLayout(5,5));
 			try {
-				image = ImageIO.read(new File("ImagesCC"+tuile.getName()));
+				System.out.println(tuile.getName());
+				imageR = ImageIO.read(new File("src\\main\\java\\gui\\ImagesCC\\"+tuile.getName()));
+				
 			} catch (IOException e) {
 				this.setBackground(Color.YELLOW);
+				System.out.println(e);
 			}
 			this.tuile = tuile;
 			this.x = x;
 			this.y = y;
-			
-
 		}
 		
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			g.drawImage(image, 0, 0, null);
+			g.drawImage(imageR, 0, 0, null);
 		}
+	
 		
 		public void tourner() {
 			this.removeAll();
