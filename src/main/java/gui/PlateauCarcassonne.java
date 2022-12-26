@@ -13,7 +13,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,8 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import src.main.java.model.CC.TuileCC;
-import src.main.java.model.DC.CoteDC;
-import src.main.java.model.DC.TuileDC;
 import src.main.java.model.general.Joueur;
 import src.main.java.model.general.Ordinateur;
 import src.main.java.model.general.Tuile;
@@ -33,25 +30,23 @@ public class PlateauCarcassonne extends JFrame{
 	JPanel information;
 	JeuCCGraphique jeu;
 	
+	Information info;
+	
 	public PlateauCarcassonne(JeuCCGraphique j) {
 		this.setSize(new Dimension(1000,800));
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jeu = j;
-		initJeu();
-	}
-	
-	public void initJeu() {
+		
+		
 		conteneur = new JPanel();
 		conteneur.setLayout(null);
 		
 		information = new JPanel();
 		information.setLayout(null);
 		
-		
-        
-        Information i = new Information(800,0);
-        conteneur.add(i);
+        info = new Information(800,0);
+        conteneur.add(info);
         
         Tuile t = jeu.setPlateau();
         placerTuile(t,0,0);
@@ -63,6 +58,11 @@ public class PlateauCarcassonne extends JFrame{
 	
 	public void placerTuile(Tuile t,int x,int y) {
 		TuileDominoCarcasonne t1 = new TuileDominoCarcasonne((TuileCC)t,x,y);
+		if (info.getCurrentTuile()!=null){
+			System.out.println("Entrer");
+			t1.setImage(info.getCurrentTuile().getImage());
+		}
+		
 		conteneur.add(t1,BorderLayout.CENTER);
 		conteneur.repaint();
 	}
@@ -78,7 +78,7 @@ public class PlateauCarcassonne extends JFrame{
 	
 	class Information extends JPanel{
 		
-		TuileDominoCarcasonne t1;
+		TuileDominoCarcasonne currentTuile;
 		Tuile tuile;
 		JButton piocher;
 		JButton placer;
@@ -135,7 +135,7 @@ public class PlateauCarcassonne extends JFrame{
 			tourner = new JButton("Rotation");
 			tourner.setEnabled(false);
 			tourner.addActionListener((ActionEvent e) ->{
-				t1.tourner();
+				currentTuile.tourner();
 			});
 			panneauButton.add(tourner);
 			
@@ -146,7 +146,7 @@ public class PlateauCarcassonne extends JFrame{
 			panneauButton.add(abandonner);
 			abandonner.addActionListener((ActionEvent e) ->{
 				jeu.abandonner();
-				if(t1 != null) {
+				if(currentTuile != null) {
 					defausser();
 				}
 				suivant();
@@ -167,8 +167,8 @@ public class PlateauCarcassonne extends JFrame{
 			haut = new JButton("^");
 			infoCoord.add(haut);
 			haut.addActionListener((ActionEvent e) ->{
-				if (t1 != null) {
-					t1.setLocation(t1.getX(),t1.getY()-100);
+				if (currentTuile != null) {
+					currentTuile.setLocation(currentTuile.getX(),currentTuile.getY()-100);
 				}
 			});
 
@@ -179,24 +179,24 @@ public class PlateauCarcassonne extends JFrame{
 			gauche = new JButton("<");
 			infoCoord.add(gauche);
 			gauche.addActionListener((ActionEvent e) ->{
-				if (t1 != null) {
-					t1.setLocation(t1.getX()-100,t1.getY());
+				if (currentTuile != null) {
+					currentTuile.setLocation(currentTuile.getX()-100,currentTuile.getY());
 				}
 			});
 			
 			bas = new JButton("v");
 			infoCoord.add(bas);
 			bas.addActionListener((ActionEvent e) ->{
-				if (t1 != null) {
-					t1.setLocation(t1.getX(),t1.getY()+100);
+				if (currentTuile != null) {
+					currentTuile.setLocation(currentTuile.getX(),currentTuile.getY()+100);
 				}
 			});
 			
 			droit = new JButton(">");
 			infoCoord.add(droit);
 			droit.addActionListener((ActionEvent e) ->{
-				if (t1 != null) {
-					t1.setLocation(t1.getX()+100,t1.getY());
+				if (currentTuile != null) {
+					currentTuile.setLocation(currentTuile.getX()+100,currentTuile.getY());
 				}
 			});
 			
@@ -206,8 +206,12 @@ public class PlateauCarcassonne extends JFrame{
 			
 		}
 		
+		public TuileDominoCarcasonne getCurrentTuile() {
+			return currentTuile;
+		}
+		
 		public void defausser() {
-			conteneur.remove(t1);
+			conteneur.remove(currentTuile);
 			conteneur.repaint();
 			tourner.setEnabled(false);
 			placer.setEnabled(false);
@@ -279,15 +283,15 @@ public class PlateauCarcassonne extends JFrame{
 		}
 			
 		public void placer() {
-			int x = (t1.getX()-400)/100;
-			int y = (t1.getY()-400)/100;
+			int x = (currentTuile.getX()-400)/100;
+			int y = (currentTuile.getY()-400)/100;
 			if (tuile != null) {
 				if (jeu.placer(tuile,x, y)){
-					conteneur.remove(t1);
+					conteneur.remove(currentTuile);
 					conteneur.repaint();
-					t1 = null;
 					placerTuile(tuile,x,y);
 					conteneur.repaint();
+					currentTuile = null;
 					message.setText("Bien joue");
 					message.setForeground(Color.WHITE );
 					panneauButton.add(message);
@@ -316,7 +320,7 @@ public class PlateauCarcassonne extends JFrame{
 		public void piocher() {
 			Tuile t = jeu.piocher(jeu.getCurrentJoueur());
 			tuile = t;
-			t1 = positionner(t,-3,-3);
+			currentTuile = positionner(t,-3,-3);
 			
 			tourner.setEnabled(true);
 			defausser.setEnabled(true);
@@ -333,11 +337,11 @@ public class PlateauCarcassonne extends JFrame{
 		int x;
 		int y;
 		
+		
 		public TuileDominoCarcasonne (TuileCC tuile,int x,int y) {
 			this.setBounds(x*100+400, y*100+400, 100, 100);
 			this.setLayout(new BorderLayout(5,5));
 			try {
-				System.out.println(tuile.getName());
 				imageR = ImageIO.read(new File("src\\main\\java\\gui\\ImagesCC\\"+tuile.getName()));
 				
 			} catch (IOException e) {
@@ -358,9 +362,34 @@ public class PlateauCarcassonne extends JFrame{
 		public void tourner() {
 			this.removeAll();
 			tuile.rotation();
-
+			
+			imageR = rotate(imageR);
+			
 			conteneur.repaint();
 			
+		}
+		
+		
+		public BufferedImage rotate(BufferedImage image) {
+	        BufferedImage buffered = (BufferedImage) image;
+	        BufferedImage buffered2 = new BufferedImage(buffered.getHeight(),buffered.getWidth(),BufferedImage.TYPE_INT_RGB);
+	        for(int x = 0;x < buffered.getWidth();x++) {
+	            for(int y = 0;y < buffered.getHeight();y++) {
+	                    buffered2.setRGB(buffered.getHeight()-y-1, x,
+	                            buffered.getRGB(x, y));
+	                 
+	                 
+	            }
+	        }
+	        return buffered2;
+	    }
+		
+		public BufferedImage getImage() {
+			return imageR;
+		}
+		
+		public void setImage(BufferedImage i) {
+			imageR = i;
 		}
 	}
 	

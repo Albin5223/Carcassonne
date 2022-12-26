@@ -60,7 +60,7 @@ public abstract class Tuile {
     	}
     	
     	int point = 0;
-    	point = Cote.comparer(partie1,partie2);
+    	point = partie1.comparer(partie2);
     	
     	return point;	
     }

@@ -336,6 +336,7 @@ public class JeuCCGraphique extends Jeu {
     public boolean placer(Tuile t,int x, int y) {
 		try {
 			plateau.poserTuile((TuileCC) t, x, y);
+			System.out.println("Pose reussi");
 			return true;
 		} catch (ActionImpossibleException | CasePleineException | TitulaireAbsentException e) {
 			return false;

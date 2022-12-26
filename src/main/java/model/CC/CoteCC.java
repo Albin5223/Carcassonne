@@ -20,5 +20,15 @@ public class CoteCC extends Cote {
         Paysage t2 = get(1);
         Paysage t3 = get(0);
         return new CoteCC(t1, t2, t3);
-    }    
+    }
+
+	@Override
+	public int comparer(Cote p2) {
+		for (int i = 0;i<3;i++) {
+			if (this.get(i).ID != ((CoteCC) p2).get(i).ID) {
+				return 0;
+			}
+		}
+		return 1;
+	}
 }

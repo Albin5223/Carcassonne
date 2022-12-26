@@ -25,24 +25,5 @@ public abstract class Cote {
     public abstract Object get(int i);
     public static int length(){return taille;}
     public abstract Cote inversePiece();
-
-    public static int comparer(Cote p1, Cote p2) {
-    	int point = 0;
-    	for (int i = 0;i<3;i++) {
-    		if(!p1.get(i).equals(p2.get(i))) {
-    			return 0;
-    		}
-    		else {
-                /*
-                 * TODO :
-                 * Ici, y'a un soucis, c'est que cette fonction compare des cotés en se servant des points, sauf que,
-                 * y'a que les dominos carrés qui donnent des points au placement des tuiles, pas carcassonne,
-                 * de plus, avec DC ça marche parce que "p1.get(i)" renvoie bien un int, mais avec CC ça renverrait un objet Paysage, donc rien à voir
-                 * Faut changer la manière de comparaison
-                 */
-    			point += (int) p1.get(i);
-    		}
-    	}
-    	return point;
-    }
+    public abstract int comparer(Cote p2);
 }
