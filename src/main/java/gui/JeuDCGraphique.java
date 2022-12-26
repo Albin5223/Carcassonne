@@ -16,8 +16,6 @@ import src.main.java.model.general.Tuile;
 
 public class JeuDCGraphique extends Jeu {
 
-	
-	
 	public JeuDCGraphique(){
 		joueurs = new ArrayList<Joueur>();
 		sac = new ArrayList<Tuile>();
@@ -25,18 +23,32 @@ public class JeuDCGraphique extends Jeu {
 		tour = 0;
 		maxScore=60;
 	}
-	
-	public void addJoueur(Joueur j) {
-		joueurs.add(j);
+
+	//Fonction qui initialise le sac avec tous les dominos possibles
+	public void initSac() {
+		ArrayList<CoteDC> pieces = new ArrayList<CoteDC>();
+		
+		for (int i = 1;i<4;i++) {
+			for (int j = 1;j<4;j++) {
+				for (int k = 1;k<4;k++) {
+					pieces.add(new CoteDC(i,j,k));
+				}
+			}
+		}
+		
+		for (int i = 0;i<pieces.size();i++) {
+			for (int j = 0;j<pieces.size();j++) {
+				for (int k = 0;k<pieces.size();k++) {
+					for (int l = 0;l<pieces.size();l++) {
+						sac.add(new TuileDC(pieces.get(i),pieces.get(j),pieces.get(k),pieces.get(l)));
+					}
+				}
+			}
+		}
 	}
 
-	@Override
 	public void lancerPartie() {
-		creerSac();
-	}
-	
-	public Joueur getCurrentJoueur() {
-		return joueurs.get(tour);
+		initSac();
 	}
 	
 	public boolean placer(Tuile t,int x, int y) {
@@ -46,24 +58,6 @@ public class JeuDCGraphique extends Jeu {
 		} catch (ActionImpossibleException | CasePleineException | TitulaireAbsentException e) {
 			return false;
 		}
-	}
-	
-	public void joueurSuivant() {
-		if(tour == -1) {
-			tour = 0;
-		}
-		else {
-			if (joueurs.get(tour).getScore()>=maxScore) {
-				partieFinie = true;
-			}
-			else {
-				tour+=1;
-				if (tour == joueurs.size()) {
-					tour=0;
-				}
-			}
-		}
-		
 	}
 	
 	
@@ -79,30 +73,6 @@ public class JeuDCGraphique extends Jeu {
             return null;
         }
     }
-	
-	//Fonction qui initialise le sac avec tous les dominos possibles
-	public void creerSac() {
-    	ArrayList<CoteDC> pieces = new ArrayList<CoteDC>();
-    	
-    	for (int i = 1;i<4;i++) {
-    		for (int j = 1;j<4;j++) {
-    			for (int k = 1;k<4;k++) {
-    				pieces.add(new CoteDC(i,j,k));
-    	    	}
-        	}
-    	}
-    	
-    	for (int i = 0;i<pieces.size();i++) {
-    		for (int j = 0;j<pieces.size();j++) {
-    			for (int k = 0;k<pieces.size();k++) {
-    				for (int l = 0;l<pieces.size();l++) {
-        				sac.add(new TuileDC(pieces.get(i),pieces.get(j),pieces.get(k),pieces.get(l)));
-        	    	}
-    	    	}
-        	}
-    	}
-    }
-
     
   //Cette fonction permet de piocher un domino aléatoire dans le sac
     public TuileDC piocher(Joueur j){
@@ -117,22 +87,7 @@ public class JeuDCGraphique extends Jeu {
     }
 
 	@Override
-	public void setJoueur() {
-		// TODO Auto-generated method stub
-		
+	public PlateauDC getPlateau() {
+		return (PlateauDC) plateau;
 	}
-
-	@Override
-	public void jouerTour() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Plateau getPlateau() {
-		return plateau;
-	}
-
-	
-
 }

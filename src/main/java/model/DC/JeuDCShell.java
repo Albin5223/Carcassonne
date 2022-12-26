@@ -21,7 +21,6 @@ public class JeuDCShell extends Jeu {
         return (PlateauDC) plateau;
     }
 
-    @Override
     public void lancerPartie() {
 
         // On initialise d'abord les joueurs
@@ -38,7 +37,6 @@ public class JeuDCShell extends Jeu {
     }
 
     // Méthode pour demander le nombre de joueurs et les initialiser
-    @Override
     @SuppressWarnings("resource")
     public void setJoueur() {
         boolean boucle = true;
@@ -61,7 +59,7 @@ public class JeuDCShell extends Jeu {
         }
         for (int i = 0; i < nombreHumain; i++) {
             System.out.println("- Quel est le nom du joueur n°" + (i+1) + " ? -");
-            joueurs.add(new Joueur(i));
+            addJoueur(new Joueur(i));
         }
 
         boucle = true;
@@ -120,7 +118,6 @@ public class JeuDCShell extends Jeu {
         }
     }
 
-    @Override
     public void jouerTour() {
         while(joueurs.size() > 1) {        // On continue le jeu tant qu'il reste au moins 2 joueurs
 
@@ -161,16 +158,6 @@ public class JeuDCShell extends Jeu {
         System.exit(0);
     }
 
-    // Fonction pour passer au joueur suivant
-    private void joueurSuivant(){
-        if(tour >= joueurs.size() - 1){
-            tour = 0;
-        }
-        else{
-            tour++;
-        }
-    }
-
     // Fonction pour demander à l'utilisateur un choix
     @SuppressWarnings("resource")
     private void demanderChoix(Joueur joueur, TuileDC pioche){
@@ -200,7 +187,7 @@ public class JeuDCShell extends Jeu {
                             boucle = false;
                             break;
                         case 'P':
-                            placerTuile(joueur,pioche);
+                            placer(joueur,pioche);
                             boucle = false;
                             break;
                         case 'D':
@@ -220,10 +207,15 @@ public class JeuDCShell extends Jeu {
             }
         }
     }
+    
+    @Override
+    public boolean placer(Tuile t, int x, int y) {
+        return false;
+    }
 
     // Fonction pour demander à l'utilisateur s'il veut placer sa tuile
     @SuppressWarnings("resource")
-    private void placerTuile(Joueur joueur, TuileDC tuile){
+    private void placer(Joueur joueur, TuileDC tuile){
         boolean boucle = true;
         while (boucle) {
             System.out.println("- Que voulez-vous faire ? : -\n");
@@ -249,7 +241,7 @@ public class JeuDCShell extends Jeu {
                                 joueurSuivant();
                             } catch (ActionImpossibleException | CasePleineException | TitulaireAbsentException e) {
                                 System.err.println("- Impossible de placer votre tuile ici -");
-                                placerTuile(joueur, tuile);
+                                placer(joueur, tuile);
                             }
                             break;
                         case 'R':

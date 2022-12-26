@@ -19,8 +19,8 @@ public class AcceuilView extends JFrame{
 	
 	int x_pos = 50;
 	int nb_Joueur;
-	JeuDCGraphique jeu;
-	JeuCCGraphique jeuCar;
+	JeuDCGraphique jeuDC;
+	JeuCCGraphique jeuCC;
 	JButton add;
 	JButton jouer_dominoCarree;
 	JButton jouer_carcassonne;
@@ -32,11 +32,10 @@ public class AcceuilView extends JFrame{
 	JPanel panneauJoueur;
 
 	public AcceuilView() {
-		jeu = new JeuDCGraphique();
-		jeuCar = new JeuCCGraphique();
+		jeuDC = new JeuDCGraphique();
+		jeuCC = new JeuCCGraphique();
 		this.setSize(new Dimension(1000,800));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
 		this.setTitle(("Domino Carree"));
 		
 		
@@ -70,16 +69,16 @@ public class AcceuilView extends JFrame{
 			javax.swing.SwingUtilities.invokeLater(
 					new Runnable() {
 						public void run() {
-							PlateauDominoCarre p = new PlateauDominoCarre(jeu);
+							PlateauDCG p = new PlateauDCG(jeuDC);
 							
 						}
 					}
 				);
-			jeu.lancerPartie();
+			jeuDC.lancerPartie();
 		});
 		buttonView.add(jouer_dominoCarree);
 		
-		jouer_carcassonne = new JButton("Jouer au jeu de Carcassonne");
+		jouer_carcassonne = new JButton("Jouer au jeuDC de Carcassonne");
 		jouer_carcassonne.setEnabled(false);
 		jouer_carcassonne.addActionListener((ActionEvent e) ->{
 			add.setVisible(false);
@@ -88,12 +87,12 @@ public class AcceuilView extends JFrame{
 			javax.swing.SwingUtilities.invokeLater(
 					new Runnable() {
 						public void run() {
-							PlateauCarcassonne p = new PlateauCarcassonne(jeuCar);
+							PlateauCCG p = new PlateauCCG(jeuCC);
 							
 						}
 					}
 				);
-			jeuCar.lancerPartie();
+			jeuCC.lancerPartie();
 		});
 		buttonView.add(jouer_carcassonne);
 		
@@ -101,6 +100,8 @@ public class AcceuilView extends JFrame{
 		container.add(panneauJoueur);
 		container.add(buttonView);
 		this.add(container);
+
+		this.setVisible(true);
 	}
 	
 	
@@ -142,11 +143,11 @@ public class AcceuilView extends JFrame{
 					joueur = new Joueur(demanderNom.getText(),idJoueur);
 				}
 				else {
-					joueur = new Ordinateur(idJoueur,1,jeu);
+					joueur = new Ordinateur(idJoueur,1,jeuDC);
 				}
 				
-				jeu.addJoueur(joueur);
-				jeuCar.addJoueur(joueur);
+				jeuDC.addJoueur(joueur);
+				jeuCC.addJoueur(joueur);
 				valider.setEnabled(false);
 				jouer_dominoCarree.setEnabled(true);
 				jouer_carcassonne.setEnabled(true);

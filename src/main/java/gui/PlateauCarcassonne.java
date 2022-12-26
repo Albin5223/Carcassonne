@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -26,6 +27,9 @@ import src.main.java.model.general.Tuile;
 
 public class PlateauCarcassonne extends JFrame{
 	
+	int dx;
+	int dy;
+	ArrayList<TuileDominoCarcasonne> tuilesPlateau = new ArrayList<TuileDominoCarcasonne>();
 	JPanel conteneur;
 	JPanel information;
 	JeuCCGraphique jeu;
@@ -59,12 +63,12 @@ public class PlateauCarcassonne extends JFrame{
 	public void placerTuile(Tuile t,int x,int y) {
 		TuileDominoCarcasonne t1 = new TuileDominoCarcasonne((TuileCC)t,x,y);
 		if (info.getCurrentTuile()!=null){
-			System.out.println("Entrer");
 			t1.setImage(info.getCurrentTuile().getImage());
 		}
 		
 		conteneur.add(t1,BorderLayout.CENTER);
 		conteneur.repaint();
+		tuilesPlateau.add(t1);
 	}
 	
 	public TuileDominoCarcasonne positionner(Tuile t,int x,int y) {
@@ -100,7 +104,7 @@ public class PlateauCarcassonne extends JFrame{
 		JButton bas;
 		
 		public Information(int x,int y) {
-			this.setBounds(x, y, 200, 800);
+			this.setBounds(x, y, 200, PlateauCarcassonne.this.getHeight());
 			this.setBackground(Color.BLUE);
 			this.setLayout(new GridLayout(4,1,100,25));
 			
@@ -149,8 +153,7 @@ public class PlateauCarcassonne extends JFrame{
 				if(currentTuile != null) {
 					defausser();
 				}
-				suivant();
-				
+				suivant();	
 			});
 			
 			this.add(jv1);
@@ -168,7 +171,12 @@ public class PlateauCarcassonne extends JFrame{
 			infoCoord.add(haut);
 			haut.addActionListener((ActionEvent e) ->{
 				if (currentTuile != null) {
-					currentTuile.setLocation(currentTuile.getX(),currentTuile.getY()-100);
+					if(currentTuile.getY()<=0){
+						glissePlateauBas();
+					}
+					else{
+						currentTuile.setLocation(currentTuile.getX(),currentTuile.getY()-100);
+					}
 				}
 			});
 
@@ -180,7 +188,12 @@ public class PlateauCarcassonne extends JFrame{
 			infoCoord.add(gauche);
 			gauche.addActionListener((ActionEvent e) ->{
 				if (currentTuile != null) {
-					currentTuile.setLocation(currentTuile.getX()-100,currentTuile.getY());
+					if(currentTuile.getX()<=0){
+						glissePlateauDroite();
+					}
+					else{
+						currentTuile.setLocation(currentTuile.getX()-100,currentTuile.getY());
+					}
 				}
 			});
 			
@@ -188,7 +201,12 @@ public class PlateauCarcassonne extends JFrame{
 			infoCoord.add(bas);
 			bas.addActionListener((ActionEvent e) ->{
 				if (currentTuile != null) {
-					currentTuile.setLocation(currentTuile.getX(),currentTuile.getY()+100);
+					if(currentTuile.getY()+currentTuile.getHeight() >= this.getHeight()){
+						glissePlateauHaut();
+					}
+					else{
+						currentTuile.setLocation(currentTuile.getX(),currentTuile.getY()+100);
+					}
 				}
 			});
 			
@@ -196,7 +214,12 @@ public class PlateauCarcassonne extends JFrame{
 			infoCoord.add(droit);
 			droit.addActionListener((ActionEvent e) ->{
 				if (currentTuile != null) {
-					currentTuile.setLocation(currentTuile.getX()+100,currentTuile.getY());
+					if(currentTuile.getX() + currentTuile.getWidth() >= PlateauCarcassonne.this.getWidth() - this.getWidth()){
+						glissePlateauGauche();
+					}
+					else{
+						currentTuile.setLocation(currentTuile.getX()+100,currentTuile.getY());
+					}
 				}
 			});
 			
@@ -204,6 +227,34 @@ public class PlateauCarcassonne extends JFrame{
 			
 			message = new JLabel();
 			
+		}
+
+		private void glissePlateauHaut(){
+			for (TuileDominoCarcasonne t : tuilesPlateau) {
+				t.setLocation(t.getX(), t.getY()-100);
+			}
+			dy += 1;
+		}
+
+		private void glissePlateauBas(){
+			for (TuileDominoCarcasonne t : tuilesPlateau) {
+				t.setLocation(t.getX(), t.getY()+100);
+			}
+			dy -= 1;
+		}
+
+		private void glissePlateauDroite(){
+			for (TuileDominoCarcasonne t : tuilesPlateau) {
+				t.setLocation(t.getX()+100, t.getY());
+			}
+			dx -= 1;
+		}
+
+		private void glissePlateauGauche(){
+			for (TuileDominoCarcasonne t : tuilesPlateau) {
+				t.setLocation(t.getX()-100, t.getY());
+			}
+			dx += 1;
 		}
 		
 		public TuileDominoCarcasonne getCurrentTuile() {
@@ -254,7 +305,6 @@ public class PlateauCarcassonne extends JFrame{
 		}
 		
 		public void suivant() {
-			jeu.jouerTour();
 			if (jeu.partieFinie()) {
 				jv1.annonceVainqueur();
 				piocher.setEnabled(false);
@@ -276,7 +326,7 @@ public class PlateauCarcassonne extends JFrame{
 				Tuile tuileOrdi = jeu.piocher(jeu.getCurrentJoueur());
 				Joueur j = jeu.getCurrentJoueur();
 				if (((Ordinateur) j).jouerTour(tuileOrdi)) {
-					PlateauCarcassonne.this.placerTuile(tuileOrdi,tuileOrdi.getCoordonnee().getX(),tuileOrdi.getCoordonnee().getY());
+					PlateauCarcassonne.this.placerTuile(tuileOrdi,tuileOrdi.getCoordonnee().getX()+dx,tuileOrdi.getCoordonnee().getY()+dy);
 				}
 				suivant();
 			}
@@ -286,7 +336,7 @@ public class PlateauCarcassonne extends JFrame{
 			int x = (currentTuile.getX()-400)/100;
 			int y = (currentTuile.getY()-400)/100;
 			if (tuile != null) {
-				if (jeu.placer(tuile,x, y)){
+				if (jeu.placer(tuile,x+dx, y+dy)){
 					conteneur.remove(currentTuile);
 					conteneur.repaint();
 					placerTuile(tuile,x,y);
@@ -362,9 +412,7 @@ public class PlateauCarcassonne extends JFrame{
 		public void tourner() {
 			this.removeAll();
 			tuile.rotation();
-			
 			imageR = rotate(imageR);
-			
 			conteneur.repaint();
 			
 		}

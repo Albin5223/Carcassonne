@@ -26,10 +26,6 @@ public class JeuCCGraphique extends Jeu {
 		tour = 0;
 		maxScore=60;
 	}
-    
-    public Joueur getCurrentJoueur() {
-		return joueurs.get(tour);
-	}
 
     public void initSac(){
 
@@ -303,50 +299,35 @@ public class JeuCCGraphique extends Jeu {
         }
     }
 
-    @Override
+
+    public void addJoueur(Joueur joueur) {
+		joueurs.add(joueur);
+	}
+
     public void lancerPartie() {
         initSac();
-    }
-
-    @Override
-    public void setJoueur() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void jouerTour() {
-    	if(tour == -1) {
-			tour = 0;
-		}
-		else {
-			if (joueurs.get(tour).getScore()>=maxScore) {
-				partieFinie = true;
-			}
-			else {
-				tour+=1;
-				if (tour == joueurs.size()) {
-					tour=0;
-				}
-			}
-		}
-        
     }
     
     public boolean placer(Tuile t,int x, int y) {
 		try {
 			plateau.poserTuile((TuileCC) t, x, y);
-			System.out.println("Pose reussi");
 			return true;
 		} catch (ActionImpossibleException | CasePleineException | TitulaireAbsentException e) {
 			return false;
 		}
 	}
 
-    @Override
-    public Plateau getPlateau() {
-        // TODO Auto-generated method stub
-        return null;
+    public Tuile setPlateau(){
+        TuileCC t = piocher(null);
+        try {
+            plateau.setTuile(t, 0, 0);
+            return t;
+            
+        } catch (CasePleineException e) {
+            System.out.println("...La première tuile d'initialisation n'a pas été placée...");
+            e.printStackTrace();
+            return null;
+        }
     }
     
     public TuileCC piocher(Joueur j){
@@ -360,21 +341,9 @@ public class JeuCCGraphique extends Jeu {
         return piocher;
     }
 
-	public void addJoueur(Joueur joueur) {
-		joueurs.add(joueur);
-	}
-	
-	public Tuile setPlateau(){
-        TuileCC t = piocher(null);
-        try {
-            plateau.setTuile(t, 0, 0);
-            return t;
-            
-        } catch (CasePleineException e) {
-            System.out.println("...La première tuile d'initialisation n'a pas été placée...");
-            e.printStackTrace();
-            return null;
-        }
+    @Override
+    public PlateauCC getPlateau() {
+        return (PlateauCC) plateau;
     }
     
 }

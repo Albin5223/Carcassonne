@@ -15,71 +15,44 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import src.main.java.model.DC.CoteDC;
-import src.main.java.model.DC.TuileDC;
+import src.main.java.model.general.Jeu;
 import src.main.java.model.general.Joueur;
 import src.main.java.model.general.Ordinateur;
 import src.main.java.model.general.Tuile;
 
-public class PlateauDominoCarre extends JFrame{
-	
-	int dx;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public abstract class PlateauG extends JFrame {
+
+    int dx;
 	int dy;
-	ArrayList<TuileDominoCarree> tuilesPlateau = new ArrayList<TuileDominoCarree>();
+	ArrayList<TuileG> tuilesPlateau = new ArrayList<TuileG>();
 	JPanel conteneur;
 	JPanel information;
-	JeuDCGraphique jeu;
-
+	Jeu jeu;
 	Information info;
 	
-	public PlateauDominoCarre(JeuDCGraphique j) {
+	public PlateauG(Jeu j) {
 		this.setSize(new Dimension(1000,800));
-		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jeu = j;
 		initJeu();
+
+		this.setVisible(true);
 	}
 	
-	public void initJeu() {
-		conteneur = new JPanel();
-		conteneur.setLayout(null);
-		
-		information = new JPanel();
-		information.setLayout(null);
-		
-		
-        
-        info = new Information(800,0);
-        conteneur.add(info);
-        
-        Tuile t = ((JeuDCGraphique) jeu).setPlateau();
-        placerTuile(t,0,0);
-        
-        
-        this.add(conteneur);
-      
-	}
+	public abstract void initJeu();
 	
-	public void placerTuile(Tuile t,int x,int y) {
-		TuileDominoCarree t1 = new TuileDominoCarree((TuileDC)t,x,y);
-		conteneur.add(t1,BorderLayout.CENTER);
-		conteneur.repaint();
-		t1.fixer();
-		tuilesPlateau.add(t1);
-	}
+	public abstract void placerTuile(Tuile t,int x,int y);
 	
-	public TuileDominoCarree positionner(Tuile t,int x,int y) {
-		TuileDominoCarree t1 = new TuileDominoCarree((TuileDC)t,x,y);
-		conteneur.add(t1,BorderLayout.CENTER);
-		conteneur.repaint();
+	public abstract TuileG positionner(Tuile t,int x,int y);
+
+    public class Information extends JPanel implements KeyListener{
 		
-		return t1;
-	}
-	
-	
-	class Information extends JPanel{
-		
-		TuileDominoCarree t1;
+		TuileG currentTuile;
 		Tuile tuile;
 		JButton piocher;
 		JButton placer;
@@ -99,16 +72,51 @@ public class PlateauDominoCarre extends JFrame{
 		JButton droit;
 		JButton haut;
 		JButton bas;
+
+		// TODO : ne marche pas encore
+		@Override
+		public void keyTyped(KeyEvent e){
+		   System.out.println("touche");
+		   switch (e.getKeyCode()) {
+			   case KeyEvent.VK_KP_UP:
+				   haut.doClick();
+				   break;
+			   case KeyEvent.VK_KP_DOWN:
+				   bas.doClick();
+				   break;
+			   case KeyEvent.VK_KP_RIGHT:
+				   droit.doClick();
+				   break;
+			   case KeyEvent.VK_KP_LEFT:
+				   gauche.doClick();
+				   break;
+			   default:
+				   break;
+		   }
+	   }
+
+	   @Override
+	   public void keyPressed(KeyEvent e) {}
+
+	   @Override
+	   public void keyReleased(KeyEvent e) {}
 		
 		public Information(int x,int y) {
-			this.setBounds(x, y, 200, PlateauDominoCarre.this.getHeight());
+			this.setBounds(x, y, 200, PlateauG.this.getHeight());
 			this.setBackground(Color.BLUE);
 			this.setLayout(new GridLayout(4,1,100,25));
+
+			addKeyListener(this);
+			addWindowListener(new WindowAdapter() {
+				public void windowOpened(WindowEvent e) { 
+				requestFocus();	
+				}
+			});
 			
 			jv1 = new JoueurView(jeu.getCurrentJoueur());
 			panneauButton = new JPanel();
 			panneauButton.setBackground(Color.BLUE);
-			
+		
 			
 			
 			piocher = new JButton("Piocher");
@@ -136,7 +144,7 @@ public class PlateauDominoCarre extends JFrame{
 			tourner = new JButton("Rotation");
 			tourner.setEnabled(false);
 			tourner.addActionListener((ActionEvent e) ->{
-				t1.tourner();
+				currentTuile.tourner();
 			});
 			panneauButton.add(tourner);
 			
@@ -147,7 +155,7 @@ public class PlateauDominoCarre extends JFrame{
 			panneauButton.add(abandonner);
 			abandonner.addActionListener((ActionEvent e) ->{
 				jeu.abandonner();
-				if(t1 != null) {
+				if(currentTuile != null) {
 					defausser();
 				}
 
@@ -169,13 +177,16 @@ public class PlateauDominoCarre extends JFrame{
 			haut = new JButton("^");
 			infoCoord.add(haut);
 			haut.addActionListener((ActionEvent e) ->{
-				if (t1 != null) {
-					if(t1.getY()<=0){
+				if (currentTuile != null) {
+					if(currentTuile.getY()<=0){
 						glissePlateauBas();
 					}
 					else{
-						t1.setLocation(t1.getX(),t1.getY()-100);
+						currentTuile.setLocation(currentTuile.getX(),currentTuile.getY()-100);
 					}
+				}
+				else{
+					glissePlateauBas();
 				}
 			});
 
@@ -186,115 +197,113 @@ public class PlateauDominoCarre extends JFrame{
 			gauche = new JButton("<");
 			infoCoord.add(gauche);
 			gauche.addActionListener((ActionEvent e) ->{
-				if (t1 != null) {
-					if(t1.getX()<=0){
+				if (currentTuile != null) {
+					if(currentTuile.getX()<=0){
 						glissePlateauDroite();
 					}
 					else{
-						t1.setLocation(t1.getX()-100,t1.getY());
+						currentTuile.setLocation(currentTuile.getX()-100,currentTuile.getY());
 					}
+				}
+				else{
+					glissePlateauDroite();
 				}
 			});
 			
 			bas = new JButton("v");
 			infoCoord.add(bas);
 			bas.addActionListener((ActionEvent e) ->{
-				if (t1 != null) {
-					if(t1.getY()+t1.getHeight() >= this.getHeight()){
+				if (currentTuile != null) {
+					if(currentTuile.getY()+currentTuile.getHeight() >= this.getHeight()){
 						glissePlateauHaut();
 					}
 					else{
-						t1.setLocation(t1.getX(),t1.getY()+100);
+						currentTuile.setLocation(currentTuile.getX(),currentTuile.getY()+100);
 					}
+				}
+				else{
+					glissePlateauHaut();
 				}
 			});
 			
 			droit = new JButton(">");
 			infoCoord.add(droit);
 			droit.addActionListener((ActionEvent e) ->{
-				if (t1 != null) {
-					if(t1.getX() + t1.getWidth() >= PlateauDominoCarre.this.getWidth() - this.getWidth()){
+				if (currentTuile != null) {
+					if(currentTuile.getX() + currentTuile.getWidth() >= PlateauG.this.getWidth() - this.getWidth()){
 						glissePlateauGauche();
 					}
 					else{
-						t1.setLocation(t1.getX()+100,t1.getY());
+						currentTuile.setLocation(currentTuile.getX()+100,currentTuile.getY());
 					}
+				}
+				else{
+					glissePlateauGauche();
 				}
 			});
 			
 			this.add(infoCoord);
 			
 			message = new JLabel();
-			
 		}
 
 		private void glissePlateauHaut(){
-			for (TuileDominoCarree t : tuilesPlateau) {
+			for (TuileG t : tuilesPlateau) {
 				t.setLocation(t.getX(), t.getY()-100);
 			}
 			dy += 1;
 		}
 
 		private void glissePlateauBas(){
-			for (TuileDominoCarree t : tuilesPlateau) {
+			for (TuileG t : tuilesPlateau) {
 				t.setLocation(t.getX(), t.getY()+100);
 			}
 			dy -= 1;
 		}
 
 		private void glissePlateauDroite(){
-			for (TuileDominoCarree t : tuilesPlateau) {
+			for (TuileG t : tuilesPlateau) {
 				t.setLocation(t.getX()+100, t.getY());
 			}
 			dx -= 1;
 		}
 
 		private void glissePlateauGauche(){
-			for (TuileDominoCarree t : tuilesPlateau) {
+			for (TuileG t : tuilesPlateau) {
 				t.setLocation(t.getX()-100, t.getY());
 			}
 			dx += 1;
 		}
+
+		public TuileG getCurrentTuile() {
+			return currentTuile;
+		}
 		
 		public void defausser() {
-			conteneur.remove(t1);
+			conteneur.remove(currentTuile);
 			conteneur.repaint();
 			tourner.setEnabled(false);
 			placer.setEnabled(false);
 			defausser.setEnabled(false);
+			currentTuile = null;
 		}
 		
 		public void quitter() {
 			this.addMouseListener(new MouseListener() {
+				@Override
+				public void mouseClicked(MouseEvent e) {PlateauG.this.dispose();}
 
 				@Override
-				public void mouseClicked(MouseEvent e) {
-					PlateauDominoCarre.this.dispose();
-				}
+				public void mousePressed(MouseEvent e) {}
 
 				@Override
-				public void mousePressed(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void mouseReleased(MouseEvent e) {}
 
 				@Override
-				public void mouseReleased(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void mouseEntered(MouseEvent e) {}
 
 				@Override
-				public void mouseEntered(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void mouseExited(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void mouseExited(MouseEvent e) {}
 				
 			});
 		}
@@ -322,24 +331,23 @@ public class PlateauDominoCarre extends JFrame{
 				Tuile tuileOrdi = jeu.piocher(jeu.getCurrentJoueur());
 				Joueur j = jeu.getCurrentJoueur();
 				if (((Ordinateur) j).jouerTour(tuileOrdi)) {
-					PlateauDominoCarre.this.placerTuile(tuileOrdi,tuileOrdi.getCoordonnee().getX()+dx,tuileOrdi.getCoordonnee().getY()+dy);
+					PlateauG.this.placerTuile(tuileOrdi,tuileOrdi.getCoordonnee().getX()-dx,tuileOrdi.getCoordonnee().getY()-dy);
 				}
 				suivant();
 			}
 		}
 			
 		public void placer() {
-			int x = (t1.getX()-400)/100;
-			int y = (t1.getY()-400)/100;
+			int x = (currentTuile.getX()-400)/100;
+			int y = (currentTuile.getY()-400)/100;
 			if (tuile != null) {
 				if (jeu.placer(tuile,x+dx, y+dy)){
-					conteneur.remove(t1);
+					conteneur.remove(currentTuile);
 					conteneur.repaint();
-					t1 = null;
 					placerTuile(tuile,x,y);
 					conteneur.repaint();
 					message.setText("Bien joue");
-					message.setForeground(Color.WHITE );
+					message.setForeground(Color.WHITE);
 					panneauButton.add(message);
 					this.setVisible(false);
 					this.setVisible(true);
@@ -350,7 +358,8 @@ public class PlateauDominoCarre extends JFrame{
 					abandonner.setEnabled(false);
 					suivant();
 					jv1.refresh();
-		
+					
+					currentTuile = null;
 					}
 				else {
 					message.setText("Erreur dans le placement");
@@ -364,101 +373,25 @@ public class PlateauDominoCarre extends JFrame{
 		}
 		
 		public void piocher() {
-			Tuile t = jeu.piocher(jeu.getCurrentJoueur());
-			tuile = t;
-			t1 = positionner(t,-3,-3);
+			tuile = jeu.piocher(jeu.getCurrentJoueur());
+			currentTuile = positionner(tuile,-3,-3);
 			
 			tourner.setEnabled(true);
 			defausser.setEnabled(true);
 			placer.setEnabled(true);
 			piocher.setEnabled(false);
-			
 		}
 	}
 	
-	class TuileDominoCarree extends JPanel{
+	public abstract class TuileG extends JPanel {
 		
-		TuileDC tuile;
+		Tuile tuile;
 		int x;
 		int y;
 		
-		public TuileDominoCarree (TuileDC tuile,int x,int y) {
-			this.setBounds(x*100+400, y*100+400, 100, 100);
-			this.setBackground(Color.YELLOW);
-			this.setLayout(new BorderLayout(5,5));
-			this.tuile = tuile;
-			this.x = x;
-			this.y = y;
-			
-			init();
-		}
+		public abstract void init();
 		
-		public void init() {
-			CoteDC gauche = tuile.getGauche();
-			CoteDC droite = tuile.getDroite();
-			CoteDC bas = tuile.getBas();
-			CoteDC haut = tuile.getHaut();
-			
-			JLabel coin = new JLabel(" ");
-			coin.setBounds(0, 0, 20, 20);
-			this.add(coin);
-			
-			JLabel coin1 = new JLabel(" ");
-			coin1.setBounds(80, 0, 20, 20);
-			this.add(coin1);
-			
-			JLabel coin2 = new JLabel(" ");
-			coin2.setBounds(0,80, 20, 20);
-			this.add(coin2);
-			
-			JLabel coin3 = new JLabel(" ");
-			coin3.setBounds(80,80, 20, 20);
-			this.add(coin3);
-			
-			for (int i = 0;i<3;i++) {
-				int intgauche = (int) gauche.get(i);
-				int intdroit = (int) droite.get(i);
-				int inthaut = (int) haut.get(i);
-				int intbas = (int) bas.get(i);
-
-				int ecartX = 5;
-				
-				JLabel jhaut = new JLabel(String.valueOf(inthaut));
-				jhaut.setBounds(ecartX+20+20*i,0, 20, 20);
-				this.add(jhaut);
-				
-				JLabel jbas = new JLabel(String.valueOf(intbas));
-				jbas.setBounds(ecartX+20+20*i,80, 20, 20);
-				this.add(jbas);
-				
-				JLabel jgauche = new JLabel(String.valueOf(intgauche));
-				jgauche.setBounds(ecartX+0,20+20*i, 20, 20);
-				this.add(jgauche);
-				
-				JLabel jdroite = new JLabel(String.valueOf(intdroit));
-				jdroite.setBounds(ecartX+80,20+20*i, 20, 20);
-				this.add(jdroite);
-				
-			}
-			
-			
-			JLabel coin4 = new JLabel("");
-			coin4.setBounds(20,80, 20, 20);
-			this.add(coin4);
-			
-		}
-		
-		public void fixer() {
-			this.setBackground(Color.RED);
-		}
-		
-		public void tourner() {
-			this.removeAll();
-			tuile.rotation();
-			init();
-			conteneur.repaint();
-			
-		}
+		public abstract void tourner();
 	}
-	
+    
 }
