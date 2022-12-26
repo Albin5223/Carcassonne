@@ -328,10 +328,10 @@ public abstract class PlateauG extends JFrame {
 				panneauButton.remove(message);
 			}
 			if (jeu.getCurrentJoueur().isBot()) {
-				Tuile tuileOrdi = jeu.piocher(jeu.getCurrentJoueur());
+				Tuile tuile = jeu.piocher(jeu.getCurrentJoueur());
 				Joueur j = jeu.getCurrentJoueur();
-				if (((Ordinateur) j).jouerTour(tuileOrdi)) {
-					PlateauG.this.placerTuile(tuileOrdi,tuileOrdi.getCoordonnee().getX()-dx,tuileOrdi.getCoordonnee().getY()-dy);
+				if (((Ordinateur) j).jouerTour(tuile)) {
+					PlateauG.this.placerTuile(tuile,tuile.getCoordonnee().getX()-dx,tuile.getCoordonnee().getY()-dy);
 				}
 				suivant();
 			}

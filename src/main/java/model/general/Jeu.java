@@ -34,7 +34,11 @@ public abstract class Jeu {
 	}
 	
 	public boolean partieFinie() {
-		return partieFinie;
+		return partieFinie || sacVide();
+	}
+
+	public boolean sacVide(){
+		return sac.size() == 0;
 	}
 
 	public Joueur getCurrentJoueur(){
@@ -43,6 +47,24 @@ public abstract class Jeu {
 		}
 		return joueurs.get(tour);
 	}
+
+	public ArrayList<Joueur> joueursPremier(){
+        int max = 0;
+        for (Joueur joueur : joueurs) {
+            if(joueur.getScore() > max){
+                max = joueur.getScore(); 
+            }
+        }
+
+        ArrayList<Joueur> list = new ArrayList<Joueur>();
+
+        for (Joueur joueur : joueurs) {
+            if(joueur.getScore() >= max){
+                list.add(joueur); 
+            }
+        }
+        return list;
+    }
 
 	public void addJoueur(Joueur j) {
 		joueurs.add(j);

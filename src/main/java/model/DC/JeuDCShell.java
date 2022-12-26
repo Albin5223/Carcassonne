@@ -120,7 +120,6 @@ public class JeuDCShell extends Jeu {
 
     public void jouerTour() {
         while(joueurs.size() > 1) {        // On continue le jeu tant qu'il reste au moins 2 joueurs
-
             // On montre l'etat actuel du jeu en printant le plateau
             afficher();
 
@@ -143,7 +142,7 @@ public class JeuDCShell extends Jeu {
                 demanderChoix(joueur, pioche);              // On lui demande ce qu'il veut faire
             }
 
-            if(joueur.getScore() >= maxScore){
+            if(joueur.getScore() >= maxScore || sacVide()){
                 joueurGagnant(joueur);
             }
         }
