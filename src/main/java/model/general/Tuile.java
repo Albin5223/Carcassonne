@@ -24,10 +24,10 @@ public abstract class Tuile {
     // Méthodes getteurs
     public Joueur getTitulaire(){return titulaire;}
     public Coordonnee getCoordonnee(){return coordonnee;}
-    public Cote getHaut(){return haut;}
-    public Cote getDroite(){return droite;}
-    public Cote getBas(){return bas;}
-    public Cote getGauche(){return gauche;}
+    public abstract Cote getHaut();
+    public abstract Cote getDroite();
+    public abstract Cote getBas();
+    public abstract Cote getGauche();
 
 
     // Méthodes setteurs

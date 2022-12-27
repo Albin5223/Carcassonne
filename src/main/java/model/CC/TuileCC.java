@@ -11,18 +11,10 @@ public class TuileCC extends Tuile {
         super(haut, droite, bas, gauche);
     }
 
-    @Override
-    public void rotation(){
-        CoteCC h = (CoteCC) gauche.inversePiece();
-        CoteCC d = (CoteCC) haut;
-        CoteCC b = (CoteCC) droite.inversePiece();
-        CoteCC g = (CoteCC) bas;
-
-        this.haut = h;
-        this.droite = d;
-        this.bas = b;
-        this.gauche = g;
-    }  
+    public CoteCC getHaut(){return (CoteCC) haut;}
+    public CoteCC getDroite(){return (CoteCC) droite;}
+    public CoteCC getBas(){return (CoteCC) bas;}
+    public CoteCC getGauche(){return (CoteCC) gauche;}
 
     public void setCentre(Centre centre){
         this.centre = centre;

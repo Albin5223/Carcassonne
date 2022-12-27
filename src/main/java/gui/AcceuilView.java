@@ -143,7 +143,7 @@ public class AcceuilView extends JFrame{
 					joueur = new Joueur(demanderNom.getText(),idJoueur);
 				}
 				else {
-					joueur = new Ordinateur(idJoueur,1,jeuDC);
+					joueur = new Ordinateur(idJoueur,1,jeuCC);
 				}
 				
 				jeuDC.addJoueur(joueur);

@@ -46,19 +46,6 @@ public class TuileDC extends Tuile {
         System.out.println();
     }
 
-    @Override
-    public void rotation(){
-        CoteDC h = (CoteDC) gauche.inversePiece();
-        CoteDC d = (CoteDC) haut;
-        CoteDC b = (CoteDC) droite.inversePiece();
-        CoteDC g = (CoteDC) bas;
-
-        this.haut = h;
-        this.droite = d;
-        this.bas = b;
-        this.gauche = g;
-    }
-
     public static void printHaut(TuileDC t){
         if(t != null){
             System.out.print("  # ");
