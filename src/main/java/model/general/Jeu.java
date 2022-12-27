@@ -89,5 +89,6 @@ public abstract class Jeu {
 
   public abstract boolean placer(Tuile t,int x, int y);
   public abstract Tuile piocher(Joueur j);
+  public abstract void initSac();
 
 }

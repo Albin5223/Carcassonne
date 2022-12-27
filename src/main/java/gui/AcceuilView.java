@@ -74,7 +74,6 @@ public class AcceuilView extends JFrame{
 						}
 					}
 				);
-			jeuDC.lancerPartie();
 		});
 		buttonView.add(jouer_dominoCarree);
 		
@@ -92,7 +91,6 @@ public class AcceuilView extends JFrame{
 						}
 					}
 				);
-			jeuCC.lancerPartie();
 		});
 		buttonView.add(jouer_carcassonne);
 		

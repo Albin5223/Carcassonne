@@ -27,7 +27,7 @@ public class JeuDCShell extends Jeu {
         setJoueur();
 
         // On initialise les tuiles ici
-        creerSac();
+        initSac();
 
         // On initialise le plateau en plaçant juste la toute première tuile
         setPlateau();
@@ -309,7 +309,7 @@ public class JeuDCShell extends Jeu {
     }
     
     //Fonction qui initialise le sac avec tous les dominos possibles
-    public void creerSac() {
+    public void initSac() {
     	ArrayList<CoteDC> pieces = new ArrayList<CoteDC>();
     	
     	for (int i = 1;i<4;i++) {

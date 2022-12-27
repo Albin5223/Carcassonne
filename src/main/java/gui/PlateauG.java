@@ -20,10 +20,7 @@ import src.main.java.model.general.Joueur;
 import src.main.java.model.general.Ordinateur;
 import src.main.java.model.general.Tuile;
 
-import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public abstract class PlateauG extends JFrame {
 
@@ -39,8 +36,8 @@ public abstract class PlateauG extends JFrame {
 		this.setSize(new Dimension(1000,800));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jeu = j;
+		jeu.initSac();
 		initJeu();
-
 		this.setVisible(true);
 	}
 	
@@ -50,7 +47,7 @@ public abstract class PlateauG extends JFrame {
 	
 	public abstract TuileG positionner(Tuile t,int x,int y);
 
-    public class Information extends JPanel implements KeyListener{
+    public class Information extends JPanel {
 		
 		TuileG currentTuile;
 		Tuile tuile;
@@ -72,44 +69,28 @@ public abstract class PlateauG extends JFrame {
 		JButton droit;
 		JButton haut;
 		JButton bas;
-
-		// TODO : ne marche pas encore
-		@Override
-		public void keyTyped(KeyEvent e){
-		   System.out.println("touche");
-		   switch (e.getKeyCode()) {
-			   case KeyEvent.VK_KP_UP:
-				   haut.doClick();
-				   break;
-			   case KeyEvent.VK_KP_DOWN:
-				   bas.doClick();
-				   break;
-			   case KeyEvent.VK_KP_RIGHT:
-				   droit.doClick();
-				   break;
-			   case KeyEvent.VK_KP_LEFT:
-				   gauche.doClick();
-				   break;
-			   default:
-				   break;
-		   }
-	   }
-
-	   @Override
-	   public void keyPressed(KeyEvent e) {}
-
-	   @Override
-	   public void keyReleased(KeyEvent e) {}
 		
 		public Information(int x,int y) {
 			this.setBounds(x, y, 200, PlateauG.this.getHeight());
 			this.setBackground(Color.BLUE);
 			this.setLayout(new GridLayout(4,1,100,25));
-
-			addKeyListener(this);
-			addWindowListener(new WindowAdapter() {
-				public void windowOpened(WindowEvent e) { 
-				requestFocus();	
+			this.addKeyListener(new Deplacements() {
+				public void keyTyped(KeyEvent e) {
+					System.out.println("touche");
+					switch (e.getKeyCode()) {
+						case KeyEvent.VK_KP_UP:
+							haut.doClick();
+							break;
+						case KeyEvent.VK_KP_DOWN:
+							bas.doClick();
+							break;
+						case KeyEvent.VK_KP_RIGHT:
+							droit.doClick();
+							break;
+						case KeyEvent.VK_KP_LEFT:
+							gauche.doClick();
+							break;
+					}
 				}
 			});
 			
@@ -245,6 +226,17 @@ public abstract class PlateauG extends JFrame {
 			this.add(infoCoord);
 			
 			message = new JLabel();
+
+			haut.setFocusable(false);
+			bas.setFocusable(false);
+			droit.setFocusable(false);
+			gauche.setFocusable(false);
+
+			piocher.setFocusable(false);
+			placer.setFocusable(false);
+			defausser.setFocusable(false);
+			tourner.setFocusable(false);
+			abandonner.setFocusable(false);
 		}
 
 		private void glissePlateauHaut(){
