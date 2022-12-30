@@ -1,11 +1,13 @@
 package src.main.java.model.CC;
 
+import src.main.java.model.general.Pion;
 import src.main.java.model.general.Tuile;
 
 public class TuileCC extends Tuile {
 
     protected Centre centre;
     protected String name;
+    protected Pion pion;
 
     public TuileCC(CoteCC haut, CoteCC droite, CoteCC bas, CoteCC gauche) {
         super(haut, droite, bas, gauche);
@@ -26,6 +28,13 @@ public class TuileCC extends Tuile {
     
     public String getName() {
     	return name;
+    }
+    
+    public void poserPion(Pion p) throws IllegalPlacementPionException {
+    	if(pion != null) {
+    		throw new IllegalPlacementPionException();
+    	}
+    	pion = p;
     }
 
     public static class Centre {

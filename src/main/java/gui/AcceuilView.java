@@ -65,7 +65,8 @@ public class AcceuilView extends JFrame{
 		jouer_dominoCarree.addActionListener((ActionEvent e) ->{
 			add.setVisible(false);
 			jouer_dominoCarree.setVisible(false);
-			
+			jouer_carcassonne.setVisible(false);
+			jeuDC.setStrategieForBot(jeuDC);
 			javax.swing.SwingUtilities.invokeLater(
 					new Runnable() {
 						public void run() {
@@ -82,7 +83,8 @@ public class AcceuilView extends JFrame{
 		jouer_carcassonne.addActionListener((ActionEvent e) ->{
 			add.setVisible(false);
 			jouer_carcassonne.setVisible(false);
-			
+			jouer_dominoCarree.setVisible(false);
+			jeuCC.setStrategieForBot(jeuCC);
 			javax.swing.SwingUtilities.invokeLater(
 					new Runnable() {
 						public void run() {
@@ -141,7 +143,7 @@ public class AcceuilView extends JFrame{
 					joueur = new Joueur(demanderNom.getText(),idJoueur);
 				}
 				else {
-					joueur = new Ordinateur(idJoueur,1,jeuCC);
+					joueur = new Ordinateur(idJoueur,1,jeuDC);
 				}
 				
 				jeuDC.addJoueur(joueur);

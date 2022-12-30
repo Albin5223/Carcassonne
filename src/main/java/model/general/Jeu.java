@@ -69,8 +69,16 @@ public abstract class Jeu {
 	public void addJoueur(Joueur j) {
 		joueurs.add(j);
 	}
+	
+	public void setStrategieForBot(Jeu jeu) {
+		for (int i = 0;i<joueurs.size();i++) {
+			if (joueurs.get(i) instanceof Ordinateur) {
+				((Ordinateur) joueurs.get(i)).setStrategie(jeu);
+			}
+		}
+	}
 
-  public void joueurSuivant() {
+	public void joueurSuivant() {
 		if(tour == -1) {
 			tour = 0;
 		}

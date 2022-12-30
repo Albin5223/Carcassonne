@@ -10,6 +10,10 @@ public class Ordinateur extends Joueur {
         choixStategie(strat);
         strategie.setJeu(jeu);
     }
+    
+    public void setStrategie(Jeu jeu) {
+    	strategie.setJeu(jeu);
+    }
 
     private void choixStategie(int choix){
         switch (choix) {
