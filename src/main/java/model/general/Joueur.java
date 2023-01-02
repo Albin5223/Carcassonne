@@ -1,6 +1,9 @@
-	package src.main.java.model.general;
+package src.main.java.model.general;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import src.main.java.model.general.Pion.Couleurs;
 
 public class Joueur {
 
@@ -10,7 +13,10 @@ public class Joueur {
     protected int score;
     protected boolean abandon;
     protected boolean ordinateur;
-    protected int partisans = 8;
+
+    protected ArrayList<Pion> pionsDispo = new ArrayList<Pion>();
+    protected ArrayList<Pion> pionsPlaces = new ArrayList<Pion>();
+    protected int nb_pions = 8;
 
     // Constructeur
     public Joueur(String nom, int id){
@@ -19,10 +25,8 @@ public class Joueur {
         score = 0;
         abandon = false;
         ordinateur = false;
+        setPions(id);
     }
-
-    public int getPartisans(){return partisans;}
-    public void decrPartisans(){partisans--;}
 
     // Constructeur avec un scanner
     @SuppressWarnings("resource")
@@ -60,5 +64,33 @@ public class Joueur {
     // Méthode pour abandonner
     public void abandonne(){
         abandon = true;
+    }
+
+    public void setPions(int id){
+        Couleurs c;
+        switch (id) {
+            default:
+                c = Couleurs.BLEU;
+                break;
+            case 1:
+                c = Couleurs.JAUNE;
+                break;
+            case 2:
+                c = Couleurs.VERT;
+                break;
+            case 3:
+                c = Couleurs.ROUGE;
+                break;
+        }
+
+        for (int i = 0; i < nb_pions; i++) {
+            pionsDispo.add(new Pion(this, null, c));
+        }
+    }
+
+    public Pion popPion(){
+        Pion p = pionsDispo.remove(0);
+        pionsPlaces.add(p);
+        return p;
     }
 }

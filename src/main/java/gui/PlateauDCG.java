@@ -18,9 +18,6 @@ public class PlateauDCG extends PlateauG {
     public void initJeu() {
 		conteneur = new JPanel();
 		conteneur.setLayout(null);
-		
-		information = new JPanel();
-		information.setLayout(null);
         
         info = new Information(800,0);
         conteneur.add(info);

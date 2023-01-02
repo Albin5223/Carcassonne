@@ -20,15 +20,12 @@ import src.main.java.model.general.Joueur;
 import src.main.java.model.general.Ordinateur;
 import src.main.java.model.general.Tuile;
 
-import java.awt.event.KeyEvent;
-
 public abstract class PlateauG extends JFrame {
 
     int dx;
 	int dy;
 	ArrayList<TuileG> tuilesPlateau = new ArrayList<TuileG>();
 	JPanel conteneur;
-	JPanel information;
 	Jeu jeu;
 	Information info;
 	
@@ -74,32 +71,13 @@ public abstract class PlateauG extends JFrame {
 			this.setBounds(x, y, 200, PlateauG.this.getHeight());
 			this.setBackground(Color.BLUE);
 			this.setLayout(new GridLayout(4,1,100,25));
-			this.addKeyListener(new Deplacements() {
-				public void keyTyped(KeyEvent e) {
-					System.out.println("touche");
-					switch (e.getKeyCode()) {
-						case KeyEvent.VK_KP_UP:
-							haut.doClick();
-							break;
-						case KeyEvent.VK_KP_DOWN:
-							bas.doClick();
-							break;
-						case KeyEvent.VK_KP_RIGHT:
-							droit.doClick();
-							break;
-						case KeyEvent.VK_KP_LEFT:
-							gauche.doClick();
-							break;
-					}
-				}
-			});
 			
 			jv1 = new JoueurView(jeu.getCurrentJoueur());
 			panneauButton = new JPanel();
 			panneauButton.setBackground(Color.BLUE);
 		
 			
-			
+
 			piocher = new JButton("Piocher");
 			panneauButton.add(piocher,BorderLayout.NORTH);
 			
@@ -239,28 +217,28 @@ public abstract class PlateauG extends JFrame {
 			abandonner.setFocusable(false);
 		}
 
-		private void glissePlateauHaut(){
+		protected void glissePlateauHaut(){
 			for (TuileG t : tuilesPlateau) {
 				t.setLocation(t.getX(), t.getY()-100);
 			}
 			dy += 1;
 		}
 
-		private void glissePlateauBas(){
+		protected void glissePlateauBas(){
 			for (TuileG t : tuilesPlateau) {
 				t.setLocation(t.getX(), t.getY()+100);
 			}
 			dy -= 1;
 		}
 
-		private void glissePlateauDroite(){
+		protected void glissePlateauDroite(){
 			for (TuileG t : tuilesPlateau) {
 				t.setLocation(t.getX()+100, t.getY());
 			}
 			dx -= 1;
 		}
 
-		private void glissePlateauGauche(){
+		protected void glissePlateauGauche(){
 			for (TuileG t : tuilesPlateau) {
 				t.setLocation(t.getX()-100, t.getY());
 			}
@@ -320,13 +298,17 @@ public abstract class PlateauG extends JFrame {
 				panneauButton.remove(message);
 			}
 			if (jeu.getCurrentJoueur().isBot()) {
+				currentTuile = null;
 				Tuile tuile = jeu.piocher(jeu.getCurrentJoueur());
 				Joueur j = jeu.getCurrentJoueur();
 				if (((Ordinateur) j).jouerTour(tuile)) {
-					PlateauG.this.placerTuile(tuile,tuile.getCoordonnee().getX()-dx,tuile.getCoordonnee().getY()-dy);
+					placerTuile(tuile,tuile.getCoordonnee().getX()-dx,tuile.getCoordonnee().getY()-dy);
 				}
 				suivant();
 			}
+
+			jv1.refresh();
+			currentTuile = null;
 		}
 			
 		public void placer() {
@@ -349,9 +331,6 @@ public abstract class PlateauG extends JFrame {
 					placer.setEnabled(false);
 					abandonner.setEnabled(false);
 					suivant();
-					jv1.refresh();
-					
-					currentTuile = null;
 					}
 				else {
 					message.setText("Erreur dans le placement");

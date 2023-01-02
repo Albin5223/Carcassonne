@@ -11,6 +11,7 @@ public abstract class Tuile {
     public Cote bas;      // Domino qui se situe en bas de la tuile
     public Cote gauche;   // Domino qui se situe à gauche de la tuile
     public Coordonnee coordonnee;
+    public int rotations = 0;
 
     // Constructeur : pour le moment, on force les tuiles à avoir des cotés avec 3 valeurs, on pourra potentiellement augmenter la taille après
     public Tuile(Cote haut, Cote droite, Cote bas, Cote gauche){
@@ -28,6 +29,7 @@ public abstract class Tuile {
     public abstract Cote getDroite();
     public abstract Cote getBas();
     public abstract Cote getGauche();
+    public int getRotations(){return rotations;}
 
 
     // Méthodes setteurs
@@ -44,6 +46,11 @@ public abstract class Tuile {
         this.droite = d;
         this.bas = b;
         this.gauche = g;
+
+        rotations++;
+        if(rotations>=4){
+            rotations = 0;
+        }
     }
 
     public static int comparer(Tuile t1,Tuile t2, char c1,char c2) {
