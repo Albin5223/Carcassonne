@@ -261,7 +261,16 @@ public abstract class PlateauG extends JFrame {
 		public void quitter() {
 			this.addMouseListener(new MouseListener() {
 				@Override
-				public void mouseClicked(MouseEvent e) {PlateauG.this.dispose();}
+				public void mouseClicked(MouseEvent e) {
+					PlateauG.this.dispose();
+					javax.swing.SwingUtilities.invokeLater(
+							new Runnable() {
+								public void run() {
+									AcceuilView a = new AcceuilView();
+								}
+							}
+						);
+				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {}

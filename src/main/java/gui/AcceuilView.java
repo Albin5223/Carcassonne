@@ -1,7 +1,9 @@
 package src.main.java.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
@@ -24,6 +26,7 @@ public class AcceuilView extends JFrame{
 	JButton add;
 	JButton jouer_dominoCarree;
 	JButton jouer_carcassonne;
+	JButton quitter;
 	
 	
 	JPanel container;
@@ -43,7 +46,19 @@ public class AcceuilView extends JFrame{
 		container.setLayout(new GridLayout(1,2));
 		
 		buttonView = new JPanel();
+		buttonView.setLayout(new GridLayout(4,1));
+		
+		
+		JPanel containerDroite = new JPanel();
+		
+		
+		JLabel consigne = new JLabel("Ajouter au moins un joueur pour jouer");
+		containerDroite.add(consigne);
+		
+		
 		panneauJoueur = new JPanel();
+		
+		
 		
 		add = new JButton("Ajouter un joueur");
 		
@@ -71,6 +86,8 @@ public class AcceuilView extends JFrame{
 					new Runnable() {
 						public void run() {
 							PlateauDCG p = new PlateauDCG(jeuDC);
+							CreationJoueurView.reset();
+							AcceuilView.this.dispose();
 							
 						}
 					}
@@ -89,7 +106,8 @@ public class AcceuilView extends JFrame{
 					new Runnable() {
 						public void run() {
 							PlateauCCG p = new PlateauCCG(jeuCC);
-							
+							CreationJoueurView.reset();
+							AcceuilView.this.dispose();	
 						}
 					}
 				);
@@ -97,13 +115,24 @@ public class AcceuilView extends JFrame{
 		buttonView.add(jouer_carcassonne);
 		
 		
+		quitter = new JButton("Quitter");
+		quitter.addActionListener((ActionEvent e) ->{
+			this.dispose();
+		});
+		buttonView.add(quitter);
+		
+		containerDroite.add(buttonView);
 		container.add(panneauJoueur);
-		container.add(buttonView);
+		container.add(containerDroite);
 		this.add(container);
 
 		this.setVisible(true);
 	}
 	
+	public void afficher(JPanel p) {
+		container.setVisible(false);
+		this.add(p);
+	}
 	
 	public class CreationJoueurView extends JPanel{
 		
@@ -164,7 +193,10 @@ public class AcceuilView extends JFrame{
 		public void ajouter() {
 			panneauJoueur.add(this);
 			panneauJoueur.repaint();
-			
+		}
+		
+		public static void reset() {
+			id=0;
 		}
 	}
 

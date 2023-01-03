@@ -1,6 +1,6 @@
-package src.main.java.gui;
+	package src.main.java.gui;
 
-public class Test {
+public class Launcher {
 
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(
