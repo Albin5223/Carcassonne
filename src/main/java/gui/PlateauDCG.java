@@ -12,6 +12,7 @@ public class PlateauDCG extends PlateauG {
 
     public PlateauDCG(JeuDCGraphique j) {
         super(j);
+        this.setTitle(("Domino Carree"));
     }
 
     @Override

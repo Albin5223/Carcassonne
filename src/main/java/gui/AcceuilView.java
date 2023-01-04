@@ -1,9 +1,9 @@
 package src.main.java.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
@@ -39,24 +39,40 @@ public class AcceuilView extends JFrame{
 		jeuCC = new JeuCCGraphique();
 		this.setSize(new Dimension(1000,800));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle(("Domino Carree"));
+		this.setTitle(("Acceuil du Jeu"));
+		
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		
 		container = new JPanel();
-		container.setLayout(new GridLayout(1,2));
+		container.setLayout(new GridLayout(3,1));
 		
 		buttonView = new JPanel();
 		buttonView.setLayout(new GridLayout(4,1));
 		
+		JPanel docu = new JPanel();
+		docu.setLayout(new FlowLayout(FlowLayout.CENTER,50,20));
+		container.add(docu);
+		
+		JLabel titre = new JLabel(" Jeu de Carcassonne ou Jeu de Domino Carree ");
+		titre.setFont(new Font("Arial",Font.ITALIC,40));
+		docu.add(titre);
+		
+		JLabel consigne = new JLabel(" Ajouter au moins un joueur humain pour jouer ");
+		consigne.setFont(new Font("Arial",Font.ITALIC,20));
+		docu.add(consigne);
+		
+		
+		
 		
 		JPanel containerDroite = new JPanel();
-		
-		
-		JLabel consigne = new JLabel("Ajouter au moins un joueur pour jouer");
-		containerDroite.add(consigne);
+		containerDroite.setLayout(new FlowLayout(FlowLayout.CENTER,50,20));
 		
 		
 		panneauJoueur = new JPanel();
+		panneauJoueur.setLayout(new FlowLayout(FlowLayout.CENTER,25,5));
+		
 		
 		
 		
@@ -122,8 +138,9 @@ public class AcceuilView extends JFrame{
 		buttonView.add(quitter);
 		
 		containerDroite.add(buttonView);
-		container.add(panneauJoueur);
+		
 		container.add(containerDroite);
+		container.add(panneauJoueur);
 		this.add(container);
 
 		this.setVisible(true);
@@ -170,6 +187,11 @@ public class AcceuilView extends JFrame{
 				Joueur joueur;
 				if (estRobot == null || !estRobot.isSelected()) {
 					joueur = new Joueur(demanderNom.getText(),idJoueur);
+					if (idJoueur==0) {
+						jouer_dominoCarree.setEnabled(true);
+						jouer_carcassonne.setEnabled(true);
+					}
+					
 				}
 				else {
 					joueur = new Ordinateur(idJoueur,1,jeuDC);
@@ -178,8 +200,7 @@ public class AcceuilView extends JFrame{
 				jeuDC.addJoueur(joueur);
 				jeuCC.addJoueur(joueur);
 				valider.setEnabled(false);
-				jouer_dominoCarree.setEnabled(true);
-				jouer_carcassonne.setEnabled(true);
+				
 				
 			});
 			

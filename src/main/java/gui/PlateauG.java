@@ -32,6 +32,8 @@ public abstract class PlateauG extends JFrame {
 	public PlateauG(Jeu j) {
 		this.setSize(new Dimension(1000,800));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		jeu = j;
 		jeu.initSac();
 		initJeu();
