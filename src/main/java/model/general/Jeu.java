@@ -70,10 +70,10 @@ public abstract class Jeu {
 		joueurs.add(j);
 	}
 	
-	public void setStrategieForBot(Jeu jeu) {
+	public void setStrategieForBot() {
 		for (int i = 0;i<joueurs.size();i++) {
 			if (joueurs.get(i) instanceof Ordinateur) {
-				((Ordinateur) joueurs.get(i)).setStrategie(jeu);
+				((Ordinateur) joueurs.get(i)).setStrategie(this);
 			}
 		}
 	}

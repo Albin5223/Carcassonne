@@ -12,7 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.Dimension;
 
 import src.main.java.gui.PlateauCCG.TuileCCG.PionHolder;
 import src.main.java.model.CC.TuileCC;

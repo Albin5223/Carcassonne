@@ -63,27 +63,22 @@ public abstract class Plateau {
 		Coordonnee haut = new Coordonnee(c.getX(), c.getY()-1);
 		Coordonnee droite = new Coordonnee(c.getX()+1, c.getY());
 		Coordonnee gauche = new Coordonnee(c.getX()-1, c.getY());
-		if(!isOccupee(bas)){
+		if(!isOccupee(bas) && !possibilites.contains(bas)){
 			possibilites.add(bas);
 		}
-		if(!isOccupee(haut)){
+		if(!isOccupee(haut) && !possibilites.contains(haut)){
 			possibilites.add(haut);
 		}
-		if(!isOccupee(droite)){
+		if(!isOccupee(droite) && !possibilites.contains(droite)){
 			possibilites.add(droite);
 		}
-		if(!isOccupee(gauche)){
+		if(!isOccupee(gauche) && !possibilites.contains(gauche)){
 			possibilites.add(gauche);
 		}
 	}
 
 	public boolean isOccupee(int x, int y){
-		Coordonnee c = new Coordonnee(x, y);
-		Tuile sub = plateau.get(c);
-		if(sub != null){
-			return true;
-		}
-		return false;
+		return isOccupee(new Coordonnee(x, y));
 	}
 
 	public boolean isOccupee(Coordonnee c){

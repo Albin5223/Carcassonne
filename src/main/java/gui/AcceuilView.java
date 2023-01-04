@@ -55,11 +55,11 @@ public class AcceuilView extends JFrame{
 		docu.setLayout(new FlowLayout(FlowLayout.CENTER,50,20));
 		container.add(docu);
 		
-		JLabel titre = new JLabel(" Jeu de Carcassonne ou Jeu de Domino Carree ");
+		JLabel titre = new JLabel(" Jeu de Carcassonne / Jeu des Dominos-Carrees ");
 		titre.setFont(new Font("Arial",Font.ITALIC,40));
 		docu.add(titre);
 		
-		JLabel consigne = new JLabel(" Ajouter au moins un joueur humain pour jouer ");
+		JLabel consigne = new JLabel("( Ajoutez au moins un joueur humain pour jouer )");
 		consigne.setFont(new Font("Arial",Font.ITALIC,20));
 		docu.add(consigne);
 		
@@ -91,13 +91,13 @@ public class AcceuilView extends JFrame{
 		
 		buttonView.add(add);
 		
-		jouer_dominoCarree = new JButton ("Jouer aux dominos carres");
+		jouer_dominoCarree = new JButton ("Jouer au jeu des Dominos-Carres");
 		jouer_dominoCarree.setEnabled(false);
 		jouer_dominoCarree.addActionListener((ActionEvent e) ->{
 			add.setVisible(false);
 			jouer_dominoCarree.setVisible(false);
 			jouer_carcassonne.setVisible(false);
-			jeuDC.setStrategieForBot(jeuDC);
+			jeuDC.setStrategieForBot();
 			javax.swing.SwingUtilities.invokeLater(
 					new Runnable() {
 						public void run() {
@@ -111,13 +111,13 @@ public class AcceuilView extends JFrame{
 		});
 		buttonView.add(jouer_dominoCarree);
 		
-		jouer_carcassonne = new JButton("Jouer au jeuDC de Carcassonne");
+		jouer_carcassonne = new JButton("Jouer au jeu de Carcassonne");
 		jouer_carcassonne.setEnabled(false);
 		jouer_carcassonne.addActionListener((ActionEvent e) ->{
 			add.setVisible(false);
 			jouer_carcassonne.setVisible(false);
 			jouer_dominoCarree.setVisible(false);
-			jeuCC.setStrategieForBot(jeuCC);
+			jeuCC.setStrategieForBot();
 			javax.swing.SwingUtilities.invokeLater(
 					new Runnable() {
 						public void run() {
