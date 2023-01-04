@@ -325,7 +325,7 @@ public abstract class PlateauG extends JFrame {
 			int y = (currentTuile.getY()-400)/100;
 			if (tuile != null) {
 				if (jeu.placer(tuile,x+dx, y+dy)){
-					conteneur.remove(currentTuile);
+					//conteneur.remove(currentTuile);
 					conteneur.repaint();
 					placerTuile(tuile,x,y);
 					conteneur.repaint();
@@ -347,7 +347,6 @@ public abstract class PlateauG extends JFrame {
 					panneauButton.add(message);
 					this.setVisible(false);
 					this.setVisible(true);
-		
 				}
 			}		
 		}

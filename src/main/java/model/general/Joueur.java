@@ -67,28 +67,29 @@ public class Joueur {
     }
 
     public void setPions(int id){
-        Couleurs c;
-        switch (id) {
-            default:
-                c = Couleurs.BLEU;
-                break;
-            case 1:
-                c = Couleurs.JAUNE;
-                break;
-            case 2:
-                c = Couleurs.VERT;
-                break;
-            case 3:
-                c = Couleurs.ROUGE;
-                break;
-        }
-
+        Couleurs c = getCouleursPion();
         for (int i = 0; i < nb_pions; i++) {
             pionsDispo.add(new Pion(this, null, c));
         }
     }
 
-    public Pion popPion(){
+    public Couleurs getCouleursPion(){
+        switch (id) {
+            default:
+                return Couleurs.BLEU;
+            case 1:
+                return Couleurs.JAUNE;
+            case 2:
+                return Couleurs.VERT;
+            case 3:
+                return Couleurs.ROUGE;
+        }
+    }
+
+    public boolean pionsIsEmpty(){return pionsDispo.isEmpty();}
+
+    public Pion popPion() throws PionsVideException {
+        if(pionsIsEmpty()){throw new PionsVideException();}
         Pion p = pionsDispo.remove(0);
         pionsPlaces.add(p);
         return p;
