@@ -23,6 +23,7 @@ public class PlateauCCG extends PlateauG {
 
     public PlateauCCG(JeuCCGraphique j) {
         super(j);
+        this.setTitle(("Jeu de Carcassonne"));
     }
 
 	public class InformationCC extends Information {
