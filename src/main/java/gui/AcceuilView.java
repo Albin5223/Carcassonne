@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -27,7 +29,8 @@ public class AcceuilView extends JFrame{
 	JButton jouer_dominoCarree;
 	JButton jouer_carcassonne;
 	JButton quitter;
-	
+
+	ArrayList<Joueur> listJoueurs;
 	
 	JPanel container;
 	
@@ -44,6 +47,7 @@ public class AcceuilView extends JFrame{
 		setResizable(false);
 		setLocationRelativeTo(null);
 		
+		listJoueurs = new ArrayList<Joueur>();
 		
 		container = new JPanel();
 		container.setLayout(new GridLayout(3,1));
@@ -94,6 +98,14 @@ public class AcceuilView extends JFrame{
 		jouer_dominoCarree = new JButton ("Jouer au jeu des Dominos-Carres");
 		jouer_dominoCarree.setEnabled(false);
 		jouer_dominoCarree.addActionListener((ActionEvent e) ->{
+
+			sortByID();
+
+			for (Joueur joueur : listJoueurs) {
+				jeuDC.addJoueur(joueur);
+			}
+
+
 			add.setVisible(false);
 			jouer_dominoCarree.setVisible(false);
 			jouer_carcassonne.setVisible(false);
@@ -114,6 +126,13 @@ public class AcceuilView extends JFrame{
 		jouer_carcassonne = new JButton("Jouer au jeu de Carcassonne");
 		jouer_carcassonne.setEnabled(false);
 		jouer_carcassonne.addActionListener((ActionEvent e) ->{
+
+			sortByID();
+
+			for (Joueur joueur : listJoueurs) {
+				jeuCC.addJoueur(joueur);
+			}
+
 			add.setVisible(false);
 			jouer_carcassonne.setVisible(false);
 			jouer_dominoCarree.setVisible(false);
@@ -149,6 +168,17 @@ public class AcceuilView extends JFrame{
 	public void afficher(JPanel p) {
 		container.setVisible(false);
 		this.add(p);
+	}
+
+	private void sortByID(){
+		listJoueurs.sort(new Comparator<Joueur>() {
+			@Override
+			public int compare(Joueur o1, Joueur o2) {
+				if(o1.getID() < o2.getID()){return -1;}
+				else if(o1.getID() == o2.getID()){return 0;}
+				return 1;
+			}
+		});
 	}
 	
 	public class CreationJoueurView extends JPanel{
@@ -196,12 +226,10 @@ public class AcceuilView extends JFrame{
 				else {
 					joueur = new Ordinateur(idJoueur,1,jeuDC);
 				}
-				
-				jeuDC.addJoueur(joueur);
-				jeuCC.addJoueur(joueur);
+				listJoueurs.add(joueur);
 				valider.setEnabled(false);
 				
-				
+	
 			});
 			
 			this.add(container);
