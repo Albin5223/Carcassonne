@@ -9,7 +9,6 @@ import src.main.java.model.DC.ActionImpossibleException;
 import src.main.java.model.general.CasePleineException;
 import src.main.java.model.general.Jeu;
 import src.main.java.model.general.Joueur;
-import src.main.java.model.general.Plateau;
 import src.main.java.model.general.TitulaireAbsentException;
 import src.main.java.model.general.Tuile;
 import src.main.java.model.CC.Paysage.*;

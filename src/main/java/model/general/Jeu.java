@@ -15,7 +15,7 @@ public abstract class Jeu {
     protected int niveauOrdinateur = 2;
     protected boolean partieFinie;
     protected ArrayList<Tuile> sac;    // Cet attribut représente les tuiles stockées dans le sac du jeu
-    protected int maxScore = 20;        // Représente le nombre de points à avoir pour finir la partie
+    protected int maxScore = 60;        // Représente le nombre de points à avoir pour finir la partie
     protected final int maxPlayers = 4;   // Représente le nombre de joueurs maximal que peut accueillir notre jeu (on peut l'augmenter si besoin)
     protected int tour;
 

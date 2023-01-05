@@ -11,6 +11,7 @@ import src.main.java.model.general.Joueur;
 
 public class JoueurView extends JPanel{
 	
+	private static final long serialVersionUID = 1L;
 	Joueur joueur;
 	JLabel nom,score;
 	
