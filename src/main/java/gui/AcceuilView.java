@@ -113,7 +113,7 @@ public class AcceuilView extends JFrame{
 			javax.swing.SwingUtilities.invokeLater(
 					new Runnable() {
 						public void run() {
-							PlateauDCG p = new PlateauDCG(jeuDC);
+							new PlateauDCG(jeuDC);
 							CreationJoueurView.reset();
 							AcceuilView.this.dispose();
 							
@@ -140,7 +140,7 @@ public class AcceuilView extends JFrame{
 			javax.swing.SwingUtilities.invokeLater(
 					new Runnable() {
 						public void run() {
-							PlateauCCG p = new PlateauCCG(jeuCC);
+							new PlateauCCG(jeuCC);
 							CreationJoueurView.reset();
 							AcceuilView.this.dispose();	
 						}

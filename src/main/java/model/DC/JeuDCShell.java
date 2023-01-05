@@ -330,9 +330,4 @@ public class JeuDCShell extends Jeu {
         	}
     	}
     }
-
-    public static void main(String[] args) {
-        JeuDCShell jeu = new JeuDCShell();
-        jeu.lancerPartie();
-    }
 }

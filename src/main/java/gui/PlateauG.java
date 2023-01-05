@@ -268,7 +268,7 @@ public abstract class PlateauG extends JFrame {
 					javax.swing.SwingUtilities.invokeLater(
 							new Runnable() {
 								public void run() {
-									AcceuilView a = new AcceuilView();
+									new AcceuilView();
 								}
 							}
 						);

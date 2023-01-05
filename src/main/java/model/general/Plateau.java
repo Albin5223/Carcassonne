@@ -82,9 +82,8 @@ public abstract class Plateau {
 	}
 
 	public boolean isOccupee(Coordonnee c){
-		Tuile sub;
 		try {
-			sub = this.getTuile(c.getX(),c.getY());
+			this.getTuile(c.getX(),c.getY());
 			return true;
 		} catch (CaseVideException e) {
 			return false;

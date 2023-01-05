@@ -51,6 +51,44 @@ public class PlateauCCG extends PlateauG {
 			panneauButton.add(suivant,BorderLayout.NORTH);
 		}
 
+		@Override
+		protected void glissePlateauHaut(){
+			for (TuileG t : tuilesPlateau) {
+				TuileCCG ccg = (TuileCCG) t;
+				ccg.setLocation(ccg.getX(), ccg.getY()-100);
+				for (JLabel[] p : ccg.pionG.pionHolder) {
+					for (JLabel j : p) {
+						j.setLocation(j.getX(), j.getY()-100);
+					}
+				}
+			}
+			dy += 1;
+		}
+
+		@Override
+		protected void glissePlateauBas(){
+			for (TuileG t : tuilesPlateau) {
+				t.setLocation(t.getX(), t.getY()+100);
+			}
+			dy -= 1;
+		}
+
+		@Override
+		protected void glissePlateauDroite(){
+			for (TuileG t : tuilesPlateau) {
+				t.setLocation(t.getX()+100, t.getY());
+			}
+			dx -= 1;
+		}
+
+		@Override
+		protected void glissePlateauGauche(){
+			for (TuileG t : tuilesPlateau) {
+				t.setLocation(t.getX()-100, t.getY());
+			}
+			dx += 1;
+		}
+
 		public void removeAllActionListeners(JButton b){
 			for (ActionListener a : b.getActionListeners()) {
 				b.removeActionListener(a);
@@ -119,11 +157,7 @@ public class PlateauCCG extends PlateauG {
 				}
 			});
 		}
-
-		/*
-		 * TODO :
-		 * Remplacer les touches de deplacements pour deplacer le pion et savoir sur quel paysage exactement le mettre
-		 */
+		
 		public void setPionKeys(){
 			removeAllActionListeners(haut);
 			removeAllActionListeners(gauche);
@@ -266,7 +300,7 @@ public class PlateauCCG extends PlateauG {
 		protected Pion pion;
 		protected PionHolder pionG = new PionHolder();
 
-		protected class PionHolder extends JPanel {
+		protected class PionHolder {
 
 			protected int x = 0;
 			protected int y = 0;
