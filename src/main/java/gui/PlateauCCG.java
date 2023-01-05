@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import src.main.java.gui.PlateauCCG.TuileCCG.PionHolder;
+import src.main.java.gui.PlateauCCG.TuileCCG.PionG;
 import src.main.java.model.CC.TuileCC;
 import src.main.java.model.general.Pion;
 import src.main.java.model.general.PionsVideException;
@@ -54,12 +54,11 @@ public class PlateauCCG extends PlateauG {
 		@Override
 		protected void glissePlateauHaut(){
 			for (TuileG t : tuilesPlateau) {
-				TuileCCG ccg = (TuileCCG) t;
-				ccg.setLocation(ccg.getX(), ccg.getY()-100);
-				for (JLabel[] p : ccg.pionG.pionHolder) {
-					for (JLabel j : p) {
-						j.setLocation(j.getX(), j.getY()-100);
-					}
+				t.setLocation(t.getX(), t.getY()-100);
+				PionG p = ((TuileCCG) t).pionG;
+				if(p != null){
+					p.setLocation(p.getX(), p.getY()-100);
+					p.refresh();
 				}
 			}
 			dy += 1;
@@ -69,6 +68,11 @@ public class PlateauCCG extends PlateauG {
 		protected void glissePlateauBas(){
 			for (TuileG t : tuilesPlateau) {
 				t.setLocation(t.getX(), t.getY()+100);
+				PionG p = ((TuileCCG) t).pionG;
+				if(p != null){
+					p.setLocation(p.getX(), p.getY()+100);
+					p.refresh();
+				}
 			}
 			dy -= 1;
 		}
@@ -77,6 +81,11 @@ public class PlateauCCG extends PlateauG {
 		protected void glissePlateauDroite(){
 			for (TuileG t : tuilesPlateau) {
 				t.setLocation(t.getX()+100, t.getY());
+				PionG p = ((TuileCCG) t).pionG;
+				if(p != null){
+					p.setLocation(p.getX()+100, p.getY());
+					p.refresh();
+				}
 			}
 			dx -= 1;
 		}
@@ -85,6 +94,11 @@ public class PlateauCCG extends PlateauG {
 		protected void glissePlateauGauche(){
 			for (TuileG t : tuilesPlateau) {
 				t.setLocation(t.getX()-100, t.getY());
+				PionG p = ((TuileCCG) t).pionG;
+				if(p != null){
+					p.setLocation(p.getX()-100, p.getY());
+					p.refresh();
+				}
 			}
 			dx += 1;
 		}
@@ -95,11 +109,15 @@ public class PlateauCCG extends PlateauG {
 			}
 		}
 
-		public void setDefaultKeys(){
+		public void removeAllActionListenersFleches(){
 			removeAllActionListeners(haut);
 			removeAllActionListeners(gauche);
 			removeAllActionListeners(bas);
 			removeAllActionListeners(droit);
+		}
+
+		public void setDefaultKeys(){
+			removeAllActionListenersFleches();
 
 			haut.addActionListener((ActionEvent e) ->{
 				if (currentTuile != null) {
@@ -157,51 +175,44 @@ public class PlateauCCG extends PlateauG {
 				}
 			});
 		}
-		
-		public void setPionKeys(){
-			removeAllActionListeners(haut);
-			removeAllActionListeners(gauche);
-			removeAllActionListeners(bas);
-			removeAllActionListeners(droit);
 
-			PionHolder p = ((TuileCCG) currentTuile).pionG;
+		public void setPionKeys(){
+			removeAllActionListenersFleches();
+
+			PionG p = ((TuileCCG) tuilesPlateau.get(tuilesPlateau.size()-1)).pionG;
 
 			haut.addActionListener((ActionEvent e) ->{
 				if(p.y > 0){
-					p.pionHolder[p.x][p.y].setVisible(false);
 					p.y--;
-					p.pionHolder[p.x][p.y].setVisible(true);
+					p.refresh();
 				}
 			});
 
 			gauche.addActionListener((ActionEvent e) ->{
 				if(p.x > 0){
-					p.pionHolder[p.x][p.y].setVisible(false);
 					p.x--;
-					p.pionHolder[p.x][p.y].setVisible(true);
+					p.refresh();
 				}
 			});
 
 			bas.addActionListener((ActionEvent e) ->{
-				if(p.y < 4){
-					p.pionHolder[p.x][p.y].setVisible(false);
+				if(p.y < 3){
 					p.y++;
-					p.pionHolder[p.x][p.y].setVisible(true);
+					p.refresh();
 				}
 			});
 
 			droit.addActionListener((ActionEvent e) ->{
-				if(p.x < 4){
-					p.pionHolder[p.x][p.y].setVisible(false);
+				if(p.x < 3){
 					p.x++;
-					p.pionHolder[p.x][p.y].setVisible(true);
+					p.refresh();
 				}
 			});
 		}
 		
 		public void placerPion(){
 			try {
-				((TuileCCG) currentTuile).placerPion();
+				((TuileCCG) tuilesPlateau.get(tuilesPlateau.size()-1)).placerPion();
 				setPionKeys();
 				placerPion.setEnabled(false);
 			} catch (PionsVideException e) {
@@ -222,6 +233,8 @@ public class PlateauCCG extends PlateauG {
 				tourner.setEnabled(false);
 				abandonner.setEnabled(false);
 	
+				removeAllActionListenersFleches();
+
 				if(!jeu.getCurrentJoueur().pionsIsEmpty()){		// Si il lui reste des pions, on lui laisse le choix
 					placerPion.setEnabled(true);
 					suivant.setEnabled(true);
@@ -238,6 +251,7 @@ public class PlateauCCG extends PlateauG {
 			int y = (currentTuile.getY()-400)/100;
 			if (tuile != null) {
 				if (jeu.placer(tuile,x+dx, y+dy)){
+					conteneur.remove(currentTuile);
 					placerTuile(tuile,x,y);
 					message.setText("Bien joue");
 					message.setForeground(Color.WHITE);
@@ -298,51 +312,53 @@ public class PlateauCCG extends PlateauG {
 
         protected BufferedImage imageR;
 		protected Pion pion;
-		protected PionHolder pionG = new PionHolder();
+		protected PionG pionG = new PionG();
 
-		protected class PionHolder {
+		protected class PionG extends JLabel {
 
 			protected int x = 0;
 			protected int y = 0;
-			protected JLabel[][] pionHolder = new JLabel[5][5];
 
-			public PionHolder(){
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 5; j++) {
-						JLabel image = new JLabel(new ImageIcon(stringPion()));
-						image.setVisible(false);
-						pionHolder[j][i] = image;
-						TuileCCG.this.add(image);
-					}
-				}
+			public PionG() {
+				super(new ImageIcon(stringPion()));
+				ImageIcon i = (ImageIcon) this.getIcon();
+				this.setSize(i.getIconWidth(), i.getIconHeight());
+				this.setVisible(false);
+				conteneur.add(this);
 			}
 
-			public String stringPion(){
-				switch (jeu.getCurrentJoueur().getCouleursPion()) {
-					default:
-						return "src\\main\\java\\gui\\ImagesCC\\bleu.png";
-					case ROUGE:
-						return "src\\main\\java\\gui\\ImagesCC\\rouge.png";
-					case VERT:
-						return "src\\main\\java\\gui\\ImagesCC\\vert.png";
-					case JAUNE:
-						return "src\\main\\java\\gui\\ImagesCC\\jaune.png";
-				}
+			public void refresh(){
+				this.setLocation(TuileCCG.this.getX() + x*getWidth(), TuileCCG.this.getY() + y*getHeight());
+				conteneur.repaint();
+				this.repaint();
 			}
 
-			public void placerPion() throws PionsVideException{
+			public void placerPion() throws PionsVideException {
 				pion = jeu.getCurrentJoueur().popPion();
-				pionHolder[x][y].setVisible(true);
+				refresh();
+				this.setVisible(true);
 			}
 		}
 
-		public void placerPion() throws PionsVideException{
+		public void placerPion() throws PionsVideException {
 			pionG.placerPion();
+		}
+
+		public String stringPion(){
+			switch (jeu.getCurrentJoueur().getCouleursPion()) {
+				default:
+					return "src\\main\\java\\gui\\ImagesCC\\bleu.png";
+				case ROUGE:
+					return "src\\main\\java\\gui\\ImagesCC\\rouge.png";
+				case VERT:
+					return "src\\main\\java\\gui\\ImagesCC\\vert.png";
+				case JAUNE:
+					return "src\\main\\java\\gui\\ImagesCC\\jaune.png";
+			}
 		}
 
 		public TuileCCG (TuileCC tuile,int x,int y) {
 			this.setBounds(x*100+400, y*100+400, 100, 100);
-			this.setLayout(new GridLayout(5,5));
 			try {
 				imageR = ImageIO.read(new File("src\\main\\java\\gui\\ImagesCC\\"+tuile.getName()));
 				
