@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -35,6 +36,7 @@ public abstract class PlateauG extends JFrame {
 	JPanel conteneur;
 	Jeu jeu;
 	Information info;
+	Image imageBackground;
 	
 	public PlateauG(Jeu j) {
 		this.setSize(new Dimension(1000,800));

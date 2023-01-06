@@ -3,7 +3,12 @@ package src.main.java.gui;
 import src.main.java.model.DC.TuileDC;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,6 +17,8 @@ import src.main.java.model.general.Tuile;
 
 public class PlateauDCG extends PlateauG {
 
+	
+	
     public PlateauDCG(JeuDCGraphique j) {
         super(j);
         this.setTitle(("Domino Carree"));
@@ -19,7 +26,19 @@ public class PlateauDCG extends PlateauG {
 
     @Override
     public void initJeu() {
-		conteneur = new JPanel();
+    	try {
+			imageBackground = ImageIO.read(new File("src\\main\\java\\gui\\ImageDesign\\fond_domino.jpg"));
+		} catch (IOException e1) {
+			System.out.println("Image non trouvé");
+			e1.printStackTrace();
+		}
+		conteneur = new JPanel() {
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				g.drawImage(imageBackground,0,0,null);
+				this.repaint();
+			}
+		};
 		conteneur.setLayout(null);
         
         info = new Information(800,0);

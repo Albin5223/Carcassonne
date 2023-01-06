@@ -278,7 +278,19 @@ public class PlateauCCG extends PlateauG {
 
 	@Override
 	public void initJeu(){
-		conteneur = new JPanel();
+		try {
+			imageBackground = ImageIO.read(new File("src\\main\\java\\gui\\ImageDesign\\bg_carcassonne.png"));
+		} catch (IOException e1) {
+			System.out.println("Image non trouvé");
+			e1.printStackTrace();
+		}
+		conteneur = new JPanel() {
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				g.drawImage(imageBackground,0,0,null);
+				this.repaint();
+			}
+		};
 		conteneur.setLayout(null);
 		
         info = new InformationCC(800,0);
