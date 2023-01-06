@@ -42,7 +42,7 @@ public class JeuCCGraphique extends Jeu {
         // 2 // Ville en haut, route à droite et en bas
         for (int i = 0; i < 3; i++) {
             CoteCC gauche = new CoteCC(new Pre());
-            CoteCC haut = new CoteCC(new Mur(), new Ville(false), new Mur());
+            CoteCC haut = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC droite = new CoteCC(new Pre(), new Route(), new Pre());
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
@@ -52,8 +52,8 @@ public class JeuCCGraphique extends Jeu {
 
         // 3 // Ville à gauche et en haut, route à droite et en bas, avec shield
         for (int i = 0; i < 2; i++) {
-            CoteCC gauche = new CoteCC(new Ville(true), new Ville(false), new Mur());
-            CoteCC haut = new CoteCC(new Ville(true), new Ville(false), new Mur());
+            CoteCC gauche = new CoteCC(new Ville(true), new Ville(false), new Ville(false));
+            CoteCC haut = new CoteCC(new Ville(true), new Ville(false), new Ville(false));
             CoteCC droite = new CoteCC(new Pre(), new Route(), new Pre());
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
@@ -63,9 +63,9 @@ public class JeuCCGraphique extends Jeu {
 
         // 4 // Ville à gauche, en haut et à droite, route en bas
         for (int i = 0; i < 1; i++) {
-            CoteCC gauche = new CoteCC(new Ville(false), new Ville(false), new Mur());
+            CoteCC gauche = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC haut = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
-            CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Mur());
+            CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
             tuile.setName("tuile4.png");
@@ -74,9 +74,9 @@ public class JeuCCGraphique extends Jeu {
 
         // 5 // Pareil qu'en haut, mais avec un shield et sans route en bas
         for (int i = 0; i < 1; i++) {
-            CoteCC gauche = new CoteCC(new Ville(true), new Ville(false), new Mur());
+            CoteCC gauche = new CoteCC(new Ville(true), new Ville(false), new Ville(false));
             CoteCC haut = new CoteCC(new Ville(true), new Ville(false), new Ville(false));
-            CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Mur());
+            CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
             tuile.setName("tuile5.png");
@@ -85,8 +85,8 @@ public class JeuCCGraphique extends Jeu {
 
         // 6 // Ville à gauche et en haut, route à droite et en bas, sans shield
         for (int i = 0; i < 3; i++) {
-            CoteCC gauche = new CoteCC(new Ville(false), new Ville(false), new Mur());
-            CoteCC haut = new CoteCC(new Ville(false), new Ville(false),new Mur());
+            CoteCC gauche = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
+            CoteCC haut = new CoteCC(new Ville(false), new Ville(false),new Ville(false));
             CoteCC droite = new CoteCC(new Pre(), new Route(), new Pre());
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
@@ -97,7 +97,7 @@ public class JeuCCGraphique extends Jeu {
         // 7 // Carrefour à 3 routes, ville en haut
         for (int i = 0; i < 3; i++) {
             CoteCC gauche = new CoteCC(new Pre(), new Route(), new Pre());
-            CoteCC haut = new CoteCC(new Mur(), new Ville(false), new Mur());
+            CoteCC haut = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC droite = new CoteCC(new Pre(), new Route(), new Pre());
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
@@ -132,7 +132,7 @@ public class JeuCCGraphique extends Jeu {
         // 10 // Ville en haut, tout le reste pré
         for (int i = 0; i < 5; i++) {
             CoteCC gauche = new CoteCC(new Pre());
-            CoteCC haut = new CoteCC(new Mur(),new Ville(false),new Mur());
+            CoteCC haut = new CoteCC(new Ville(false),new Ville(false),new Ville(false));
             CoteCC droite = new CoteCC(new Pre());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
@@ -143,8 +143,8 @@ public class JeuCCGraphique extends Jeu {
         // 11 // Ville en haut et à droite, tout le reste pré
         for (int i = 0; i < 2; i++) {
             CoteCC gauche = new CoteCC(new Pre());
-            CoteCC haut = new CoteCC(new Mur(),new Ville(false),new Mur());
-            CoteCC droite = new CoteCC(new Mur(),new Ville(false),new Mur());
+            CoteCC haut = new CoteCC(new Ville(false),new Ville(false),new Ville(false));
+            CoteCC droite = new CoteCC(new Ville(false),new Ville(false),new Ville(false));
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
             tuile.setName("tuile11.png");
@@ -153,9 +153,9 @@ public class JeuCCGraphique extends Jeu {
 
         // 12 // Ville à gauche, en haut et à droite
         for (int i = 0; i < 3; i++) {
-            CoteCC gauche = new CoteCC(new Ville(false), new Ville(false), new Mur());
+            CoteCC gauche = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC haut = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
-            CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Mur());
+            CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
             tuile.setName("tuile12.png");
@@ -188,8 +188,8 @@ public class JeuCCGraphique extends Jeu {
 
         // 15 // Ville à gauche et en haut
         for (int i = 0; i < 3; i++) {
-            CoteCC gauche = new CoteCC(new Ville(false), new Ville(false), new Mur());
-            CoteCC haut = new CoteCC(new Ville(false), new Ville(false), new Mur());
+            CoteCC gauche = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
+            CoteCC haut = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC droite = new CoteCC(new Pre());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
@@ -199,9 +199,9 @@ public class JeuCCGraphique extends Jeu {
 
         // 16 // Ville en tunnel avec shield
         for (int i = 0; i < 2; i++) {
-            CoteCC gauche = new CoteCC(new Mur(), new Ville(false), new Mur());
+            CoteCC gauche = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC haut = new CoteCC(new Pre());
-            CoteCC droite = new CoteCC(new Mur(), new Ville(true), new Mur());
+            CoteCC droite = new CoteCC(new Ville(false), new Ville(true), new Ville(false));
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
             tuile.setName("tuile16.png");
@@ -211,7 +211,7 @@ public class JeuCCGraphique extends Jeu {
         // 17 // Route horizontal avec ville en haut
         for (int i = 0; i < 4; i++) {
             CoteCC gauche = new CoteCC(new Pre(), new Route(), new Pre());
-            CoteCC haut = new CoteCC(new Mur(), new Ville(false), new Mur());
+            CoteCC haut = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC droite = new CoteCC(new Pre(), new Route(), new Pre());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
@@ -222,7 +222,7 @@ public class JeuCCGraphique extends Jeu {
         // 18 // Route à gauche et en bas, avec ville en haut
         for (int i = 0; i < 3; i++) {
             CoteCC gauche = new CoteCC(new Pre(), new Route(), new Pre());
-            CoteCC haut = new CoteCC(new Mur(), new Ville(false), new Mur());
+            CoteCC haut = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC droite = new CoteCC(new Pre());
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
@@ -232,9 +232,9 @@ public class JeuCCGraphique extends Jeu {
 
         // 19 // Ville en tunnel sans shield
         for (int i = 0; i < 1; i++) {
-            CoteCC gauche = new CoteCC(new Mur(), new Ville(false), new Mur());
+            CoteCC gauche = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC haut = new CoteCC(new Pre());
-            CoteCC droite = new CoteCC(new Mur(), new Ville(false), new Mur());
+            CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
             tuile.setName("tuile19.png");
@@ -243,9 +243,9 @@ public class JeuCCGraphique extends Jeu {
 
         // 20 // Ville à gauche, en haut et à droite, route en bas
         for (int i = 0; i < 2; i++) {
-            CoteCC gauche = new CoteCC(new Ville(true), new Ville(false), new Mur());
+            CoteCC gauche = new CoteCC(new Ville(true), new Ville(false), new Ville(false));
             CoteCC haut = new CoteCC(new Ville(true), new Ville(false), new Ville(false));
-            CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Mur());
+            CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC bas = new CoteCC(new Pre(), new Route(), new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
             tuile.setName("tuile20.png");
@@ -277,8 +277,8 @@ public class JeuCCGraphique extends Jeu {
 
         // 23 // Ville à gauche et en haut, avec shield
         for (int i = 0; i < 2; i++) {
-            CoteCC gauche = new CoteCC(new Ville(true), new Ville(false), new Mur());
-            CoteCC haut = new CoteCC(new Ville(true), new Ville(false), new Mur());
+            CoteCC gauche = new CoteCC(new Ville(true), new Ville(false), new Ville(false));
+            CoteCC haut = new CoteCC(new Ville(true), new Ville(false), new Ville(false));
             CoteCC droite = new CoteCC(new Pre());
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
@@ -288,9 +288,9 @@ public class JeuCCGraphique extends Jeu {
 
         // 24 // Ville à gauche et à droite
         for (int i = 0; i < 3; i++) {
-            CoteCC gauche = new CoteCC(new Mur(), new Ville(false), new Mur());
+            CoteCC gauche = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC haut = new CoteCC(new Pre());
-            CoteCC droite = new CoteCC(new Mur(), new Ville(false), new Mur());
+            CoteCC droite = new CoteCC(new Ville(false), new Ville(false), new Ville(false));
             CoteCC bas = new CoteCC(new Pre());
             TuileCC tuile = new TuileCC(haut, droite, bas, gauche);
             tuile.setName("tuile24.png");

@@ -35,13 +35,6 @@ public abstract class Paysage {
         }
     }
 
-    public static class Mur extends Paysage {
-        public Mur(){
-            ID = 3;
-            // TODO : Voir comment gérer les points
-        }
-    }
-
     public static class Ville extends Paysage {
 
         protected boolean bouclier;

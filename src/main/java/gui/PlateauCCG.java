@@ -44,7 +44,6 @@ public class PlateauCCG extends PlateauG {
 				suivant();
 				placerPion.setEnabled(false);
 				suivant.setEnabled(false);
-				setDefaultKeys();
 			});
 			panneauButton.add(placerPion,BorderLayout.NORTH);
 			panneauButton.add(suivant,BorderLayout.NORTH);
@@ -217,6 +216,12 @@ public class PlateauCCG extends PlateauG {
 			} catch (PionsVideException e) {
 				System.out.println("bug au niveau des pions");
 			}
+		}
+
+		@Override
+		public void suivant(){
+			super.suivant();
+			setDefaultKeys();
 		}
 
 		// On regarde quoi faire après que la tuile soit posée
