@@ -1,14 +1,20 @@
 package src.main.java.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -25,10 +31,10 @@ public class AcceuilView extends JFrame{
 	int nb_Joueur;
 	JeuDCGraphique jeuDC;
 	JeuCCGraphique jeuCC;
-	JButton add;
-	JButton jouer_dominoCarree;
-	JButton jouer_carcassonne;
-	JButton quitter;
+	ButtonGraphic add;
+	ButtonGraphic jouer_dominoCarree;
+	ButtonGraphic jouer_carcassonne;
+	ButtonGraphic quitter;
 
 	ArrayList<Joueur> listJoueurs;
 	
@@ -36,6 +42,8 @@ public class AcceuilView extends JFrame{
 	
 	JPanel buttonView;
 	JPanel panneauJoueur;
+	
+	Image imageBackground;
 
 	public AcceuilView() {
 		jeuDC = new JeuDCGraphique();
@@ -44,19 +52,39 @@ public class AcceuilView extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(("Acceuil du Jeu"));
 		
+		try {
+			imageBackground = ImageIO.read(new File("src\\main\\java\\gui\\ImageDesign\\paysage.jpg"));
+		} catch (IOException e1) {
+			System.out.println("Image non trouvé");
+			e1.printStackTrace();
+		}
+		
+		
 		setResizable(false);
 		setLocationRelativeTo(null);
 		
 		listJoueurs = new ArrayList<Joueur>();
 		
-		container = new JPanel();
+		container = new JPanel(){
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				g.drawImage(imageBackground,0,0,null);
+				this.repaint();
+			}
+		};
+
 		container.setLayout(new GridLayout(3,1));
 		
+		
 		buttonView = new JPanel();
+		//buttonView.setLayout(new FlowLayout(FlowLayout.CENTER,500,15));
 		buttonView.setLayout(new GridLayout(4,1));
+		buttonView.setOpaque(false);
+		
 		
 		JPanel docu = new JPanel();
 		docu.setLayout(new FlowLayout(FlowLayout.CENTER,50,20));
+		docu.setOpaque(false);
 		container.add(docu);
 		
 		JLabel titre = new JLabel(" Jeu de Carcassonne / Jeu des Dominos-Carrees ");
@@ -72,15 +100,14 @@ public class AcceuilView extends JFrame{
 		
 		JPanel containerDroite = new JPanel();
 		containerDroite.setLayout(new FlowLayout(FlowLayout.CENTER,50,20));
+		containerDroite.setOpaque(false);
 		
 		
 		panneauJoueur = new JPanel();
-		panneauJoueur.setLayout(new FlowLayout(FlowLayout.CENTER,25,5));
+		panneauJoueur.setLayout(new FlowLayout(FlowLayout.CENTER,25,15));
+		panneauJoueur.setOpaque(false);
 		
-		
-		
-		
-		add = new JButton("Ajouter un joueur");
+		add = new ButtonGraphic("Ajouter un joueur");
 		
 		add.addActionListener((ActionEvent e) ->{
 			CreationJoueurView cjv = new CreationJoueurView(x_pos);
@@ -95,7 +122,7 @@ public class AcceuilView extends JFrame{
 		
 		buttonView.add(add);
 		
-		jouer_dominoCarree = new JButton ("Jouer au jeu des Dominos-Carres");
+		jouer_dominoCarree = new ButtonGraphic ("Dominos-Carres");
 		jouer_dominoCarree.setEnabled(false);
 		jouer_dominoCarree.addActionListener((ActionEvent e) ->{
 
@@ -123,7 +150,7 @@ public class AcceuilView extends JFrame{
 		});
 		buttonView.add(jouer_dominoCarree);
 		
-		jouer_carcassonne = new JButton("Jouer au jeu de Carcassonne");
+		jouer_carcassonne = new ButtonGraphic("Carcassonne");
 		jouer_carcassonne.setEnabled(false);
 		jouer_carcassonne.addActionListener((ActionEvent e) ->{
 
@@ -150,7 +177,7 @@ public class AcceuilView extends JFrame{
 		buttonView.add(jouer_carcassonne);
 		
 		
-		quitter = new JButton("Quitter");
+		quitter = new ButtonGraphic("Quitter");
 		quitter.addActionListener((ActionEvent e) ->{
 			this.dispose();
 		});
@@ -180,6 +207,8 @@ public class AcceuilView extends JFrame{
 			}
 		});
 	}
+	
+	
 	
 	public class CreationJoueurView extends JPanel{
 		
