@@ -30,8 +30,6 @@ public class TuileCC extends Tuile {
 
     public static class Centre {
 
-        // TODO : A voir leurs utilités après. Ils vont surement servir pour les points ou autre
-
         public static class Abbaye extends Centre {}
 
         public static class Carrefour extends Centre {}

@@ -24,21 +24,12 @@ public abstract class Paysage {
     public static class Route extends Paysage {
         public Route(){
             ID = 1;
-            // TODO : Voir comment gérer les points
         }
     }
 
     public static class Pre extends Paysage {
         public Pre(){
             ID = 2;
-            // TODO : Voir comment gérer les points
-        }
-    }
-
-    public static class Mur extends Paysage {
-        public Mur(){
-            ID = 3;
-            // TODO : Voir comment gérer les points
         }
     }
 
@@ -49,7 +40,6 @@ public abstract class Paysage {
         public Ville(boolean bouclier){
             ID = 4;
             this.bouclier = bouclier;
-            // TODO : Voir comment gérer les points
         }
     }
     
