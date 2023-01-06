@@ -279,7 +279,7 @@ public class PlateauCCG extends PlateauG {
 	@Override
 	public void initJeu(){
 		try {
-			imageBackground = ImageIO.read(new File("src\\main\\java\\gui\\ImageDesign\\bg_carcassonne.png"));
+			imageBackground = ImageIO.read(new File("src\\main\\java\\gui\\ImageDesign\\fond_plateauCC.png"));
 		} catch (IOException e1) {
 			System.out.println("Image non trouvé");
 			e1.printStackTrace();
