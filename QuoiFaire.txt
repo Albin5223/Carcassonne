@@ -1,2 +1,0 @@
-Class PlateauDominosCarres :
-- ligne 150 : Il faut pouvoir poser les tuiles selon certaines conditions (à définir)
