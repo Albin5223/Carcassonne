@@ -6,10 +6,11 @@ Ce projet consiste à réaliser des prototypes de deux jeux “conceptuellement 
 
 Voici la commande : 
 
-'''
 
-javac src/java/main/launcher/Launcher.java
-java src/java/main/launcher/Launcher.class
+'''
+Dans le dossier de rendu
+
+# java -jar Jeu.jar
 
 ```
 src\main\java\gui\Launcher.java
