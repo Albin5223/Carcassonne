@@ -8,6 +8,14 @@ import java.util.Scanner;
 
 public class JeuDCShell extends Jeu {
 
+    /*
+     * lp : sert à définir le nombre de possibilité que peut avoir chaque case des côtés des tuiles.
+     * Exemple : si lp = 3, les numéros des chiffres sur les tuiles iront de 1 jusqu'à 3
+     * 
+     * MINIMUM lp = 2
+     */
+    protected int lp = 3;
+
     // Attributs :
     public JeuDCShell(){
         joueurs = new ArrayList<Joueur>();
@@ -312,9 +320,11 @@ public class JeuDCShell extends Jeu {
     public void initSac() {
     	ArrayList<CoteDC> pieces = new ArrayList<CoteDC>();
     	
-    	for (int i = 1;i<4;i++) {
-    		for (int j = 1;j<4;j++) {
-    			for (int k = 1;k<4;k++) {
+        if(lp <= 0){lp = 2;}    // Au cas où
+
+    	for (int i = 1;i<=lp;i++) {
+    		for (int j = 1;j<=lp;j++) {
+    			for (int k = 1;k<=lp;k++) {
     				pieces.add(new CoteDC(i,j,k));
     	    	}
         	}

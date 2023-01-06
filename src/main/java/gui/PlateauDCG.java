@@ -59,7 +59,6 @@ public class PlateauDCG extends PlateauG {
 			this.setBackground(Color.YELLOW);
 			this.setLayout(new BorderLayout(5,5));
 			coque.setSize(100,100);
-			this.add(coque);
 			this.tuile = tuile;
 			this.x = x;
 			this.y = y;
@@ -68,6 +67,8 @@ public class PlateauDCG extends PlateauG {
 
         @Override
         public void init() {
+			this.add(coque);
+
 			CoteDC gauche = (CoteDC) tuile.getGauche();
 			CoteDC droite = (CoteDC) tuile.getDroite();
 			CoteDC bas = (CoteDC) tuile.getBas();
