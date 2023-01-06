@@ -77,7 +77,6 @@ public class AcceuilView extends JFrame{
 		
 		
 		buttonView = new JPanel();
-		//buttonView.setLayout(new FlowLayout(FlowLayout.CENTER,500,15));
 		buttonView.setLayout(new GridLayout(4,1));
 		buttonView.setOpaque(false);
 		
@@ -87,7 +86,7 @@ public class AcceuilView extends JFrame{
 		docu.setOpaque(false);
 		container.add(docu);
 		
-		JLabel titre = new JLabel(" Jeu de Carcassonne / Jeu des Dominos-Carrees ");
+		JLabel titre = new JLabel(" Jeu de Carcassonne / Jeu des Dominos-Carres ");
 		titre.setFont(new Font("Arial",Font.ITALIC,40));
 		docu.add(titre);
 		
