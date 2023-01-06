@@ -3,6 +3,8 @@ package src.main.java.gui;
 import src.main.java.model.DC.TuileDC;
 import java.awt.BorderLayout;
 import java.awt.Color;
+
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import src.main.java.model.DC.CoteDC;
@@ -50,10 +52,13 @@ public class PlateauDCG extends PlateauG {
 
     public class TuileDCG extends TuileG {
 
+		JLabel coque = new JLabel(new ImageIcon("src\\main\\java\\gui\\Resource\\tuileDC.png"));
+
         public TuileDCG(TuileDC tuile,int x,int y) {
 			this.setBounds(x*100+400, y*100+400, 100, 100);
 			this.setBackground(Color.YELLOW);
 			this.setLayout(new BorderLayout(5,5));
+			coque.setSize(100,100);
 			this.tuile = tuile;
 			this.x = x;
 			this.y = y;
@@ -62,6 +67,8 @@ public class PlateauDCG extends PlateauG {
 
         @Override
         public void init() {
+			this.add(coque);
+
 			CoteDC gauche = (CoteDC) tuile.getGauche();
 			CoteDC droite = (CoteDC) tuile.getDroite();
 			CoteDC bas = (CoteDC) tuile.getBas();

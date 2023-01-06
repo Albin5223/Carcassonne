@@ -2,6 +2,10 @@ package src.main.java.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +13,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -68,17 +75,27 @@ public abstract class PlateauG extends JFrame {
 		JButton droit;
 		JButton haut;
 		JButton bas;
+
+		static BufferedImage bg;
+
+		@Override
+		protected void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.drawImage(bg, 0, 0, null);
+		}
+
 		
 		public Information(int x,int y) {
 			this.setBounds(x, y, 200, PlateauG.this.getHeight());
-			this.setBackground(Color.BLUE);
 			this.setLayout(new GridLayout(4,1,100,25));
+
+			try {
+				bg = ImageIO.read(new File("src\\main\\java\\gui\\Resource\\fond_information.jpg"));
+			} catch (IOException e1) {}
 			
 			jv1 = new JoueurView(jeu.getCurrentJoueur());
 			panneauButton = new JPanel();
-			panneauButton.setBackground(Color.BLUE);
-		
-			
+			panneauButton.setOpaque(false);
 
 			piocher = new JButton("Piocher");
 			panneauButton.add(piocher,BorderLayout.NORTH);
@@ -128,14 +145,16 @@ public abstract class PlateauG extends JFrame {
 			this.add(panneauButton);
 			
 			infoCoord = new JPanel();
-			infoCoord.setBackground(Color.BLUE);
-			infoCoord.setLayout(new GridLayout(2,6));
+			infoCoord.setOpaque(false);
+			infoCoord.setLayout(new GridLayout(3,3));
 			
 			JPanel vide1 = new JPanel();
-			vide1.setBackground(this.getBackground());
+			vide1.setOpaque(false);
 			infoCoord.add(vide1); 
 			
-			haut = new JButton("^");
+			haut = new JButton(new ImageIcon("src\\main\\java\\gui\\Resource\\up.png"));
+			haut.setBorder(BorderFactory.createEmptyBorder());
+			haut.setContentAreaFilled(false);
 			infoCoord.add(haut);
 			haut.addActionListener((ActionEvent e) ->{
 				if (currentTuile != null) {
@@ -152,10 +171,12 @@ public abstract class PlateauG extends JFrame {
 			});
 
 			JPanel vide2 = new JPanel();
-			vide2.setBackground(this.getBackground());
+			vide2.setOpaque(false);
 			infoCoord.add(vide2);
 
-			gauche = new JButton("<");
+			gauche = new JButton(new ImageIcon("src\\main\\java\\gui\\Resource\\left.png"));
+			gauche.setBorder(BorderFactory.createEmptyBorder());
+			gauche.setContentAreaFilled(false);
 			infoCoord.add(gauche);
 			gauche.addActionListener((ActionEvent e) ->{
 				if (currentTuile != null) {
@@ -170,24 +191,14 @@ public abstract class PlateauG extends JFrame {
 					glissePlateauDroite();
 				}
 			});
-			
-			bas = new JButton("v");
-			infoCoord.add(bas);
-			bas.addActionListener((ActionEvent e) ->{
-				if (currentTuile != null) {
-					if(currentTuile.getY()+currentTuile.getHeight() >= this.getHeight()){
-						glissePlateauHaut();
-					}
-					else{
-						currentTuile.setLocation(currentTuile.getX(),currentTuile.getY()+100);
-					}
-				}
-				else{
-					glissePlateauHaut();
-				}
-			});
-			
-			droit = new JButton(">");
+
+			JPanel vide3 = new JPanel();
+			vide3.setOpaque(false);
+			infoCoord.add(vide3);
+
+			droit = new JButton(new ImageIcon("src\\main\\java\\gui\\Resource\\right.png"));
+			droit.setBorder(BorderFactory.createEmptyBorder());
+			droit.setContentAreaFilled(false);
 			infoCoord.add(droit);
 			droit.addActionListener((ActionEvent e) ->{
 				if (currentTuile != null) {
@@ -202,6 +213,32 @@ public abstract class PlateauG extends JFrame {
 					glissePlateauGauche();
 				}
 			});
+
+			JPanel vide4 = new JPanel();
+			vide4.setOpaque(false);
+			infoCoord.add(vide4);
+			
+			bas = new JButton(new ImageIcon("src\\main\\java\\gui\\Resource\\down.png"));
+			bas.setBorder(BorderFactory.createEmptyBorder());
+			bas.setContentAreaFilled(false);
+			infoCoord.add(bas);
+			bas.addActionListener((ActionEvent e) ->{
+				if (currentTuile != null) {
+					if(currentTuile.getY()+currentTuile.getHeight() >= this.getHeight()){
+						glissePlateauHaut();
+					}
+					else{
+						currentTuile.setLocation(currentTuile.getX(),currentTuile.getY()+100);
+					}
+				}
+				else{
+					glissePlateauHaut();
+				}
+			});
+
+			JPanel vide5 = new JPanel();
+			vide5.setOpaque(false);
+			infoCoord.add(vide5);
 			
 			this.add(infoCoord);
 			

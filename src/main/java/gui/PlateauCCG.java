@@ -44,7 +44,6 @@ public class PlateauCCG extends PlateauG {
 				suivant();
 				placerPion.setEnabled(false);
 				suivant.setEnabled(false);
-				setDefaultKeys();
 			});
 			panneauButton.add(placerPion,BorderLayout.NORTH);
 			panneauButton.add(suivant,BorderLayout.NORTH);
@@ -219,6 +218,12 @@ public class PlateauCCG extends PlateauG {
 			}
 		}
 
+		@Override
+		public void suivant(){
+			super.suivant();
+			setDefaultKeys();
+		}
+
 		// On regarde quoi faire après que la tuile soit posée
 		public void tuilePlacee(){
 			if(jeu.getCurrentJoueur().isBot()){		// Si c'est un bot, on passe directement au joueur suivant
@@ -320,8 +325,7 @@ public class PlateauCCG extends PlateauG {
 
 			public PionG() {
 				super(new ImageIcon(stringPion()));
-				ImageIcon i = (ImageIcon) this.getIcon();
-				this.setSize(i.getIconWidth(), i.getIconHeight());
+				this.setSize(25, 25);
 				this.setVisible(false);
 				conteneur.add(this);
 			}
