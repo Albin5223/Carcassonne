@@ -9,6 +9,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -129,13 +132,15 @@ public abstract class PlateauG extends JFrame {
 			
 			infoCoord = new JPanel();
 			infoCoord.setBackground(Color.BLUE);
-			infoCoord.setLayout(new GridLayout(2,6));
+			infoCoord.setLayout(new GridLayout(3,3));
 			
 			JPanel vide1 = new JPanel();
 			vide1.setBackground(this.getBackground());
 			infoCoord.add(vide1); 
 			
-			haut = new JButton("^");
+			haut = new JButton(new ImageIcon("src\\main\\java\\gui\\Resource\\up.png"));
+			haut.setBorder(BorderFactory.createEmptyBorder());
+			haut.setContentAreaFilled(false);
 			infoCoord.add(haut);
 			haut.addActionListener((ActionEvent e) ->{
 				if (currentTuile != null) {
@@ -155,7 +160,9 @@ public abstract class PlateauG extends JFrame {
 			vide2.setBackground(this.getBackground());
 			infoCoord.add(vide2);
 
-			gauche = new JButton("<");
+			gauche = new JButton(new ImageIcon("src\\main\\java\\gui\\Resource\\left.png"));
+			gauche.setBorder(BorderFactory.createEmptyBorder());
+			gauche.setContentAreaFilled(false);
 			infoCoord.add(gauche);
 			gauche.addActionListener((ActionEvent e) ->{
 				if (currentTuile != null) {
@@ -170,24 +177,14 @@ public abstract class PlateauG extends JFrame {
 					glissePlateauDroite();
 				}
 			});
-			
-			bas = new JButton("v");
-			infoCoord.add(bas);
-			bas.addActionListener((ActionEvent e) ->{
-				if (currentTuile != null) {
-					if(currentTuile.getY()+currentTuile.getHeight() >= this.getHeight()){
-						glissePlateauHaut();
-					}
-					else{
-						currentTuile.setLocation(currentTuile.getX(),currentTuile.getY()+100);
-					}
-				}
-				else{
-					glissePlateauHaut();
-				}
-			});
-			
-			droit = new JButton(">");
+
+			JPanel vide3 = new JPanel();
+			vide3.setBackground(this.getBackground());
+			infoCoord.add(vide3);
+
+			droit = new JButton(new ImageIcon("src\\main\\java\\gui\\Resource\\right.png"));
+			droit.setBorder(BorderFactory.createEmptyBorder());
+			droit.setContentAreaFilled(false);
 			infoCoord.add(droit);
 			droit.addActionListener((ActionEvent e) ->{
 				if (currentTuile != null) {
@@ -202,6 +199,32 @@ public abstract class PlateauG extends JFrame {
 					glissePlateauGauche();
 				}
 			});
+
+			JPanel vide4 = new JPanel();
+			vide4.setBackground(this.getBackground());
+			infoCoord.add(vide4);
+			
+			bas = new JButton(new ImageIcon("src\\main\\java\\gui\\Resource\\down.png"));
+			bas.setBorder(BorderFactory.createEmptyBorder());
+			bas.setContentAreaFilled(false);
+			infoCoord.add(bas);
+			bas.addActionListener((ActionEvent e) ->{
+				if (currentTuile != null) {
+					if(currentTuile.getY()+currentTuile.getHeight() >= this.getHeight()){
+						glissePlateauHaut();
+					}
+					else{
+						currentTuile.setLocation(currentTuile.getX(),currentTuile.getY()+100);
+					}
+				}
+				else{
+					glissePlateauHaut();
+				}
+			});
+
+			JPanel vide5 = new JPanel();
+			vide5.setBackground(this.getBackground());
+			infoCoord.add(vide5);
 			
 			this.add(infoCoord);
 			
