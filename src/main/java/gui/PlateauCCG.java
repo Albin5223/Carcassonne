@@ -321,7 +321,7 @@ public class PlateauCCG extends PlateauG {
 			public PionG() {
 				super(new ImageIcon(stringPion()));
 				ImageIcon i = (ImageIcon) this.getIcon();
-				this.setSize(i.getIconWidth(), i.getIconHeight());
+				this.setSize(25, 25);
 				this.setVisible(false);
 				conteneur.add(this);
 			}
