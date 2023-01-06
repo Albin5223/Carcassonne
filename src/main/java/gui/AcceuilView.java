@@ -217,6 +217,9 @@ public class AcceuilView extends JFrame{
 				Joueur joueur;
 				if (estRobot == null || !estRobot.isSelected()) {
 					joueur = new Joueur(demanderNom.getText(),idJoueur);
+					if(joueur.getNom().equals("")){
+						joueur.setNom("Joueur "+(idJoueur+1));
+					}
 					if (idJoueur==0) {
 						jouer_dominoCarree.setEnabled(true);
 						jouer_carcassonne.setEnabled(true);
